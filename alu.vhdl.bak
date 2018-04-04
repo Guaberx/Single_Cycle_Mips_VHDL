@@ -1,0 +1,31 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use iee.numeric_std.all;
+
+entity ALU is
+	generic(dataWidth : integer := 31);
+	port
+	(
+		inputControl	:in signed(1 downto 0);
+		inputA			:in signed(dataWidth downto 0);
+		inputB			:in signed(dataWidth downto 0);
+		output			:out signed(dataWidth downto 0);
+		flag				:out signed(1 downto 0)
+	);
+	
+end entity;
+
+architecture ALUARCHITECTURE of ALU is
+
+begin
+	process (inputControl, inputA, inputB)
+	begin
+		case inputControl is
+			when "00" => output <= inputA + inputB;
+			when "01" => output <= inputA - inputB;
+			when "11" => output <= inputA / inputB;
+			when others =>
+			end case;
+		end process;
+end ALUARCHITECTURE;
+		
