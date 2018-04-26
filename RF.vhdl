@@ -18,7 +18,7 @@ entity RF is
 		rd : in std_logic_vector(addrWidth downto 0);
 		
 		writeData : in signed(dataWidth downto 0);
-		regWrite : in std_logic;
+		rw : in std_logic;
 		
 		-- Output ports
 		readData1	: out signed(dataWidth downto 0);
@@ -63,9 +63,9 @@ begin
 			end case;
 		end process;
 		
-	process(regWrite)
+	process(rw)
 	begin
-		if regWrite='1' then
+		if rw='1' then
 			case rd is
 				when "00001" => r1 <= writeData;
 				when "00010" => r2 <= writeData;

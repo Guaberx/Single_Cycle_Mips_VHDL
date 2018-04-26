@@ -1,5 +1,5 @@
 Analysis & Synthesis report for LabArquiII
-Wed Apr 04 15:43:25 2018
+Thu Apr 26 14:28:14 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -15,22 +15,21 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
   9. Parameter Settings for User Entity Instance: Top-level Entity: |monociclo
- 10. Parameter Settings for User Entity Instance: myMux:MUX_PCSrc
- 11. Parameter Settings for User Entity Instance: instructionMemory:pmInstructionMem
- 12. Parameter Settings for User Entity Instance: myMux:MUX_RD_RT_to_RF_writeregister
- 13. Parameter Settings for User Entity Instance: RF:pmRF
- 14. Parameter Settings for User Entity Instance: myMux:MUX_rd_instruction_15_0_to_ALUInB
- 15. Parameter Settings for User Entity Instance: alu:pmALU
- 16. Parameter Settings for User Entity Instance: dataMemory:pmDataMemory
- 17. Parameter Settings for User Entity Instance: myMux:MUX_readData_ALUresult_to_writeData
- 18. Port Connectivity Checks: "myMux:MUX_readData_ALUresult_to_writeData"
+ 10. Parameter Settings for User Entity Instance: myMux:MUX_Branch
+ 11. Parameter Settings for User Entity Instance: myMux:MUX_PCSrc
+ 12. Parameter Settings for User Entity Instance: instructionMemory:pmInstructionMem
+ 13. Parameter Settings for User Entity Instance: myMux:MUX_RD_RT_to_RF_writeregister
+ 14. Parameter Settings for User Entity Instance: RF:pmRF
+ 15. Parameter Settings for User Entity Instance: myMux:MUX_rd_instruction_15_0_to_ALUInB
+ 16. Parameter Settings for User Entity Instance: alu:pmALU
+ 17. Parameter Settings for User Entity Instance: dataMemory:pmDataMemory
+ 18. Parameter Settings for User Entity Instance: myMux:MUX_readData_ALUresult_to_writeData
  19. Port Connectivity Checks: "alu:pmALU"
- 20. Port Connectivity Checks: "myMux:MUX_rd_instruction_15_0_to_ALUInB"
- 21. Port Connectivity Checks: "myMux:MUX_RD_RT_to_RF_writeregister"
- 22. Port Connectivity Checks: "instructionMemory:pmInstructionMem"
- 23. Port Connectivity Checks: "myMux:MUX_PCSrc"
- 24. Elapsed Time Per Partition
- 25. Analysis & Synthesis Messages
+ 20. Port Connectivity Checks: "instructionMemory:pmInstructionMem"
+ 21. Port Connectivity Checks: "myMux:MUX_PCSrc"
+ 22. Port Connectivity Checks: "myMux:MUX_Branch"
+ 23. Elapsed Time Per Partition
+ 24. Analysis & Synthesis Messages
 
 
 
@@ -56,7 +55,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Apr 04 15:43:25 2018           ;
+; Analysis & Synthesis Status        ; Successful - Thu Apr 26 14:28:14 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; LabArquiII                                      ;
 ; Top-level Entity Name              ; monociclo                                       ;
@@ -248,6 +247,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: myMux:MUX_Branch ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; w              ; 32    ; Signed Integer                       ;
+; n              ; 2     ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +--------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: myMux:MUX_PCSrc ;
 +----------------+-------+-------------------------------------+
@@ -335,15 +345,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-----------------------------------------------------------------------+
-; Port Connectivity Checks: "myMux:MUX_readData_ALUresult_to_writeData" ;
-+----------+-------+----------+-----------------------------------------+
-; Port     ; Type  ; Severity ; Details                                 ;
-+----------+-------+----------+-----------------------------------------+
-; selector ; Input ; Info     ; Stuck at GND                            ;
-+----------+-------+----------+-----------------------------------------+
-
-
 +----------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "alu:pmALU"                                                                          ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
@@ -351,24 +352,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+--------+----------+-------------------------------------------------------------------------------------+
 ; flag ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+---------------------------------------------------------------------+
-; Port Connectivity Checks: "myMux:MUX_rd_instruction_15_0_to_ALUInB" ;
-+----------+-------+----------+---------------------------------------+
-; Port     ; Type  ; Severity ; Details                               ;
-+----------+-------+----------+---------------------------------------+
-; selector ; Input ; Info     ; Stuck at GND                          ;
-+----------+-------+----------+---------------------------------------+
-
-
-+-----------------------------------------------------------------+
-; Port Connectivity Checks: "myMux:MUX_RD_RT_to_RF_writeregister" ;
-+----------+-------+----------+-----------------------------------+
-; Port     ; Type  ; Severity ; Details                           ;
-+----------+-------+----------+-----------------------------------+
-; selector ; Input ; Info     ; Stuck at GND                      ;
-+----------+-------+----------+-----------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------+
@@ -385,11 +368,20 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------------------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port             ; Type   ; Severity ; Details                                                                             ;
 +------------------+--------+----------+-------------------------------------------------------------------------------------+
-; selector         ; Input  ; Info     ; Stuck at GND                                                                        ;
-; values[0][31..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
 ; values[1][31..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
 ; dataout[31..8]   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 +------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------+
+; Port Connectivity Checks: "myMux:MUX_Branch"       ;
++------------------+-------+----------+--------------+
+; Port             ; Type  ; Severity ; Details      ;
++------------------+-------+----------+--------------+
+; selector         ; Input ; Info     ; Stuck at GND ;
+; values[0][31..8] ; Input ; Info     ; Stuck at GND ;
+; values[1][31..8] ; Input ; Info     ; Stuck at GND ;
++------------------+-------+----------+--------------+
 
 
 +-------------------------------+
@@ -407,7 +399,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed Apr 04 15:43:23 2018
+    Info: Processing started: Thu Apr 26 14:28:12 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off LabArquiII -c LabArquiII
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file alu.vhdl
@@ -436,15 +428,16 @@ Info (12021): Found 2 design units, including 1 entities, in source file datamem
 Info (12021): Found 0 design units, including 0 entities, in source file alucontrol.vhd
 Info (12021): Found 0 design units, including 0 entities, in source file controlunity.vhd
 Info (12127): Elaborating entity "monociclo" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at monociclo.vhdl(36): object "ALUflag" assigned a value but never read
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(37): used implicit default value for signal "inputControlM" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(42): used implicit default value for signal "rW" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(46): used implicit default value for signal "regDST" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(47): used implicit default value for signal "aluSrc" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(37): used implicit default value for signal "ALUControlOutput" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(45): used implicit default value for signal "regDST" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(46): used implicit default value for signal "Jump" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(47): used implicit default value for signal "Branch" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(48): used implicit default value for signal "MemRead" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(49): used implicit default value for signal "MemWrite" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(50): used implicit default value for signal "MemtoReg" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Info (12128): Elaborating entity "myMux" for hierarchy "myMux:MUX_PCSrc"
+Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(49): used implicit default value for signal "MemtoReg" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(51): used implicit default value for signal "MemWrite" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(52): used implicit default value for signal "ALUSrc" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(53): used implicit default value for signal "RegWrite" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Info (12128): Elaborating entity "myMux" for hierarchy "myMux:MUX_Branch"
 Info (12128): Elaborating entity "instructionMemory" for hierarchy "instructionMemory:pmInstructionMem"
 Info (12128): Elaborating entity "myMux" for hierarchy "myMux:MUX_RD_RT_to_RF_writeregister"
 Info (12128): Elaborating entity "RF" for hierarchy "RF:pmRF"
@@ -578,10 +571,10 @@ Warning (21074): Design contains 1 input pin(s) that do not drive logic
 Info (21057): Implemented 1 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 1 input pins
     Info (21059): Implemented 0 output pins
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 35 warnings
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 36 warnings
     Info: Peak virtual memory: 568 megabytes
-    Info: Processing ended: Wed Apr 04 15:43:25 2018
+    Info: Processing ended: Thu Apr 26 14:28:14 2018
     Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Total CPU time (on all processors): 00:00:02
 
 

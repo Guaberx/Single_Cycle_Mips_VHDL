@@ -34,28 +34,30 @@ architecture arquiMonociclo of monociclo is
 	signal ALUInB: signed((dataWidth-1) downto 0);
 	signal ALUresult: signed((dataWidth-1) downto 0);
 	signal ALUflag: std_logic_vector(1 downto 0);--ZERO
-	signal inputControlM: std_logic_vector(1 downto 0);
+	signal ALUControlOutput: std_logic_vector(1 downto 0);
 	
 	signal instruction : std_logic_vector((dataWidth-1) downto 0);
 	signal inm_extended : std_logic_vector((dataWidth-1) downto 0);
 	signal inm_shifted : std_logic_vector((dataWidth-1) downto 0);
-	signal rW : std_logic;
 	
 	signal rdIN : std_logic_vector((registerWidth-1) downto 0);
 	
-	signal regDST : natural;
-	signal aluSrc : natural;
+	signal regDST : std_logic_vector(1 downto 0);
+	signal Jump : std_logic_vector(1 downto 0);
+	signal Branch : std_logic_vector(1 downto 0);
 	signal MemRead : std_logic;
+	signal MemtoReg : std_logic_vector(1 downto 0);
+	signal ALUOp : std_logic;--TODO REHACER ESTO BIEN!!!
 	signal MemWrite : std_logic;
-	signal MemtoReg : natural;
-	signal PCMuxSelect : natural;
-	
+	signal ALUSrc : std_logic_vector(1 downto 0);
+	signal RegWrite : std_logic;
+		
 	signal dataMemOut : signed((dataWidth-1) downto 0);
 	signal resultMux : signed((dataWidth-1) downto 0);
 	
-	signal pcSrcMuxResult : natural range 0 to 2**ADDR_WIDTH - 1;
-	
-
+	signal pcSrcMuxResult : natural range 0 to 2**ADDR_WIDTH - 1;--Maximo 256 instrucciones
+	signal branchMuxResult : std_logic_vector((dataWidth-1) downto 0);--Maximo 256 instrucciones
+	signal branchAndZero : std_logic_vector(1 downto 0);
 begin
 	process(clk, PC)
 	begin
@@ -66,6 +68,23 @@ begin
 	
 	PCAdder <= PC + 4;
 	branchAdder <= PCAdder + to_integer(shift_left(unsigned(inm_extended), 2));
+	branchAndZero <= Branch AND ALUflag;
+	
+	-- Multiplexor BranchAdder -> PC
+	MUX_Branch: work.myMux 
+	generic map
+	(
+		W => dataWidth,
+		N => 2
+	)
+	port map 
+	(
+		Selector => to_integer(unsigned(branchAndZero)),
+		Values(0) => std_logic_vector(to_unsigned(PCAdder,dataWidth)),
+		Values(1) => std_logic_vector(to_unsigned(branchAdder,dataWidth)),
+		DataOut => branchMuxResult
+	);
+	
 	
 	-- Multiplexor BranchAdder -> PC
 	MUX_PCSrc: work.myMux 
@@ -76,14 +95,13 @@ begin
 	)
 	port map 
 	(
-		Selector => regDST,
-		Values(0) => std_logic_vector(to_unsigned(PCAdder,dataWidth)),
-		Values(1) => std_logic_vector(to_unsigned(branchAdder,dataWidth)),
+		Selector => to_integer(unsigned(Jump)),
+		Values(0) => branchMuxResult,
+		Values(1) => std_logic_vector(to_unsigned(PCAdder,dataWidth)),
 		to_integer(unsigned(DataOut)) => pcSrcMuxResult
 	);
 	
-	
-	
+	-- Instruction Memory
 	pmInstructionMem: work.instructionMemory
 	port map 
 	(
@@ -101,12 +119,13 @@ begin
 	)
 	port map 
 	(
-		Selector => regDST,
+		Selector => to_integer(unsigned(regDST)),
 		Values(0) => instruction(20 downto 16),
 		Values(1) => instruction(15 downto 11),
 		DataOut => rdIN
 	);
 	
+	-- Register File
 	pmRF: work.RF
 	port map 
 	(
@@ -115,7 +134,7 @@ begin
 		rd => rdIN,
 		
 		writeData => resultMux,
-		regWrite => rW,
+		rw => RegWrite,
 		
 		readData1 => ALUInA,
 		readData2 => rData2
@@ -130,29 +149,33 @@ begin
 	)
 	port map 
 	(
-		Selector => aluSrc,
+		Selector => to_integer(unsigned(aluSrc)),
 		Values(0) => std_logic_vector(rData2),
 		Values(1) => std_logic_vector(inm_extended),
 		signed(DataOut) => ALUInB
 	);
 	
+	--Sign Extended
 	pmSignExtendI: work.sign_extend
 	port map 
 	(
 		a => instruction(15 downto 0),
 		b => inm_extended
 	);
-
+	
+	--ALU
 	pmALU: work.alu
 	port map 
 	(
+		inputControl => ALUControlOutput,
 		inputA => ALUInA,
 		inputB => ALUInB,
 		output => ALUresult,
-		flag => ALUflag, -- "Zero"
-		inputControl => inputControlM
+		flag => ALUflag -- "Zero"
+		
 	);
 	
+	--Data Memory
 	pmDataMemory: work.dataMemory
 	port map 
 	(
@@ -173,7 +196,7 @@ begin
 	)
 	port map 
 	(
-		Selector => memtoReg,
+		Selector => to_integer(unsigned(MemtoReg)),
 		Values(0) => std_logic_vector(dataMemOut),
 		Values(1) => std_logic_vector(ALUresult),
 		signed(DataOut) => resultMux -- REVISAR: Si cambias este por "open" se visualiza mejor en el rtl view
