@@ -15,7 +15,16 @@ entity monociclo is
 	port
 	(
 		-- Input ports
-		clk	: in  std_logic
+		clk	: in  std_logic;
+		SalidaALU : out signed((dataWidth-1) downto 0);
+		SalidaROM : out std_logic_vector((dataWidth-1) downto 0);
+		SalidaRAM : out signed((dataWidth-1) downto 0);
+		SalidaRF1 : out signed((dataWidth-1) downto 0);
+		SalidaRF2 : out signed((dataWidth-1) downto 0);
+		SalidaPC : out natural range 0 to 2**ADDR_WIDTH - 1;
+		SalidaInmediato : out std_logic_vector(15 downto 0);
+		SalidaInmediatoExtendido : out std_logic_vector((dataWidth-1) downto 0);
+		SalidaMuxRFALU : out signed((dataWidth-1) downto 0)
 		
 	);
 end monociclo;
@@ -42,35 +51,75 @@ architecture arquiMonociclo of monociclo is
 	
 	signal rdIN : std_logic_vector((registerWidth-1) downto 0);
 	
-	signal regDST : std_logic_vector(1 downto 0);
-	signal Jump : std_logic_vector(1 downto 0);
-	signal Branch : std_logic_vector(1 downto 0);
+	signal regDST : std_logic_vector(0 downto 0);
+	signal Jump : std_logic_vector(0 downto 0);
+	signal Branch : std_logic_vector(0 downto 0);
 	signal MemRead : std_logic;
-	signal MemtoReg : std_logic_vector(1 downto 0);
-	signal ALUOp : std_logic;--TODO REHACER ESTO BIEN!!!
+	signal MemtoReg : std_logic_vector(0 downto 0);
+	signal ALUOp : std_logic_vector(1 downto 0);--TODO REHACER ESTO BIEN!!!
 	signal MemWrite : std_logic;
-	signal ALUSrc : std_logic_vector(1 downto 0);
+	signal ALUSrc : std_logic_vector(0 downto 0);
 	signal RegWrite : std_logic;
 		
 	signal dataMemOut : signed((dataWidth-1) downto 0);
 	signal resultMux : signed((dataWidth-1) downto 0);
 	
 	signal pcSrcMuxResult : natural range 0 to 2**ADDR_WIDTH - 1;--Maximo 256 instrucciones
-	signal branchMuxResult : std_logic_vector((dataWidth-1) downto 0);--Maximo 256 instrucciones
+	signal branchMuxResult	 : std_logic_vector((dataWidth-1) downto 0);--Maximo 256 instrucciones
 	signal branchAndZero : std_logic_vector(1 downto 0);
 begin
+
+
+	SalidaALU <= ALUresult;
+	SalidaROM <= instruction;
+	SalidaRAM <= dataMemOut;
+	SalidaRF1 <= ALUInA;
+	SalidaRF2 <= rData2;
+	SalidaPC <= PC;
+	SalidaInmediato <= instruction(15 downto 0);
+	SalidaInmediatoExtendido <= inm_extended;
+	SalidaMuxRFALU <= ALUInB;
+
+
+
+
+
+
+
+
 	process(clk, PC)
 	begin
-		if(falling_edge(clk)) then
+		--if(falling_edge(clk)) then
+		if(rising_edge(clk)) then
 			PC <= pcSrcMuxResult;
 		end if;
 	end process;
 	
-	PCAdder <= PC + 4;
+	PCAdder <= PC + 1;
 	branchAdder <= PCAdder + to_integer(shift_left(unsigned(inm_extended), 2));
 	branchAndZero <= Branch AND ALUflag;
 	
-	-- Multiplexor BranchAdder -> PC
+	
+	
+	-- Control Unity
+	pmControlUnity: work.ControlUnity
+	port map 
+	(
+		OP => instruction(31 downto 26),
+		OutregDST => regDST,
+		OutJump => Jump,
+		OutBranch => Branch,
+		OutMemRead => MemRead,
+		OutMemtoReg => MemtoReg,
+		OutALUOp => ALUOp,
+		OutMemWrite => MemWrite,
+		OutALUSrc => ALUSrc,
+		OutRegWrite => RegWrite
+	);
+	
+	
+	
+	--Multiplexor BranchAdder -> PC
 	MUX_Branch: work.myMux 
 	generic map
 	(
@@ -84,6 +133,15 @@ begin
 		Values(1) => std_logic_vector(to_unsigned(branchAdder,dataWidth)),
 		DataOut => branchMuxResult
 	);
+	
+	--case branchAndZero is
+	--	when "00" =>
+	--		branchMuxResult <= PCAdder;
+	--	when "01" =>
+	--		branchMuxResult <= branchAdder;
+	--	when others =>
+	--		branchMuxResult <= x"00000000";
+	--end case;
 	
 	
 	-- Multiplexor BranchAdder -> PC
@@ -100,6 +158,7 @@ begin
 		Values(1) => std_logic_vector(to_unsigned(PCAdder,dataWidth)),
 		to_integer(unsigned(DataOut)) => pcSrcMuxResult
 	);
+	
 	
 	-- Instruction Memory
 	pmInstructionMem: work.instructionMemory
@@ -141,19 +200,23 @@ begin
 	);
 	
 	-- Multiplexor RF -> ALU
-	MUX_rd_instruction_15_0_to_ALUInB: work.myMux 
-	generic map
-	(
-		W => dataWidth,
-		N => 2
-	)
-	port map 
-	(
-		Selector => to_integer(unsigned(aluSrc)),
-		Values(0) => std_logic_vector(rData2),
-		Values(1) => std_logic_vector(inm_extended),
-		signed(DataOut) => ALUInB
-	);
+	--MUX_rd_instruction_15_0_to_ALUInB: work.myMux 
+	--generic map
+	--(
+	--	W => dataWidth,
+	--	N => 2
+	--)
+	--port map 
+	--(
+	--	Selector => to_integer(unsigned(aluSrc)),
+	--	Values(0) => std_logic_vector(rData2),
+	--	Values(1) => std_logic_vector(inm_extended),
+	--	signed(DataOut) => ALUInB
+	--);
+	
+	with ALUSrc select ALUInB <=
+		rData2 when "0",
+		rData2 when "1";
 	
 	--Sign Extended
 	pmSignExtendI: work.sign_extend
@@ -162,6 +225,18 @@ begin
 		a => instruction(15 downto 0),
 		b => inm_extended
 	);
+	
+	
+	--ALUControl
+	pmALUControl: work.ALUControl
+	port map 
+	(
+		InALUOp => ALUOp,
+		InInstruction => instruction(5 downto 0),
+		Output => ALUControlOutput		
+	);
+	
+	
 	
 	--ALU
 	pmALU: work.alu
@@ -172,7 +247,6 @@ begin
 		inputB => ALUInB,
 		output => ALUresult,
 		flag => ALUflag -- "Zero"
-		
 	);
 	
 	--Data Memory

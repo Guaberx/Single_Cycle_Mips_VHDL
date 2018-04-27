@@ -1,0 +1,6314 @@
+// Copyright (C) 1991-2013 Altera Corporation
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, Altera MegaCore Function License 
+// Agreement, or other applicable license agreement, including, 
+// without limitation, that your use is for the sole purpose of 
+// programming logic devices manufactured by Altera and sold by 
+// Altera or its authorized distributors.  Please refer to the 
+// applicable agreement for further details.
+
+// VENDOR "Altera"
+// PROGRAM "Quartus II 64-Bit"
+// VERSION "Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition"
+
+// DATE "04/27/2018 17:32:17"
+
+// 
+// Device: Altera EP2C70F672C7 Package FBGA672
+// 
+
+// 
+// This Verilog file should be used for ModelSim-Altera (Verilog) only
+// 
+
+`timescale 1 ps/ 1 ps
+
+module monociclo (
+	clk,
+	SalidaALU,
+	SalidaROM,
+	SalidaRAM,
+	SalidaRF1,
+	SalidaRF2,
+	SalidaPC);
+input 	clk;
+output 	[31:0] SalidaALU;
+output 	[31:0] SalidaROM;
+output 	[31:0] SalidaRAM;
+output 	[31:0] SalidaRF1;
+output 	[31:0] SalidaRF2;
+output 	[7:0] SalidaPC;
+
+wire gnd;
+wire vcc;
+wire unknown;
+
+assign gnd = 1'b0;
+assign vcc = 1'b1;
+assign unknown = 1'bx;
+
+tri1 devclrn;
+tri1 devpor;
+tri1 devoe;
+wire \clk~combout ;
+wire \PC[1]~7_combout ;
+wire \PC[1]~8 ;
+wire \PC[2]~10 ;
+wire \PC[3]~12 ;
+wire \PC[4]~14 ;
+wire \PC[5]~15_combout ;
+wire \PC[5]~16 ;
+wire \PC[6]~17_combout ;
+wire \PC[6]~18 ;
+wire \PC[7]~19_combout ;
+wire \pmInstructionMem|Mux2~1_combout ;
+wire \PC[0]~21_combout ;
+wire \pmInstructionMem|Mux2~2_combout ;
+wire \PC[2]~9_combout ;
+wire \PC[3]~11_combout ;
+wire \PC[4]~13_combout ;
+wire \pmInstructionMem|Mux2~0_combout ;
+wire \pmInstructionMem|Mux1~0_combout ;
+wire [7:0] PC;
+wire [31:0] \pmInstructionMem|q ;
+
+
+cycloneii_io \clk~I (
+	.datain(gnd),
+	.oe(gnd),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(\clk~combout ),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(clk));
+// synopsys translate_off
+defparam \clk~I .input_async_reset = "none";
+defparam \clk~I .input_power_up = "low";
+defparam \clk~I .input_register_mode = "none";
+defparam \clk~I .input_sync_reset = "none";
+defparam \clk~I .oe_async_reset = "none";
+defparam \clk~I .oe_power_up = "low";
+defparam \clk~I .oe_register_mode = "none";
+defparam \clk~I .oe_sync_reset = "none";
+defparam \clk~I .operation_mode = "input";
+defparam \clk~I .output_async_reset = "none";
+defparam \clk~I .output_power_up = "low";
+defparam \clk~I .output_register_mode = "none";
+defparam \clk~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_lcell_comb \PC[1]~7 (
+// Equation(s):
+// \PC[1]~7_combout  = (PC[0] & (PC[1] $ (VCC))) # (!PC[0] & (PC[1] & VCC))
+// \PC[1]~8  = CARRY((PC[0] & PC[1]))
+
+	.dataa(PC[0]),
+	.datab(PC[1]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\PC[1]~7_combout ),
+	.cout(\PC[1]~8 ));
+// synopsys translate_off
+defparam \PC[1]~7 .lut_mask = 16'h6688;
+defparam \PC[1]~7 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_ff \PC[1] (
+	.clk(\clk~combout ),
+	.datain(\PC[1]~7_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(PC[1]));
+
+cycloneii_lcell_comb \PC[2]~9 (
+// Equation(s):
+// \PC[2]~9_combout  = (PC[2] & (!\PC[1]~8 )) # (!PC[2] & ((\PC[1]~8 ) # (GND)))
+// \PC[2]~10  = CARRY((!\PC[1]~8 ) # (!PC[2]))
+
+	.dataa(PC[2]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\PC[1]~8 ),
+	.combout(\PC[2]~9_combout ),
+	.cout(\PC[2]~10 ));
+// synopsys translate_off
+defparam \PC[2]~9 .lut_mask = 16'h5A5F;
+defparam \PC[2]~9 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \PC[3]~11 (
+// Equation(s):
+// \PC[3]~11_combout  = (PC[3] & (\PC[2]~10  $ (GND))) # (!PC[3] & (!\PC[2]~10  & VCC))
+// \PC[3]~12  = CARRY((PC[3] & !\PC[2]~10 ))
+
+	.dataa(PC[3]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\PC[2]~10 ),
+	.combout(\PC[3]~11_combout ),
+	.cout(\PC[3]~12 ));
+// synopsys translate_off
+defparam \PC[3]~11 .lut_mask = 16'hA50A;
+defparam \PC[3]~11 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \PC[4]~13 (
+// Equation(s):
+// \PC[4]~13_combout  = (PC[4] & (!\PC[3]~12 )) # (!PC[4] & ((\PC[3]~12 ) # (GND)))
+// \PC[4]~14  = CARRY((!\PC[3]~12 ) # (!PC[4]))
+
+	.dataa(PC[4]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\PC[3]~12 ),
+	.combout(\PC[4]~13_combout ),
+	.cout(\PC[4]~14 ));
+// synopsys translate_off
+defparam \PC[4]~13 .lut_mask = 16'h5A5F;
+defparam \PC[4]~13 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \PC[5]~15 (
+// Equation(s):
+// \PC[5]~15_combout  = (PC[5] & (\PC[4]~14  $ (GND))) # (!PC[5] & (!\PC[4]~14  & VCC))
+// \PC[5]~16  = CARRY((PC[5] & !\PC[4]~14 ))
+
+	.dataa(PC[5]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\PC[4]~14 ),
+	.combout(\PC[5]~15_combout ),
+	.cout(\PC[5]~16 ));
+// synopsys translate_off
+defparam \PC[5]~15 .lut_mask = 16'hA50A;
+defparam \PC[5]~15 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_ff \PC[5] (
+	.clk(\clk~combout ),
+	.datain(\PC[5]~15_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(PC[5]));
+
+cycloneii_lcell_comb \PC[6]~17 (
+// Equation(s):
+// \PC[6]~17_combout  = (PC[6] & (!\PC[5]~16 )) # (!PC[6] & ((\PC[5]~16 ) # (GND)))
+// \PC[6]~18  = CARRY((!\PC[5]~16 ) # (!PC[6]))
+
+	.dataa(PC[6]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\PC[5]~16 ),
+	.combout(\PC[6]~17_combout ),
+	.cout(\PC[6]~18 ));
+// synopsys translate_off
+defparam \PC[6]~17 .lut_mask = 16'h5A5F;
+defparam \PC[6]~17 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_ff \PC[6] (
+	.clk(\clk~combout ),
+	.datain(\PC[6]~17_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(PC[6]));
+
+cycloneii_lcell_comb \PC[7]~19 (
+// Equation(s):
+// \PC[7]~19_combout  = PC[7] $ (!\PC[6]~18 )
+
+	.dataa(PC[7]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\PC[6]~18 ),
+	.combout(\PC[7]~19_combout ),
+	.cout());
+// synopsys translate_off
+defparam \PC[7]~19 .lut_mask = 16'hA5A5;
+defparam \PC[7]~19 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_ff \PC[7] (
+	.clk(\clk~combout ),
+	.datain(\PC[7]~19_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(PC[7]));
+
+cycloneii_lcell_comb \pmInstructionMem|Mux2~1 (
+// Equation(s):
+// \pmInstructionMem|Mux2~1_combout  = (!PC[5] & (!PC[6] & !PC[7]))
+
+	.dataa(vcc),
+	.datab(PC[5]),
+	.datac(PC[6]),
+	.datad(PC[7]),
+	.cin(gnd),
+	.combout(\pmInstructionMem|Mux2~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \pmInstructionMem|Mux2~1 .lut_mask = 16'h0003;
+defparam \pmInstructionMem|Mux2~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \PC[0]~21 (
+// Equation(s):
+// \PC[0]~21_combout  = !PC[0]
+
+	.dataa(PC[0]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\PC[0]~21_combout ),
+	.cout());
+// synopsys translate_off
+defparam \PC[0]~21 .lut_mask = 16'h5555;
+defparam \PC[0]~21 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_ff \PC[0] (
+	.clk(\clk~combout ),
+	.datain(\PC[0]~21_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(PC[0]));
+
+cycloneii_lcell_comb \pmInstructionMem|Mux2~2 (
+// Equation(s):
+// \pmInstructionMem|Mux2~2_combout  = (\pmInstructionMem|Mux2~0_combout  & (\pmInstructionMem|Mux2~1_combout  & !PC[0]))
+
+	.dataa(\pmInstructionMem|Mux2~0_combout ),
+	.datab(\pmInstructionMem|Mux2~1_combout ),
+	.datac(vcc),
+	.datad(PC[0]),
+	.cin(gnd),
+	.combout(\pmInstructionMem|Mux2~2_combout ),
+	.cout());
+// synopsys translate_off
+defparam \pmInstructionMem|Mux2~2 .lut_mask = 16'h0088;
+defparam \pmInstructionMem|Mux2~2 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_ff \pmInstructionMem|q[0] (
+	.clk(\clk~combout ),
+	.datain(\pmInstructionMem|Mux2~2_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\pmInstructionMem|q [0]));
+
+cycloneii_lcell_ff \PC[2] (
+	.clk(\clk~combout ),
+	.datain(\PC[2]~9_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(PC[2]));
+
+cycloneii_lcell_ff \PC[3] (
+	.clk(\clk~combout ),
+	.datain(\PC[3]~11_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(PC[3]));
+
+cycloneii_lcell_ff \PC[4] (
+	.clk(\clk~combout ),
+	.datain(\PC[4]~13_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(PC[4]));
+
+cycloneii_lcell_comb \pmInstructionMem|Mux2~0 (
+// Equation(s):
+// \pmInstructionMem|Mux2~0_combout  = (!PC[1] & (!PC[2] & (!PC[3] & !PC[4])))
+
+	.dataa(PC[1]),
+	.datab(PC[2]),
+	.datac(PC[3]),
+	.datad(PC[4]),
+	.cin(gnd),
+	.combout(\pmInstructionMem|Mux2~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \pmInstructionMem|Mux2~0 .lut_mask = 16'h0001;
+defparam \pmInstructionMem|Mux2~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmInstructionMem|Mux1~0 (
+// Equation(s):
+// \pmInstructionMem|Mux1~0_combout  = (PC[0] & (\pmInstructionMem|Mux2~0_combout  & \pmInstructionMem|Mux2~1_combout ))
+
+	.dataa(PC[0]),
+	.datab(\pmInstructionMem|Mux2~0_combout ),
+	.datac(\pmInstructionMem|Mux2~1_combout ),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\pmInstructionMem|Mux1~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \pmInstructionMem|Mux1~0 .lut_mask = 16'h8080;
+defparam \pmInstructionMem|Mux1~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_ff \pmInstructionMem|q[5] (
+	.clk(\clk~combout ),
+	.datain(\pmInstructionMem|Mux1~0_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\pmInstructionMem|q [5]));
+
+cycloneii_io \SalidaALU[0]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[0]));
+// synopsys translate_off
+defparam \SalidaALU[0]~I .input_async_reset = "none";
+defparam \SalidaALU[0]~I .input_power_up = "low";
+defparam \SalidaALU[0]~I .input_register_mode = "none";
+defparam \SalidaALU[0]~I .input_sync_reset = "none";
+defparam \SalidaALU[0]~I .oe_async_reset = "none";
+defparam \SalidaALU[0]~I .oe_power_up = "low";
+defparam \SalidaALU[0]~I .oe_register_mode = "none";
+defparam \SalidaALU[0]~I .oe_sync_reset = "none";
+defparam \SalidaALU[0]~I .operation_mode = "output";
+defparam \SalidaALU[0]~I .output_async_reset = "none";
+defparam \SalidaALU[0]~I .output_power_up = "low";
+defparam \SalidaALU[0]~I .output_register_mode = "none";
+defparam \SalidaALU[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[1]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[1]));
+// synopsys translate_off
+defparam \SalidaALU[1]~I .input_async_reset = "none";
+defparam \SalidaALU[1]~I .input_power_up = "low";
+defparam \SalidaALU[1]~I .input_register_mode = "none";
+defparam \SalidaALU[1]~I .input_sync_reset = "none";
+defparam \SalidaALU[1]~I .oe_async_reset = "none";
+defparam \SalidaALU[1]~I .oe_power_up = "low";
+defparam \SalidaALU[1]~I .oe_register_mode = "none";
+defparam \SalidaALU[1]~I .oe_sync_reset = "none";
+defparam \SalidaALU[1]~I .operation_mode = "output";
+defparam \SalidaALU[1]~I .output_async_reset = "none";
+defparam \SalidaALU[1]~I .output_power_up = "low";
+defparam \SalidaALU[1]~I .output_register_mode = "none";
+defparam \SalidaALU[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[2]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[2]));
+// synopsys translate_off
+defparam \SalidaALU[2]~I .input_async_reset = "none";
+defparam \SalidaALU[2]~I .input_power_up = "low";
+defparam \SalidaALU[2]~I .input_register_mode = "none";
+defparam \SalidaALU[2]~I .input_sync_reset = "none";
+defparam \SalidaALU[2]~I .oe_async_reset = "none";
+defparam \SalidaALU[2]~I .oe_power_up = "low";
+defparam \SalidaALU[2]~I .oe_register_mode = "none";
+defparam \SalidaALU[2]~I .oe_sync_reset = "none";
+defparam \SalidaALU[2]~I .operation_mode = "output";
+defparam \SalidaALU[2]~I .output_async_reset = "none";
+defparam \SalidaALU[2]~I .output_power_up = "low";
+defparam \SalidaALU[2]~I .output_register_mode = "none";
+defparam \SalidaALU[2]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[3]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[3]));
+// synopsys translate_off
+defparam \SalidaALU[3]~I .input_async_reset = "none";
+defparam \SalidaALU[3]~I .input_power_up = "low";
+defparam \SalidaALU[3]~I .input_register_mode = "none";
+defparam \SalidaALU[3]~I .input_sync_reset = "none";
+defparam \SalidaALU[3]~I .oe_async_reset = "none";
+defparam \SalidaALU[3]~I .oe_power_up = "low";
+defparam \SalidaALU[3]~I .oe_register_mode = "none";
+defparam \SalidaALU[3]~I .oe_sync_reset = "none";
+defparam \SalidaALU[3]~I .operation_mode = "output";
+defparam \SalidaALU[3]~I .output_async_reset = "none";
+defparam \SalidaALU[3]~I .output_power_up = "low";
+defparam \SalidaALU[3]~I .output_register_mode = "none";
+defparam \SalidaALU[3]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[4]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[4]));
+// synopsys translate_off
+defparam \SalidaALU[4]~I .input_async_reset = "none";
+defparam \SalidaALU[4]~I .input_power_up = "low";
+defparam \SalidaALU[4]~I .input_register_mode = "none";
+defparam \SalidaALU[4]~I .input_sync_reset = "none";
+defparam \SalidaALU[4]~I .oe_async_reset = "none";
+defparam \SalidaALU[4]~I .oe_power_up = "low";
+defparam \SalidaALU[4]~I .oe_register_mode = "none";
+defparam \SalidaALU[4]~I .oe_sync_reset = "none";
+defparam \SalidaALU[4]~I .operation_mode = "output";
+defparam \SalidaALU[4]~I .output_async_reset = "none";
+defparam \SalidaALU[4]~I .output_power_up = "low";
+defparam \SalidaALU[4]~I .output_register_mode = "none";
+defparam \SalidaALU[4]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[5]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[5]));
+// synopsys translate_off
+defparam \SalidaALU[5]~I .input_async_reset = "none";
+defparam \SalidaALU[5]~I .input_power_up = "low";
+defparam \SalidaALU[5]~I .input_register_mode = "none";
+defparam \SalidaALU[5]~I .input_sync_reset = "none";
+defparam \SalidaALU[5]~I .oe_async_reset = "none";
+defparam \SalidaALU[5]~I .oe_power_up = "low";
+defparam \SalidaALU[5]~I .oe_register_mode = "none";
+defparam \SalidaALU[5]~I .oe_sync_reset = "none";
+defparam \SalidaALU[5]~I .operation_mode = "output";
+defparam \SalidaALU[5]~I .output_async_reset = "none";
+defparam \SalidaALU[5]~I .output_power_up = "low";
+defparam \SalidaALU[5]~I .output_register_mode = "none";
+defparam \SalidaALU[5]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[6]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[6]));
+// synopsys translate_off
+defparam \SalidaALU[6]~I .input_async_reset = "none";
+defparam \SalidaALU[6]~I .input_power_up = "low";
+defparam \SalidaALU[6]~I .input_register_mode = "none";
+defparam \SalidaALU[6]~I .input_sync_reset = "none";
+defparam \SalidaALU[6]~I .oe_async_reset = "none";
+defparam \SalidaALU[6]~I .oe_power_up = "low";
+defparam \SalidaALU[6]~I .oe_register_mode = "none";
+defparam \SalidaALU[6]~I .oe_sync_reset = "none";
+defparam \SalidaALU[6]~I .operation_mode = "output";
+defparam \SalidaALU[6]~I .output_async_reset = "none";
+defparam \SalidaALU[6]~I .output_power_up = "low";
+defparam \SalidaALU[6]~I .output_register_mode = "none";
+defparam \SalidaALU[6]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[7]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[7]));
+// synopsys translate_off
+defparam \SalidaALU[7]~I .input_async_reset = "none";
+defparam \SalidaALU[7]~I .input_power_up = "low";
+defparam \SalidaALU[7]~I .input_register_mode = "none";
+defparam \SalidaALU[7]~I .input_sync_reset = "none";
+defparam \SalidaALU[7]~I .oe_async_reset = "none";
+defparam \SalidaALU[7]~I .oe_power_up = "low";
+defparam \SalidaALU[7]~I .oe_register_mode = "none";
+defparam \SalidaALU[7]~I .oe_sync_reset = "none";
+defparam \SalidaALU[7]~I .operation_mode = "output";
+defparam \SalidaALU[7]~I .output_async_reset = "none";
+defparam \SalidaALU[7]~I .output_power_up = "low";
+defparam \SalidaALU[7]~I .output_register_mode = "none";
+defparam \SalidaALU[7]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[8]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[8]));
+// synopsys translate_off
+defparam \SalidaALU[8]~I .input_async_reset = "none";
+defparam \SalidaALU[8]~I .input_power_up = "low";
+defparam \SalidaALU[8]~I .input_register_mode = "none";
+defparam \SalidaALU[8]~I .input_sync_reset = "none";
+defparam \SalidaALU[8]~I .oe_async_reset = "none";
+defparam \SalidaALU[8]~I .oe_power_up = "low";
+defparam \SalidaALU[8]~I .oe_register_mode = "none";
+defparam \SalidaALU[8]~I .oe_sync_reset = "none";
+defparam \SalidaALU[8]~I .operation_mode = "output";
+defparam \SalidaALU[8]~I .output_async_reset = "none";
+defparam \SalidaALU[8]~I .output_power_up = "low";
+defparam \SalidaALU[8]~I .output_register_mode = "none";
+defparam \SalidaALU[8]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[9]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[9]));
+// synopsys translate_off
+defparam \SalidaALU[9]~I .input_async_reset = "none";
+defparam \SalidaALU[9]~I .input_power_up = "low";
+defparam \SalidaALU[9]~I .input_register_mode = "none";
+defparam \SalidaALU[9]~I .input_sync_reset = "none";
+defparam \SalidaALU[9]~I .oe_async_reset = "none";
+defparam \SalidaALU[9]~I .oe_power_up = "low";
+defparam \SalidaALU[9]~I .oe_register_mode = "none";
+defparam \SalidaALU[9]~I .oe_sync_reset = "none";
+defparam \SalidaALU[9]~I .operation_mode = "output";
+defparam \SalidaALU[9]~I .output_async_reset = "none";
+defparam \SalidaALU[9]~I .output_power_up = "low";
+defparam \SalidaALU[9]~I .output_register_mode = "none";
+defparam \SalidaALU[9]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[10]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[10]));
+// synopsys translate_off
+defparam \SalidaALU[10]~I .input_async_reset = "none";
+defparam \SalidaALU[10]~I .input_power_up = "low";
+defparam \SalidaALU[10]~I .input_register_mode = "none";
+defparam \SalidaALU[10]~I .input_sync_reset = "none";
+defparam \SalidaALU[10]~I .oe_async_reset = "none";
+defparam \SalidaALU[10]~I .oe_power_up = "low";
+defparam \SalidaALU[10]~I .oe_register_mode = "none";
+defparam \SalidaALU[10]~I .oe_sync_reset = "none";
+defparam \SalidaALU[10]~I .operation_mode = "output";
+defparam \SalidaALU[10]~I .output_async_reset = "none";
+defparam \SalidaALU[10]~I .output_power_up = "low";
+defparam \SalidaALU[10]~I .output_register_mode = "none";
+defparam \SalidaALU[10]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[11]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[11]));
+// synopsys translate_off
+defparam \SalidaALU[11]~I .input_async_reset = "none";
+defparam \SalidaALU[11]~I .input_power_up = "low";
+defparam \SalidaALU[11]~I .input_register_mode = "none";
+defparam \SalidaALU[11]~I .input_sync_reset = "none";
+defparam \SalidaALU[11]~I .oe_async_reset = "none";
+defparam \SalidaALU[11]~I .oe_power_up = "low";
+defparam \SalidaALU[11]~I .oe_register_mode = "none";
+defparam \SalidaALU[11]~I .oe_sync_reset = "none";
+defparam \SalidaALU[11]~I .operation_mode = "output";
+defparam \SalidaALU[11]~I .output_async_reset = "none";
+defparam \SalidaALU[11]~I .output_power_up = "low";
+defparam \SalidaALU[11]~I .output_register_mode = "none";
+defparam \SalidaALU[11]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[12]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[12]));
+// synopsys translate_off
+defparam \SalidaALU[12]~I .input_async_reset = "none";
+defparam \SalidaALU[12]~I .input_power_up = "low";
+defparam \SalidaALU[12]~I .input_register_mode = "none";
+defparam \SalidaALU[12]~I .input_sync_reset = "none";
+defparam \SalidaALU[12]~I .oe_async_reset = "none";
+defparam \SalidaALU[12]~I .oe_power_up = "low";
+defparam \SalidaALU[12]~I .oe_register_mode = "none";
+defparam \SalidaALU[12]~I .oe_sync_reset = "none";
+defparam \SalidaALU[12]~I .operation_mode = "output";
+defparam \SalidaALU[12]~I .output_async_reset = "none";
+defparam \SalidaALU[12]~I .output_power_up = "low";
+defparam \SalidaALU[12]~I .output_register_mode = "none";
+defparam \SalidaALU[12]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[13]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[13]));
+// synopsys translate_off
+defparam \SalidaALU[13]~I .input_async_reset = "none";
+defparam \SalidaALU[13]~I .input_power_up = "low";
+defparam \SalidaALU[13]~I .input_register_mode = "none";
+defparam \SalidaALU[13]~I .input_sync_reset = "none";
+defparam \SalidaALU[13]~I .oe_async_reset = "none";
+defparam \SalidaALU[13]~I .oe_power_up = "low";
+defparam \SalidaALU[13]~I .oe_register_mode = "none";
+defparam \SalidaALU[13]~I .oe_sync_reset = "none";
+defparam \SalidaALU[13]~I .operation_mode = "output";
+defparam \SalidaALU[13]~I .output_async_reset = "none";
+defparam \SalidaALU[13]~I .output_power_up = "low";
+defparam \SalidaALU[13]~I .output_register_mode = "none";
+defparam \SalidaALU[13]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[14]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[14]));
+// synopsys translate_off
+defparam \SalidaALU[14]~I .input_async_reset = "none";
+defparam \SalidaALU[14]~I .input_power_up = "low";
+defparam \SalidaALU[14]~I .input_register_mode = "none";
+defparam \SalidaALU[14]~I .input_sync_reset = "none";
+defparam \SalidaALU[14]~I .oe_async_reset = "none";
+defparam \SalidaALU[14]~I .oe_power_up = "low";
+defparam \SalidaALU[14]~I .oe_register_mode = "none";
+defparam \SalidaALU[14]~I .oe_sync_reset = "none";
+defparam \SalidaALU[14]~I .operation_mode = "output";
+defparam \SalidaALU[14]~I .output_async_reset = "none";
+defparam \SalidaALU[14]~I .output_power_up = "low";
+defparam \SalidaALU[14]~I .output_register_mode = "none";
+defparam \SalidaALU[14]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[15]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[15]));
+// synopsys translate_off
+defparam \SalidaALU[15]~I .input_async_reset = "none";
+defparam \SalidaALU[15]~I .input_power_up = "low";
+defparam \SalidaALU[15]~I .input_register_mode = "none";
+defparam \SalidaALU[15]~I .input_sync_reset = "none";
+defparam \SalidaALU[15]~I .oe_async_reset = "none";
+defparam \SalidaALU[15]~I .oe_power_up = "low";
+defparam \SalidaALU[15]~I .oe_register_mode = "none";
+defparam \SalidaALU[15]~I .oe_sync_reset = "none";
+defparam \SalidaALU[15]~I .operation_mode = "output";
+defparam \SalidaALU[15]~I .output_async_reset = "none";
+defparam \SalidaALU[15]~I .output_power_up = "low";
+defparam \SalidaALU[15]~I .output_register_mode = "none";
+defparam \SalidaALU[15]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[16]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[16]));
+// synopsys translate_off
+defparam \SalidaALU[16]~I .input_async_reset = "none";
+defparam \SalidaALU[16]~I .input_power_up = "low";
+defparam \SalidaALU[16]~I .input_register_mode = "none";
+defparam \SalidaALU[16]~I .input_sync_reset = "none";
+defparam \SalidaALU[16]~I .oe_async_reset = "none";
+defparam \SalidaALU[16]~I .oe_power_up = "low";
+defparam \SalidaALU[16]~I .oe_register_mode = "none";
+defparam \SalidaALU[16]~I .oe_sync_reset = "none";
+defparam \SalidaALU[16]~I .operation_mode = "output";
+defparam \SalidaALU[16]~I .output_async_reset = "none";
+defparam \SalidaALU[16]~I .output_power_up = "low";
+defparam \SalidaALU[16]~I .output_register_mode = "none";
+defparam \SalidaALU[16]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[17]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[17]));
+// synopsys translate_off
+defparam \SalidaALU[17]~I .input_async_reset = "none";
+defparam \SalidaALU[17]~I .input_power_up = "low";
+defparam \SalidaALU[17]~I .input_register_mode = "none";
+defparam \SalidaALU[17]~I .input_sync_reset = "none";
+defparam \SalidaALU[17]~I .oe_async_reset = "none";
+defparam \SalidaALU[17]~I .oe_power_up = "low";
+defparam \SalidaALU[17]~I .oe_register_mode = "none";
+defparam \SalidaALU[17]~I .oe_sync_reset = "none";
+defparam \SalidaALU[17]~I .operation_mode = "output";
+defparam \SalidaALU[17]~I .output_async_reset = "none";
+defparam \SalidaALU[17]~I .output_power_up = "low";
+defparam \SalidaALU[17]~I .output_register_mode = "none";
+defparam \SalidaALU[17]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[18]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[18]));
+// synopsys translate_off
+defparam \SalidaALU[18]~I .input_async_reset = "none";
+defparam \SalidaALU[18]~I .input_power_up = "low";
+defparam \SalidaALU[18]~I .input_register_mode = "none";
+defparam \SalidaALU[18]~I .input_sync_reset = "none";
+defparam \SalidaALU[18]~I .oe_async_reset = "none";
+defparam \SalidaALU[18]~I .oe_power_up = "low";
+defparam \SalidaALU[18]~I .oe_register_mode = "none";
+defparam \SalidaALU[18]~I .oe_sync_reset = "none";
+defparam \SalidaALU[18]~I .operation_mode = "output";
+defparam \SalidaALU[18]~I .output_async_reset = "none";
+defparam \SalidaALU[18]~I .output_power_up = "low";
+defparam \SalidaALU[18]~I .output_register_mode = "none";
+defparam \SalidaALU[18]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[19]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[19]));
+// synopsys translate_off
+defparam \SalidaALU[19]~I .input_async_reset = "none";
+defparam \SalidaALU[19]~I .input_power_up = "low";
+defparam \SalidaALU[19]~I .input_register_mode = "none";
+defparam \SalidaALU[19]~I .input_sync_reset = "none";
+defparam \SalidaALU[19]~I .oe_async_reset = "none";
+defparam \SalidaALU[19]~I .oe_power_up = "low";
+defparam \SalidaALU[19]~I .oe_register_mode = "none";
+defparam \SalidaALU[19]~I .oe_sync_reset = "none";
+defparam \SalidaALU[19]~I .operation_mode = "output";
+defparam \SalidaALU[19]~I .output_async_reset = "none";
+defparam \SalidaALU[19]~I .output_power_up = "low";
+defparam \SalidaALU[19]~I .output_register_mode = "none";
+defparam \SalidaALU[19]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[20]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[20]));
+// synopsys translate_off
+defparam \SalidaALU[20]~I .input_async_reset = "none";
+defparam \SalidaALU[20]~I .input_power_up = "low";
+defparam \SalidaALU[20]~I .input_register_mode = "none";
+defparam \SalidaALU[20]~I .input_sync_reset = "none";
+defparam \SalidaALU[20]~I .oe_async_reset = "none";
+defparam \SalidaALU[20]~I .oe_power_up = "low";
+defparam \SalidaALU[20]~I .oe_register_mode = "none";
+defparam \SalidaALU[20]~I .oe_sync_reset = "none";
+defparam \SalidaALU[20]~I .operation_mode = "output";
+defparam \SalidaALU[20]~I .output_async_reset = "none";
+defparam \SalidaALU[20]~I .output_power_up = "low";
+defparam \SalidaALU[20]~I .output_register_mode = "none";
+defparam \SalidaALU[20]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[21]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[21]));
+// synopsys translate_off
+defparam \SalidaALU[21]~I .input_async_reset = "none";
+defparam \SalidaALU[21]~I .input_power_up = "low";
+defparam \SalidaALU[21]~I .input_register_mode = "none";
+defparam \SalidaALU[21]~I .input_sync_reset = "none";
+defparam \SalidaALU[21]~I .oe_async_reset = "none";
+defparam \SalidaALU[21]~I .oe_power_up = "low";
+defparam \SalidaALU[21]~I .oe_register_mode = "none";
+defparam \SalidaALU[21]~I .oe_sync_reset = "none";
+defparam \SalidaALU[21]~I .operation_mode = "output";
+defparam \SalidaALU[21]~I .output_async_reset = "none";
+defparam \SalidaALU[21]~I .output_power_up = "low";
+defparam \SalidaALU[21]~I .output_register_mode = "none";
+defparam \SalidaALU[21]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[22]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[22]));
+// synopsys translate_off
+defparam \SalidaALU[22]~I .input_async_reset = "none";
+defparam \SalidaALU[22]~I .input_power_up = "low";
+defparam \SalidaALU[22]~I .input_register_mode = "none";
+defparam \SalidaALU[22]~I .input_sync_reset = "none";
+defparam \SalidaALU[22]~I .oe_async_reset = "none";
+defparam \SalidaALU[22]~I .oe_power_up = "low";
+defparam \SalidaALU[22]~I .oe_register_mode = "none";
+defparam \SalidaALU[22]~I .oe_sync_reset = "none";
+defparam \SalidaALU[22]~I .operation_mode = "output";
+defparam \SalidaALU[22]~I .output_async_reset = "none";
+defparam \SalidaALU[22]~I .output_power_up = "low";
+defparam \SalidaALU[22]~I .output_register_mode = "none";
+defparam \SalidaALU[22]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[23]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[23]));
+// synopsys translate_off
+defparam \SalidaALU[23]~I .input_async_reset = "none";
+defparam \SalidaALU[23]~I .input_power_up = "low";
+defparam \SalidaALU[23]~I .input_register_mode = "none";
+defparam \SalidaALU[23]~I .input_sync_reset = "none";
+defparam \SalidaALU[23]~I .oe_async_reset = "none";
+defparam \SalidaALU[23]~I .oe_power_up = "low";
+defparam \SalidaALU[23]~I .oe_register_mode = "none";
+defparam \SalidaALU[23]~I .oe_sync_reset = "none";
+defparam \SalidaALU[23]~I .operation_mode = "output";
+defparam \SalidaALU[23]~I .output_async_reset = "none";
+defparam \SalidaALU[23]~I .output_power_up = "low";
+defparam \SalidaALU[23]~I .output_register_mode = "none";
+defparam \SalidaALU[23]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[24]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[24]));
+// synopsys translate_off
+defparam \SalidaALU[24]~I .input_async_reset = "none";
+defparam \SalidaALU[24]~I .input_power_up = "low";
+defparam \SalidaALU[24]~I .input_register_mode = "none";
+defparam \SalidaALU[24]~I .input_sync_reset = "none";
+defparam \SalidaALU[24]~I .oe_async_reset = "none";
+defparam \SalidaALU[24]~I .oe_power_up = "low";
+defparam \SalidaALU[24]~I .oe_register_mode = "none";
+defparam \SalidaALU[24]~I .oe_sync_reset = "none";
+defparam \SalidaALU[24]~I .operation_mode = "output";
+defparam \SalidaALU[24]~I .output_async_reset = "none";
+defparam \SalidaALU[24]~I .output_power_up = "low";
+defparam \SalidaALU[24]~I .output_register_mode = "none";
+defparam \SalidaALU[24]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[25]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[25]));
+// synopsys translate_off
+defparam \SalidaALU[25]~I .input_async_reset = "none";
+defparam \SalidaALU[25]~I .input_power_up = "low";
+defparam \SalidaALU[25]~I .input_register_mode = "none";
+defparam \SalidaALU[25]~I .input_sync_reset = "none";
+defparam \SalidaALU[25]~I .oe_async_reset = "none";
+defparam \SalidaALU[25]~I .oe_power_up = "low";
+defparam \SalidaALU[25]~I .oe_register_mode = "none";
+defparam \SalidaALU[25]~I .oe_sync_reset = "none";
+defparam \SalidaALU[25]~I .operation_mode = "output";
+defparam \SalidaALU[25]~I .output_async_reset = "none";
+defparam \SalidaALU[25]~I .output_power_up = "low";
+defparam \SalidaALU[25]~I .output_register_mode = "none";
+defparam \SalidaALU[25]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[26]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[26]));
+// synopsys translate_off
+defparam \SalidaALU[26]~I .input_async_reset = "none";
+defparam \SalidaALU[26]~I .input_power_up = "low";
+defparam \SalidaALU[26]~I .input_register_mode = "none";
+defparam \SalidaALU[26]~I .input_sync_reset = "none";
+defparam \SalidaALU[26]~I .oe_async_reset = "none";
+defparam \SalidaALU[26]~I .oe_power_up = "low";
+defparam \SalidaALU[26]~I .oe_register_mode = "none";
+defparam \SalidaALU[26]~I .oe_sync_reset = "none";
+defparam \SalidaALU[26]~I .operation_mode = "output";
+defparam \SalidaALU[26]~I .output_async_reset = "none";
+defparam \SalidaALU[26]~I .output_power_up = "low";
+defparam \SalidaALU[26]~I .output_register_mode = "none";
+defparam \SalidaALU[26]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[27]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[27]));
+// synopsys translate_off
+defparam \SalidaALU[27]~I .input_async_reset = "none";
+defparam \SalidaALU[27]~I .input_power_up = "low";
+defparam \SalidaALU[27]~I .input_register_mode = "none";
+defparam \SalidaALU[27]~I .input_sync_reset = "none";
+defparam \SalidaALU[27]~I .oe_async_reset = "none";
+defparam \SalidaALU[27]~I .oe_power_up = "low";
+defparam \SalidaALU[27]~I .oe_register_mode = "none";
+defparam \SalidaALU[27]~I .oe_sync_reset = "none";
+defparam \SalidaALU[27]~I .operation_mode = "output";
+defparam \SalidaALU[27]~I .output_async_reset = "none";
+defparam \SalidaALU[27]~I .output_power_up = "low";
+defparam \SalidaALU[27]~I .output_register_mode = "none";
+defparam \SalidaALU[27]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[28]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[28]));
+// synopsys translate_off
+defparam \SalidaALU[28]~I .input_async_reset = "none";
+defparam \SalidaALU[28]~I .input_power_up = "low";
+defparam \SalidaALU[28]~I .input_register_mode = "none";
+defparam \SalidaALU[28]~I .input_sync_reset = "none";
+defparam \SalidaALU[28]~I .oe_async_reset = "none";
+defparam \SalidaALU[28]~I .oe_power_up = "low";
+defparam \SalidaALU[28]~I .oe_register_mode = "none";
+defparam \SalidaALU[28]~I .oe_sync_reset = "none";
+defparam \SalidaALU[28]~I .operation_mode = "output";
+defparam \SalidaALU[28]~I .output_async_reset = "none";
+defparam \SalidaALU[28]~I .output_power_up = "low";
+defparam \SalidaALU[28]~I .output_register_mode = "none";
+defparam \SalidaALU[28]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[29]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[29]));
+// synopsys translate_off
+defparam \SalidaALU[29]~I .input_async_reset = "none";
+defparam \SalidaALU[29]~I .input_power_up = "low";
+defparam \SalidaALU[29]~I .input_register_mode = "none";
+defparam \SalidaALU[29]~I .input_sync_reset = "none";
+defparam \SalidaALU[29]~I .oe_async_reset = "none";
+defparam \SalidaALU[29]~I .oe_power_up = "low";
+defparam \SalidaALU[29]~I .oe_register_mode = "none";
+defparam \SalidaALU[29]~I .oe_sync_reset = "none";
+defparam \SalidaALU[29]~I .operation_mode = "output";
+defparam \SalidaALU[29]~I .output_async_reset = "none";
+defparam \SalidaALU[29]~I .output_power_up = "low";
+defparam \SalidaALU[29]~I .output_register_mode = "none";
+defparam \SalidaALU[29]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[30]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[30]));
+// synopsys translate_off
+defparam \SalidaALU[30]~I .input_async_reset = "none";
+defparam \SalidaALU[30]~I .input_power_up = "low";
+defparam \SalidaALU[30]~I .input_register_mode = "none";
+defparam \SalidaALU[30]~I .input_sync_reset = "none";
+defparam \SalidaALU[30]~I .oe_async_reset = "none";
+defparam \SalidaALU[30]~I .oe_power_up = "low";
+defparam \SalidaALU[30]~I .oe_register_mode = "none";
+defparam \SalidaALU[30]~I .oe_sync_reset = "none";
+defparam \SalidaALU[30]~I .operation_mode = "output";
+defparam \SalidaALU[30]~I .output_async_reset = "none";
+defparam \SalidaALU[30]~I .output_power_up = "low";
+defparam \SalidaALU[30]~I .output_register_mode = "none";
+defparam \SalidaALU[30]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALU[31]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALU[31]));
+// synopsys translate_off
+defparam \SalidaALU[31]~I .input_async_reset = "none";
+defparam \SalidaALU[31]~I .input_power_up = "low";
+defparam \SalidaALU[31]~I .input_register_mode = "none";
+defparam \SalidaALU[31]~I .input_sync_reset = "none";
+defparam \SalidaALU[31]~I .oe_async_reset = "none";
+defparam \SalidaALU[31]~I .oe_power_up = "low";
+defparam \SalidaALU[31]~I .oe_register_mode = "none";
+defparam \SalidaALU[31]~I .oe_sync_reset = "none";
+defparam \SalidaALU[31]~I .operation_mode = "output";
+defparam \SalidaALU[31]~I .output_async_reset = "none";
+defparam \SalidaALU[31]~I .output_power_up = "low";
+defparam \SalidaALU[31]~I .output_register_mode = "none";
+defparam \SalidaALU[31]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[0]~I (
+	.datain(\pmInstructionMem|q [0]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[0]));
+// synopsys translate_off
+defparam \SalidaROM[0]~I .input_async_reset = "none";
+defparam \SalidaROM[0]~I .input_power_up = "low";
+defparam \SalidaROM[0]~I .input_register_mode = "none";
+defparam \SalidaROM[0]~I .input_sync_reset = "none";
+defparam \SalidaROM[0]~I .oe_async_reset = "none";
+defparam \SalidaROM[0]~I .oe_power_up = "low";
+defparam \SalidaROM[0]~I .oe_register_mode = "none";
+defparam \SalidaROM[0]~I .oe_sync_reset = "none";
+defparam \SalidaROM[0]~I .operation_mode = "output";
+defparam \SalidaROM[0]~I .output_async_reset = "none";
+defparam \SalidaROM[0]~I .output_power_up = "low";
+defparam \SalidaROM[0]~I .output_register_mode = "none";
+defparam \SalidaROM[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[1]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[1]));
+// synopsys translate_off
+defparam \SalidaROM[1]~I .input_async_reset = "none";
+defparam \SalidaROM[1]~I .input_power_up = "low";
+defparam \SalidaROM[1]~I .input_register_mode = "none";
+defparam \SalidaROM[1]~I .input_sync_reset = "none";
+defparam \SalidaROM[1]~I .oe_async_reset = "none";
+defparam \SalidaROM[1]~I .oe_power_up = "low";
+defparam \SalidaROM[1]~I .oe_register_mode = "none";
+defparam \SalidaROM[1]~I .oe_sync_reset = "none";
+defparam \SalidaROM[1]~I .operation_mode = "output";
+defparam \SalidaROM[1]~I .output_async_reset = "none";
+defparam \SalidaROM[1]~I .output_power_up = "low";
+defparam \SalidaROM[1]~I .output_register_mode = "none";
+defparam \SalidaROM[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[2]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[2]));
+// synopsys translate_off
+defparam \SalidaROM[2]~I .input_async_reset = "none";
+defparam \SalidaROM[2]~I .input_power_up = "low";
+defparam \SalidaROM[2]~I .input_register_mode = "none";
+defparam \SalidaROM[2]~I .input_sync_reset = "none";
+defparam \SalidaROM[2]~I .oe_async_reset = "none";
+defparam \SalidaROM[2]~I .oe_power_up = "low";
+defparam \SalidaROM[2]~I .oe_register_mode = "none";
+defparam \SalidaROM[2]~I .oe_sync_reset = "none";
+defparam \SalidaROM[2]~I .operation_mode = "output";
+defparam \SalidaROM[2]~I .output_async_reset = "none";
+defparam \SalidaROM[2]~I .output_power_up = "low";
+defparam \SalidaROM[2]~I .output_register_mode = "none";
+defparam \SalidaROM[2]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[3]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[3]));
+// synopsys translate_off
+defparam \SalidaROM[3]~I .input_async_reset = "none";
+defparam \SalidaROM[3]~I .input_power_up = "low";
+defparam \SalidaROM[3]~I .input_register_mode = "none";
+defparam \SalidaROM[3]~I .input_sync_reset = "none";
+defparam \SalidaROM[3]~I .oe_async_reset = "none";
+defparam \SalidaROM[3]~I .oe_power_up = "low";
+defparam \SalidaROM[3]~I .oe_register_mode = "none";
+defparam \SalidaROM[3]~I .oe_sync_reset = "none";
+defparam \SalidaROM[3]~I .operation_mode = "output";
+defparam \SalidaROM[3]~I .output_async_reset = "none";
+defparam \SalidaROM[3]~I .output_power_up = "low";
+defparam \SalidaROM[3]~I .output_register_mode = "none";
+defparam \SalidaROM[3]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[4]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[4]));
+// synopsys translate_off
+defparam \SalidaROM[4]~I .input_async_reset = "none";
+defparam \SalidaROM[4]~I .input_power_up = "low";
+defparam \SalidaROM[4]~I .input_register_mode = "none";
+defparam \SalidaROM[4]~I .input_sync_reset = "none";
+defparam \SalidaROM[4]~I .oe_async_reset = "none";
+defparam \SalidaROM[4]~I .oe_power_up = "low";
+defparam \SalidaROM[4]~I .oe_register_mode = "none";
+defparam \SalidaROM[4]~I .oe_sync_reset = "none";
+defparam \SalidaROM[4]~I .operation_mode = "output";
+defparam \SalidaROM[4]~I .output_async_reset = "none";
+defparam \SalidaROM[4]~I .output_power_up = "low";
+defparam \SalidaROM[4]~I .output_register_mode = "none";
+defparam \SalidaROM[4]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[5]~I (
+	.datain(\pmInstructionMem|q [5]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[5]));
+// synopsys translate_off
+defparam \SalidaROM[5]~I .input_async_reset = "none";
+defparam \SalidaROM[5]~I .input_power_up = "low";
+defparam \SalidaROM[5]~I .input_register_mode = "none";
+defparam \SalidaROM[5]~I .input_sync_reset = "none";
+defparam \SalidaROM[5]~I .oe_async_reset = "none";
+defparam \SalidaROM[5]~I .oe_power_up = "low";
+defparam \SalidaROM[5]~I .oe_register_mode = "none";
+defparam \SalidaROM[5]~I .oe_sync_reset = "none";
+defparam \SalidaROM[5]~I .operation_mode = "output";
+defparam \SalidaROM[5]~I .output_async_reset = "none";
+defparam \SalidaROM[5]~I .output_power_up = "low";
+defparam \SalidaROM[5]~I .output_register_mode = "none";
+defparam \SalidaROM[5]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[6]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[6]));
+// synopsys translate_off
+defparam \SalidaROM[6]~I .input_async_reset = "none";
+defparam \SalidaROM[6]~I .input_power_up = "low";
+defparam \SalidaROM[6]~I .input_register_mode = "none";
+defparam \SalidaROM[6]~I .input_sync_reset = "none";
+defparam \SalidaROM[6]~I .oe_async_reset = "none";
+defparam \SalidaROM[6]~I .oe_power_up = "low";
+defparam \SalidaROM[6]~I .oe_register_mode = "none";
+defparam \SalidaROM[6]~I .oe_sync_reset = "none";
+defparam \SalidaROM[6]~I .operation_mode = "output";
+defparam \SalidaROM[6]~I .output_async_reset = "none";
+defparam \SalidaROM[6]~I .output_power_up = "low";
+defparam \SalidaROM[6]~I .output_register_mode = "none";
+defparam \SalidaROM[6]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[7]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[7]));
+// synopsys translate_off
+defparam \SalidaROM[7]~I .input_async_reset = "none";
+defparam \SalidaROM[7]~I .input_power_up = "low";
+defparam \SalidaROM[7]~I .input_register_mode = "none";
+defparam \SalidaROM[7]~I .input_sync_reset = "none";
+defparam \SalidaROM[7]~I .oe_async_reset = "none";
+defparam \SalidaROM[7]~I .oe_power_up = "low";
+defparam \SalidaROM[7]~I .oe_register_mode = "none";
+defparam \SalidaROM[7]~I .oe_sync_reset = "none";
+defparam \SalidaROM[7]~I .operation_mode = "output";
+defparam \SalidaROM[7]~I .output_async_reset = "none";
+defparam \SalidaROM[7]~I .output_power_up = "low";
+defparam \SalidaROM[7]~I .output_register_mode = "none";
+defparam \SalidaROM[7]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[8]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[8]));
+// synopsys translate_off
+defparam \SalidaROM[8]~I .input_async_reset = "none";
+defparam \SalidaROM[8]~I .input_power_up = "low";
+defparam \SalidaROM[8]~I .input_register_mode = "none";
+defparam \SalidaROM[8]~I .input_sync_reset = "none";
+defparam \SalidaROM[8]~I .oe_async_reset = "none";
+defparam \SalidaROM[8]~I .oe_power_up = "low";
+defparam \SalidaROM[8]~I .oe_register_mode = "none";
+defparam \SalidaROM[8]~I .oe_sync_reset = "none";
+defparam \SalidaROM[8]~I .operation_mode = "output";
+defparam \SalidaROM[8]~I .output_async_reset = "none";
+defparam \SalidaROM[8]~I .output_power_up = "low";
+defparam \SalidaROM[8]~I .output_register_mode = "none";
+defparam \SalidaROM[8]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[9]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[9]));
+// synopsys translate_off
+defparam \SalidaROM[9]~I .input_async_reset = "none";
+defparam \SalidaROM[9]~I .input_power_up = "low";
+defparam \SalidaROM[9]~I .input_register_mode = "none";
+defparam \SalidaROM[9]~I .input_sync_reset = "none";
+defparam \SalidaROM[9]~I .oe_async_reset = "none";
+defparam \SalidaROM[9]~I .oe_power_up = "low";
+defparam \SalidaROM[9]~I .oe_register_mode = "none";
+defparam \SalidaROM[9]~I .oe_sync_reset = "none";
+defparam \SalidaROM[9]~I .operation_mode = "output";
+defparam \SalidaROM[9]~I .output_async_reset = "none";
+defparam \SalidaROM[9]~I .output_power_up = "low";
+defparam \SalidaROM[9]~I .output_register_mode = "none";
+defparam \SalidaROM[9]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[10]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[10]));
+// synopsys translate_off
+defparam \SalidaROM[10]~I .input_async_reset = "none";
+defparam \SalidaROM[10]~I .input_power_up = "low";
+defparam \SalidaROM[10]~I .input_register_mode = "none";
+defparam \SalidaROM[10]~I .input_sync_reset = "none";
+defparam \SalidaROM[10]~I .oe_async_reset = "none";
+defparam \SalidaROM[10]~I .oe_power_up = "low";
+defparam \SalidaROM[10]~I .oe_register_mode = "none";
+defparam \SalidaROM[10]~I .oe_sync_reset = "none";
+defparam \SalidaROM[10]~I .operation_mode = "output";
+defparam \SalidaROM[10]~I .output_async_reset = "none";
+defparam \SalidaROM[10]~I .output_power_up = "low";
+defparam \SalidaROM[10]~I .output_register_mode = "none";
+defparam \SalidaROM[10]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[11]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[11]));
+// synopsys translate_off
+defparam \SalidaROM[11]~I .input_async_reset = "none";
+defparam \SalidaROM[11]~I .input_power_up = "low";
+defparam \SalidaROM[11]~I .input_register_mode = "none";
+defparam \SalidaROM[11]~I .input_sync_reset = "none";
+defparam \SalidaROM[11]~I .oe_async_reset = "none";
+defparam \SalidaROM[11]~I .oe_power_up = "low";
+defparam \SalidaROM[11]~I .oe_register_mode = "none";
+defparam \SalidaROM[11]~I .oe_sync_reset = "none";
+defparam \SalidaROM[11]~I .operation_mode = "output";
+defparam \SalidaROM[11]~I .output_async_reset = "none";
+defparam \SalidaROM[11]~I .output_power_up = "low";
+defparam \SalidaROM[11]~I .output_register_mode = "none";
+defparam \SalidaROM[11]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[12]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[12]));
+// synopsys translate_off
+defparam \SalidaROM[12]~I .input_async_reset = "none";
+defparam \SalidaROM[12]~I .input_power_up = "low";
+defparam \SalidaROM[12]~I .input_register_mode = "none";
+defparam \SalidaROM[12]~I .input_sync_reset = "none";
+defparam \SalidaROM[12]~I .oe_async_reset = "none";
+defparam \SalidaROM[12]~I .oe_power_up = "low";
+defparam \SalidaROM[12]~I .oe_register_mode = "none";
+defparam \SalidaROM[12]~I .oe_sync_reset = "none";
+defparam \SalidaROM[12]~I .operation_mode = "output";
+defparam \SalidaROM[12]~I .output_async_reset = "none";
+defparam \SalidaROM[12]~I .output_power_up = "low";
+defparam \SalidaROM[12]~I .output_register_mode = "none";
+defparam \SalidaROM[12]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[13]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[13]));
+// synopsys translate_off
+defparam \SalidaROM[13]~I .input_async_reset = "none";
+defparam \SalidaROM[13]~I .input_power_up = "low";
+defparam \SalidaROM[13]~I .input_register_mode = "none";
+defparam \SalidaROM[13]~I .input_sync_reset = "none";
+defparam \SalidaROM[13]~I .oe_async_reset = "none";
+defparam \SalidaROM[13]~I .oe_power_up = "low";
+defparam \SalidaROM[13]~I .oe_register_mode = "none";
+defparam \SalidaROM[13]~I .oe_sync_reset = "none";
+defparam \SalidaROM[13]~I .operation_mode = "output";
+defparam \SalidaROM[13]~I .output_async_reset = "none";
+defparam \SalidaROM[13]~I .output_power_up = "low";
+defparam \SalidaROM[13]~I .output_register_mode = "none";
+defparam \SalidaROM[13]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[14]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[14]));
+// synopsys translate_off
+defparam \SalidaROM[14]~I .input_async_reset = "none";
+defparam \SalidaROM[14]~I .input_power_up = "low";
+defparam \SalidaROM[14]~I .input_register_mode = "none";
+defparam \SalidaROM[14]~I .input_sync_reset = "none";
+defparam \SalidaROM[14]~I .oe_async_reset = "none";
+defparam \SalidaROM[14]~I .oe_power_up = "low";
+defparam \SalidaROM[14]~I .oe_register_mode = "none";
+defparam \SalidaROM[14]~I .oe_sync_reset = "none";
+defparam \SalidaROM[14]~I .operation_mode = "output";
+defparam \SalidaROM[14]~I .output_async_reset = "none";
+defparam \SalidaROM[14]~I .output_power_up = "low";
+defparam \SalidaROM[14]~I .output_register_mode = "none";
+defparam \SalidaROM[14]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[15]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[15]));
+// synopsys translate_off
+defparam \SalidaROM[15]~I .input_async_reset = "none";
+defparam \SalidaROM[15]~I .input_power_up = "low";
+defparam \SalidaROM[15]~I .input_register_mode = "none";
+defparam \SalidaROM[15]~I .input_sync_reset = "none";
+defparam \SalidaROM[15]~I .oe_async_reset = "none";
+defparam \SalidaROM[15]~I .oe_power_up = "low";
+defparam \SalidaROM[15]~I .oe_register_mode = "none";
+defparam \SalidaROM[15]~I .oe_sync_reset = "none";
+defparam \SalidaROM[15]~I .operation_mode = "output";
+defparam \SalidaROM[15]~I .output_async_reset = "none";
+defparam \SalidaROM[15]~I .output_power_up = "low";
+defparam \SalidaROM[15]~I .output_register_mode = "none";
+defparam \SalidaROM[15]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[16]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[16]));
+// synopsys translate_off
+defparam \SalidaROM[16]~I .input_async_reset = "none";
+defparam \SalidaROM[16]~I .input_power_up = "low";
+defparam \SalidaROM[16]~I .input_register_mode = "none";
+defparam \SalidaROM[16]~I .input_sync_reset = "none";
+defparam \SalidaROM[16]~I .oe_async_reset = "none";
+defparam \SalidaROM[16]~I .oe_power_up = "low";
+defparam \SalidaROM[16]~I .oe_register_mode = "none";
+defparam \SalidaROM[16]~I .oe_sync_reset = "none";
+defparam \SalidaROM[16]~I .operation_mode = "output";
+defparam \SalidaROM[16]~I .output_async_reset = "none";
+defparam \SalidaROM[16]~I .output_power_up = "low";
+defparam \SalidaROM[16]~I .output_register_mode = "none";
+defparam \SalidaROM[16]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[17]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[17]));
+// synopsys translate_off
+defparam \SalidaROM[17]~I .input_async_reset = "none";
+defparam \SalidaROM[17]~I .input_power_up = "low";
+defparam \SalidaROM[17]~I .input_register_mode = "none";
+defparam \SalidaROM[17]~I .input_sync_reset = "none";
+defparam \SalidaROM[17]~I .oe_async_reset = "none";
+defparam \SalidaROM[17]~I .oe_power_up = "low";
+defparam \SalidaROM[17]~I .oe_register_mode = "none";
+defparam \SalidaROM[17]~I .oe_sync_reset = "none";
+defparam \SalidaROM[17]~I .operation_mode = "output";
+defparam \SalidaROM[17]~I .output_async_reset = "none";
+defparam \SalidaROM[17]~I .output_power_up = "low";
+defparam \SalidaROM[17]~I .output_register_mode = "none";
+defparam \SalidaROM[17]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[18]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[18]));
+// synopsys translate_off
+defparam \SalidaROM[18]~I .input_async_reset = "none";
+defparam \SalidaROM[18]~I .input_power_up = "low";
+defparam \SalidaROM[18]~I .input_register_mode = "none";
+defparam \SalidaROM[18]~I .input_sync_reset = "none";
+defparam \SalidaROM[18]~I .oe_async_reset = "none";
+defparam \SalidaROM[18]~I .oe_power_up = "low";
+defparam \SalidaROM[18]~I .oe_register_mode = "none";
+defparam \SalidaROM[18]~I .oe_sync_reset = "none";
+defparam \SalidaROM[18]~I .operation_mode = "output";
+defparam \SalidaROM[18]~I .output_async_reset = "none";
+defparam \SalidaROM[18]~I .output_power_up = "low";
+defparam \SalidaROM[18]~I .output_register_mode = "none";
+defparam \SalidaROM[18]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[19]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[19]));
+// synopsys translate_off
+defparam \SalidaROM[19]~I .input_async_reset = "none";
+defparam \SalidaROM[19]~I .input_power_up = "low";
+defparam \SalidaROM[19]~I .input_register_mode = "none";
+defparam \SalidaROM[19]~I .input_sync_reset = "none";
+defparam \SalidaROM[19]~I .oe_async_reset = "none";
+defparam \SalidaROM[19]~I .oe_power_up = "low";
+defparam \SalidaROM[19]~I .oe_register_mode = "none";
+defparam \SalidaROM[19]~I .oe_sync_reset = "none";
+defparam \SalidaROM[19]~I .operation_mode = "output";
+defparam \SalidaROM[19]~I .output_async_reset = "none";
+defparam \SalidaROM[19]~I .output_power_up = "low";
+defparam \SalidaROM[19]~I .output_register_mode = "none";
+defparam \SalidaROM[19]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[20]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[20]));
+// synopsys translate_off
+defparam \SalidaROM[20]~I .input_async_reset = "none";
+defparam \SalidaROM[20]~I .input_power_up = "low";
+defparam \SalidaROM[20]~I .input_register_mode = "none";
+defparam \SalidaROM[20]~I .input_sync_reset = "none";
+defparam \SalidaROM[20]~I .oe_async_reset = "none";
+defparam \SalidaROM[20]~I .oe_power_up = "low";
+defparam \SalidaROM[20]~I .oe_register_mode = "none";
+defparam \SalidaROM[20]~I .oe_sync_reset = "none";
+defparam \SalidaROM[20]~I .operation_mode = "output";
+defparam \SalidaROM[20]~I .output_async_reset = "none";
+defparam \SalidaROM[20]~I .output_power_up = "low";
+defparam \SalidaROM[20]~I .output_register_mode = "none";
+defparam \SalidaROM[20]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[21]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[21]));
+// synopsys translate_off
+defparam \SalidaROM[21]~I .input_async_reset = "none";
+defparam \SalidaROM[21]~I .input_power_up = "low";
+defparam \SalidaROM[21]~I .input_register_mode = "none";
+defparam \SalidaROM[21]~I .input_sync_reset = "none";
+defparam \SalidaROM[21]~I .oe_async_reset = "none";
+defparam \SalidaROM[21]~I .oe_power_up = "low";
+defparam \SalidaROM[21]~I .oe_register_mode = "none";
+defparam \SalidaROM[21]~I .oe_sync_reset = "none";
+defparam \SalidaROM[21]~I .operation_mode = "output";
+defparam \SalidaROM[21]~I .output_async_reset = "none";
+defparam \SalidaROM[21]~I .output_power_up = "low";
+defparam \SalidaROM[21]~I .output_register_mode = "none";
+defparam \SalidaROM[21]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[22]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[22]));
+// synopsys translate_off
+defparam \SalidaROM[22]~I .input_async_reset = "none";
+defparam \SalidaROM[22]~I .input_power_up = "low";
+defparam \SalidaROM[22]~I .input_register_mode = "none";
+defparam \SalidaROM[22]~I .input_sync_reset = "none";
+defparam \SalidaROM[22]~I .oe_async_reset = "none";
+defparam \SalidaROM[22]~I .oe_power_up = "low";
+defparam \SalidaROM[22]~I .oe_register_mode = "none";
+defparam \SalidaROM[22]~I .oe_sync_reset = "none";
+defparam \SalidaROM[22]~I .operation_mode = "output";
+defparam \SalidaROM[22]~I .output_async_reset = "none";
+defparam \SalidaROM[22]~I .output_power_up = "low";
+defparam \SalidaROM[22]~I .output_register_mode = "none";
+defparam \SalidaROM[22]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[23]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[23]));
+// synopsys translate_off
+defparam \SalidaROM[23]~I .input_async_reset = "none";
+defparam \SalidaROM[23]~I .input_power_up = "low";
+defparam \SalidaROM[23]~I .input_register_mode = "none";
+defparam \SalidaROM[23]~I .input_sync_reset = "none";
+defparam \SalidaROM[23]~I .oe_async_reset = "none";
+defparam \SalidaROM[23]~I .oe_power_up = "low";
+defparam \SalidaROM[23]~I .oe_register_mode = "none";
+defparam \SalidaROM[23]~I .oe_sync_reset = "none";
+defparam \SalidaROM[23]~I .operation_mode = "output";
+defparam \SalidaROM[23]~I .output_async_reset = "none";
+defparam \SalidaROM[23]~I .output_power_up = "low";
+defparam \SalidaROM[23]~I .output_register_mode = "none";
+defparam \SalidaROM[23]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[24]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[24]));
+// synopsys translate_off
+defparam \SalidaROM[24]~I .input_async_reset = "none";
+defparam \SalidaROM[24]~I .input_power_up = "low";
+defparam \SalidaROM[24]~I .input_register_mode = "none";
+defparam \SalidaROM[24]~I .input_sync_reset = "none";
+defparam \SalidaROM[24]~I .oe_async_reset = "none";
+defparam \SalidaROM[24]~I .oe_power_up = "low";
+defparam \SalidaROM[24]~I .oe_register_mode = "none";
+defparam \SalidaROM[24]~I .oe_sync_reset = "none";
+defparam \SalidaROM[24]~I .operation_mode = "output";
+defparam \SalidaROM[24]~I .output_async_reset = "none";
+defparam \SalidaROM[24]~I .output_power_up = "low";
+defparam \SalidaROM[24]~I .output_register_mode = "none";
+defparam \SalidaROM[24]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[25]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[25]));
+// synopsys translate_off
+defparam \SalidaROM[25]~I .input_async_reset = "none";
+defparam \SalidaROM[25]~I .input_power_up = "low";
+defparam \SalidaROM[25]~I .input_register_mode = "none";
+defparam \SalidaROM[25]~I .input_sync_reset = "none";
+defparam \SalidaROM[25]~I .oe_async_reset = "none";
+defparam \SalidaROM[25]~I .oe_power_up = "low";
+defparam \SalidaROM[25]~I .oe_register_mode = "none";
+defparam \SalidaROM[25]~I .oe_sync_reset = "none";
+defparam \SalidaROM[25]~I .operation_mode = "output";
+defparam \SalidaROM[25]~I .output_async_reset = "none";
+defparam \SalidaROM[25]~I .output_power_up = "low";
+defparam \SalidaROM[25]~I .output_register_mode = "none";
+defparam \SalidaROM[25]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[26]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[26]));
+// synopsys translate_off
+defparam \SalidaROM[26]~I .input_async_reset = "none";
+defparam \SalidaROM[26]~I .input_power_up = "low";
+defparam \SalidaROM[26]~I .input_register_mode = "none";
+defparam \SalidaROM[26]~I .input_sync_reset = "none";
+defparam \SalidaROM[26]~I .oe_async_reset = "none";
+defparam \SalidaROM[26]~I .oe_power_up = "low";
+defparam \SalidaROM[26]~I .oe_register_mode = "none";
+defparam \SalidaROM[26]~I .oe_sync_reset = "none";
+defparam \SalidaROM[26]~I .operation_mode = "output";
+defparam \SalidaROM[26]~I .output_async_reset = "none";
+defparam \SalidaROM[26]~I .output_power_up = "low";
+defparam \SalidaROM[26]~I .output_register_mode = "none";
+defparam \SalidaROM[26]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[27]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[27]));
+// synopsys translate_off
+defparam \SalidaROM[27]~I .input_async_reset = "none";
+defparam \SalidaROM[27]~I .input_power_up = "low";
+defparam \SalidaROM[27]~I .input_register_mode = "none";
+defparam \SalidaROM[27]~I .input_sync_reset = "none";
+defparam \SalidaROM[27]~I .oe_async_reset = "none";
+defparam \SalidaROM[27]~I .oe_power_up = "low";
+defparam \SalidaROM[27]~I .oe_register_mode = "none";
+defparam \SalidaROM[27]~I .oe_sync_reset = "none";
+defparam \SalidaROM[27]~I .operation_mode = "output";
+defparam \SalidaROM[27]~I .output_async_reset = "none";
+defparam \SalidaROM[27]~I .output_power_up = "low";
+defparam \SalidaROM[27]~I .output_register_mode = "none";
+defparam \SalidaROM[27]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[28]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[28]));
+// synopsys translate_off
+defparam \SalidaROM[28]~I .input_async_reset = "none";
+defparam \SalidaROM[28]~I .input_power_up = "low";
+defparam \SalidaROM[28]~I .input_register_mode = "none";
+defparam \SalidaROM[28]~I .input_sync_reset = "none";
+defparam \SalidaROM[28]~I .oe_async_reset = "none";
+defparam \SalidaROM[28]~I .oe_power_up = "low";
+defparam \SalidaROM[28]~I .oe_register_mode = "none";
+defparam \SalidaROM[28]~I .oe_sync_reset = "none";
+defparam \SalidaROM[28]~I .operation_mode = "output";
+defparam \SalidaROM[28]~I .output_async_reset = "none";
+defparam \SalidaROM[28]~I .output_power_up = "low";
+defparam \SalidaROM[28]~I .output_register_mode = "none";
+defparam \SalidaROM[28]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[29]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[29]));
+// synopsys translate_off
+defparam \SalidaROM[29]~I .input_async_reset = "none";
+defparam \SalidaROM[29]~I .input_power_up = "low";
+defparam \SalidaROM[29]~I .input_register_mode = "none";
+defparam \SalidaROM[29]~I .input_sync_reset = "none";
+defparam \SalidaROM[29]~I .oe_async_reset = "none";
+defparam \SalidaROM[29]~I .oe_power_up = "low";
+defparam \SalidaROM[29]~I .oe_register_mode = "none";
+defparam \SalidaROM[29]~I .oe_sync_reset = "none";
+defparam \SalidaROM[29]~I .operation_mode = "output";
+defparam \SalidaROM[29]~I .output_async_reset = "none";
+defparam \SalidaROM[29]~I .output_power_up = "low";
+defparam \SalidaROM[29]~I .output_register_mode = "none";
+defparam \SalidaROM[29]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[30]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[30]));
+// synopsys translate_off
+defparam \SalidaROM[30]~I .input_async_reset = "none";
+defparam \SalidaROM[30]~I .input_power_up = "low";
+defparam \SalidaROM[30]~I .input_register_mode = "none";
+defparam \SalidaROM[30]~I .input_sync_reset = "none";
+defparam \SalidaROM[30]~I .oe_async_reset = "none";
+defparam \SalidaROM[30]~I .oe_power_up = "low";
+defparam \SalidaROM[30]~I .oe_register_mode = "none";
+defparam \SalidaROM[30]~I .oe_sync_reset = "none";
+defparam \SalidaROM[30]~I .operation_mode = "output";
+defparam \SalidaROM[30]~I .output_async_reset = "none";
+defparam \SalidaROM[30]~I .output_power_up = "low";
+defparam \SalidaROM[30]~I .output_register_mode = "none";
+defparam \SalidaROM[30]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaROM[31]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaROM[31]));
+// synopsys translate_off
+defparam \SalidaROM[31]~I .input_async_reset = "none";
+defparam \SalidaROM[31]~I .input_power_up = "low";
+defparam \SalidaROM[31]~I .input_register_mode = "none";
+defparam \SalidaROM[31]~I .input_sync_reset = "none";
+defparam \SalidaROM[31]~I .oe_async_reset = "none";
+defparam \SalidaROM[31]~I .oe_power_up = "low";
+defparam \SalidaROM[31]~I .oe_register_mode = "none";
+defparam \SalidaROM[31]~I .oe_sync_reset = "none";
+defparam \SalidaROM[31]~I .operation_mode = "output";
+defparam \SalidaROM[31]~I .output_async_reset = "none";
+defparam \SalidaROM[31]~I .output_power_up = "low";
+defparam \SalidaROM[31]~I .output_register_mode = "none";
+defparam \SalidaROM[31]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[0]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[0]));
+// synopsys translate_off
+defparam \SalidaRAM[0]~I .input_async_reset = "none";
+defparam \SalidaRAM[0]~I .input_power_up = "low";
+defparam \SalidaRAM[0]~I .input_register_mode = "none";
+defparam \SalidaRAM[0]~I .input_sync_reset = "none";
+defparam \SalidaRAM[0]~I .oe_async_reset = "none";
+defparam \SalidaRAM[0]~I .oe_power_up = "low";
+defparam \SalidaRAM[0]~I .oe_register_mode = "none";
+defparam \SalidaRAM[0]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[0]~I .operation_mode = "output";
+defparam \SalidaRAM[0]~I .output_async_reset = "none";
+defparam \SalidaRAM[0]~I .output_power_up = "low";
+defparam \SalidaRAM[0]~I .output_register_mode = "none";
+defparam \SalidaRAM[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[1]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[1]));
+// synopsys translate_off
+defparam \SalidaRAM[1]~I .input_async_reset = "none";
+defparam \SalidaRAM[1]~I .input_power_up = "low";
+defparam \SalidaRAM[1]~I .input_register_mode = "none";
+defparam \SalidaRAM[1]~I .input_sync_reset = "none";
+defparam \SalidaRAM[1]~I .oe_async_reset = "none";
+defparam \SalidaRAM[1]~I .oe_power_up = "low";
+defparam \SalidaRAM[1]~I .oe_register_mode = "none";
+defparam \SalidaRAM[1]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[1]~I .operation_mode = "output";
+defparam \SalidaRAM[1]~I .output_async_reset = "none";
+defparam \SalidaRAM[1]~I .output_power_up = "low";
+defparam \SalidaRAM[1]~I .output_register_mode = "none";
+defparam \SalidaRAM[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[2]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[2]));
+// synopsys translate_off
+defparam \SalidaRAM[2]~I .input_async_reset = "none";
+defparam \SalidaRAM[2]~I .input_power_up = "low";
+defparam \SalidaRAM[2]~I .input_register_mode = "none";
+defparam \SalidaRAM[2]~I .input_sync_reset = "none";
+defparam \SalidaRAM[2]~I .oe_async_reset = "none";
+defparam \SalidaRAM[2]~I .oe_power_up = "low";
+defparam \SalidaRAM[2]~I .oe_register_mode = "none";
+defparam \SalidaRAM[2]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[2]~I .operation_mode = "output";
+defparam \SalidaRAM[2]~I .output_async_reset = "none";
+defparam \SalidaRAM[2]~I .output_power_up = "low";
+defparam \SalidaRAM[2]~I .output_register_mode = "none";
+defparam \SalidaRAM[2]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[3]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[3]));
+// synopsys translate_off
+defparam \SalidaRAM[3]~I .input_async_reset = "none";
+defparam \SalidaRAM[3]~I .input_power_up = "low";
+defparam \SalidaRAM[3]~I .input_register_mode = "none";
+defparam \SalidaRAM[3]~I .input_sync_reset = "none";
+defparam \SalidaRAM[3]~I .oe_async_reset = "none";
+defparam \SalidaRAM[3]~I .oe_power_up = "low";
+defparam \SalidaRAM[3]~I .oe_register_mode = "none";
+defparam \SalidaRAM[3]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[3]~I .operation_mode = "output";
+defparam \SalidaRAM[3]~I .output_async_reset = "none";
+defparam \SalidaRAM[3]~I .output_power_up = "low";
+defparam \SalidaRAM[3]~I .output_register_mode = "none";
+defparam \SalidaRAM[3]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[4]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[4]));
+// synopsys translate_off
+defparam \SalidaRAM[4]~I .input_async_reset = "none";
+defparam \SalidaRAM[4]~I .input_power_up = "low";
+defparam \SalidaRAM[4]~I .input_register_mode = "none";
+defparam \SalidaRAM[4]~I .input_sync_reset = "none";
+defparam \SalidaRAM[4]~I .oe_async_reset = "none";
+defparam \SalidaRAM[4]~I .oe_power_up = "low";
+defparam \SalidaRAM[4]~I .oe_register_mode = "none";
+defparam \SalidaRAM[4]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[4]~I .operation_mode = "output";
+defparam \SalidaRAM[4]~I .output_async_reset = "none";
+defparam \SalidaRAM[4]~I .output_power_up = "low";
+defparam \SalidaRAM[4]~I .output_register_mode = "none";
+defparam \SalidaRAM[4]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[5]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[5]));
+// synopsys translate_off
+defparam \SalidaRAM[5]~I .input_async_reset = "none";
+defparam \SalidaRAM[5]~I .input_power_up = "low";
+defparam \SalidaRAM[5]~I .input_register_mode = "none";
+defparam \SalidaRAM[5]~I .input_sync_reset = "none";
+defparam \SalidaRAM[5]~I .oe_async_reset = "none";
+defparam \SalidaRAM[5]~I .oe_power_up = "low";
+defparam \SalidaRAM[5]~I .oe_register_mode = "none";
+defparam \SalidaRAM[5]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[5]~I .operation_mode = "output";
+defparam \SalidaRAM[5]~I .output_async_reset = "none";
+defparam \SalidaRAM[5]~I .output_power_up = "low";
+defparam \SalidaRAM[5]~I .output_register_mode = "none";
+defparam \SalidaRAM[5]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[6]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[6]));
+// synopsys translate_off
+defparam \SalidaRAM[6]~I .input_async_reset = "none";
+defparam \SalidaRAM[6]~I .input_power_up = "low";
+defparam \SalidaRAM[6]~I .input_register_mode = "none";
+defparam \SalidaRAM[6]~I .input_sync_reset = "none";
+defparam \SalidaRAM[6]~I .oe_async_reset = "none";
+defparam \SalidaRAM[6]~I .oe_power_up = "low";
+defparam \SalidaRAM[6]~I .oe_register_mode = "none";
+defparam \SalidaRAM[6]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[6]~I .operation_mode = "output";
+defparam \SalidaRAM[6]~I .output_async_reset = "none";
+defparam \SalidaRAM[6]~I .output_power_up = "low";
+defparam \SalidaRAM[6]~I .output_register_mode = "none";
+defparam \SalidaRAM[6]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[7]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[7]));
+// synopsys translate_off
+defparam \SalidaRAM[7]~I .input_async_reset = "none";
+defparam \SalidaRAM[7]~I .input_power_up = "low";
+defparam \SalidaRAM[7]~I .input_register_mode = "none";
+defparam \SalidaRAM[7]~I .input_sync_reset = "none";
+defparam \SalidaRAM[7]~I .oe_async_reset = "none";
+defparam \SalidaRAM[7]~I .oe_power_up = "low";
+defparam \SalidaRAM[7]~I .oe_register_mode = "none";
+defparam \SalidaRAM[7]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[7]~I .operation_mode = "output";
+defparam \SalidaRAM[7]~I .output_async_reset = "none";
+defparam \SalidaRAM[7]~I .output_power_up = "low";
+defparam \SalidaRAM[7]~I .output_register_mode = "none";
+defparam \SalidaRAM[7]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[8]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[8]));
+// synopsys translate_off
+defparam \SalidaRAM[8]~I .input_async_reset = "none";
+defparam \SalidaRAM[8]~I .input_power_up = "low";
+defparam \SalidaRAM[8]~I .input_register_mode = "none";
+defparam \SalidaRAM[8]~I .input_sync_reset = "none";
+defparam \SalidaRAM[8]~I .oe_async_reset = "none";
+defparam \SalidaRAM[8]~I .oe_power_up = "low";
+defparam \SalidaRAM[8]~I .oe_register_mode = "none";
+defparam \SalidaRAM[8]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[8]~I .operation_mode = "output";
+defparam \SalidaRAM[8]~I .output_async_reset = "none";
+defparam \SalidaRAM[8]~I .output_power_up = "low";
+defparam \SalidaRAM[8]~I .output_register_mode = "none";
+defparam \SalidaRAM[8]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[9]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[9]));
+// synopsys translate_off
+defparam \SalidaRAM[9]~I .input_async_reset = "none";
+defparam \SalidaRAM[9]~I .input_power_up = "low";
+defparam \SalidaRAM[9]~I .input_register_mode = "none";
+defparam \SalidaRAM[9]~I .input_sync_reset = "none";
+defparam \SalidaRAM[9]~I .oe_async_reset = "none";
+defparam \SalidaRAM[9]~I .oe_power_up = "low";
+defparam \SalidaRAM[9]~I .oe_register_mode = "none";
+defparam \SalidaRAM[9]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[9]~I .operation_mode = "output";
+defparam \SalidaRAM[9]~I .output_async_reset = "none";
+defparam \SalidaRAM[9]~I .output_power_up = "low";
+defparam \SalidaRAM[9]~I .output_register_mode = "none";
+defparam \SalidaRAM[9]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[10]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[10]));
+// synopsys translate_off
+defparam \SalidaRAM[10]~I .input_async_reset = "none";
+defparam \SalidaRAM[10]~I .input_power_up = "low";
+defparam \SalidaRAM[10]~I .input_register_mode = "none";
+defparam \SalidaRAM[10]~I .input_sync_reset = "none";
+defparam \SalidaRAM[10]~I .oe_async_reset = "none";
+defparam \SalidaRAM[10]~I .oe_power_up = "low";
+defparam \SalidaRAM[10]~I .oe_register_mode = "none";
+defparam \SalidaRAM[10]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[10]~I .operation_mode = "output";
+defparam \SalidaRAM[10]~I .output_async_reset = "none";
+defparam \SalidaRAM[10]~I .output_power_up = "low";
+defparam \SalidaRAM[10]~I .output_register_mode = "none";
+defparam \SalidaRAM[10]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[11]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[11]));
+// synopsys translate_off
+defparam \SalidaRAM[11]~I .input_async_reset = "none";
+defparam \SalidaRAM[11]~I .input_power_up = "low";
+defparam \SalidaRAM[11]~I .input_register_mode = "none";
+defparam \SalidaRAM[11]~I .input_sync_reset = "none";
+defparam \SalidaRAM[11]~I .oe_async_reset = "none";
+defparam \SalidaRAM[11]~I .oe_power_up = "low";
+defparam \SalidaRAM[11]~I .oe_register_mode = "none";
+defparam \SalidaRAM[11]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[11]~I .operation_mode = "output";
+defparam \SalidaRAM[11]~I .output_async_reset = "none";
+defparam \SalidaRAM[11]~I .output_power_up = "low";
+defparam \SalidaRAM[11]~I .output_register_mode = "none";
+defparam \SalidaRAM[11]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[12]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[12]));
+// synopsys translate_off
+defparam \SalidaRAM[12]~I .input_async_reset = "none";
+defparam \SalidaRAM[12]~I .input_power_up = "low";
+defparam \SalidaRAM[12]~I .input_register_mode = "none";
+defparam \SalidaRAM[12]~I .input_sync_reset = "none";
+defparam \SalidaRAM[12]~I .oe_async_reset = "none";
+defparam \SalidaRAM[12]~I .oe_power_up = "low";
+defparam \SalidaRAM[12]~I .oe_register_mode = "none";
+defparam \SalidaRAM[12]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[12]~I .operation_mode = "output";
+defparam \SalidaRAM[12]~I .output_async_reset = "none";
+defparam \SalidaRAM[12]~I .output_power_up = "low";
+defparam \SalidaRAM[12]~I .output_register_mode = "none";
+defparam \SalidaRAM[12]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[13]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[13]));
+// synopsys translate_off
+defparam \SalidaRAM[13]~I .input_async_reset = "none";
+defparam \SalidaRAM[13]~I .input_power_up = "low";
+defparam \SalidaRAM[13]~I .input_register_mode = "none";
+defparam \SalidaRAM[13]~I .input_sync_reset = "none";
+defparam \SalidaRAM[13]~I .oe_async_reset = "none";
+defparam \SalidaRAM[13]~I .oe_power_up = "low";
+defparam \SalidaRAM[13]~I .oe_register_mode = "none";
+defparam \SalidaRAM[13]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[13]~I .operation_mode = "output";
+defparam \SalidaRAM[13]~I .output_async_reset = "none";
+defparam \SalidaRAM[13]~I .output_power_up = "low";
+defparam \SalidaRAM[13]~I .output_register_mode = "none";
+defparam \SalidaRAM[13]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[14]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[14]));
+// synopsys translate_off
+defparam \SalidaRAM[14]~I .input_async_reset = "none";
+defparam \SalidaRAM[14]~I .input_power_up = "low";
+defparam \SalidaRAM[14]~I .input_register_mode = "none";
+defparam \SalidaRAM[14]~I .input_sync_reset = "none";
+defparam \SalidaRAM[14]~I .oe_async_reset = "none";
+defparam \SalidaRAM[14]~I .oe_power_up = "low";
+defparam \SalidaRAM[14]~I .oe_register_mode = "none";
+defparam \SalidaRAM[14]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[14]~I .operation_mode = "output";
+defparam \SalidaRAM[14]~I .output_async_reset = "none";
+defparam \SalidaRAM[14]~I .output_power_up = "low";
+defparam \SalidaRAM[14]~I .output_register_mode = "none";
+defparam \SalidaRAM[14]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[15]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[15]));
+// synopsys translate_off
+defparam \SalidaRAM[15]~I .input_async_reset = "none";
+defparam \SalidaRAM[15]~I .input_power_up = "low";
+defparam \SalidaRAM[15]~I .input_register_mode = "none";
+defparam \SalidaRAM[15]~I .input_sync_reset = "none";
+defparam \SalidaRAM[15]~I .oe_async_reset = "none";
+defparam \SalidaRAM[15]~I .oe_power_up = "low";
+defparam \SalidaRAM[15]~I .oe_register_mode = "none";
+defparam \SalidaRAM[15]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[15]~I .operation_mode = "output";
+defparam \SalidaRAM[15]~I .output_async_reset = "none";
+defparam \SalidaRAM[15]~I .output_power_up = "low";
+defparam \SalidaRAM[15]~I .output_register_mode = "none";
+defparam \SalidaRAM[15]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[16]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[16]));
+// synopsys translate_off
+defparam \SalidaRAM[16]~I .input_async_reset = "none";
+defparam \SalidaRAM[16]~I .input_power_up = "low";
+defparam \SalidaRAM[16]~I .input_register_mode = "none";
+defparam \SalidaRAM[16]~I .input_sync_reset = "none";
+defparam \SalidaRAM[16]~I .oe_async_reset = "none";
+defparam \SalidaRAM[16]~I .oe_power_up = "low";
+defparam \SalidaRAM[16]~I .oe_register_mode = "none";
+defparam \SalidaRAM[16]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[16]~I .operation_mode = "output";
+defparam \SalidaRAM[16]~I .output_async_reset = "none";
+defparam \SalidaRAM[16]~I .output_power_up = "low";
+defparam \SalidaRAM[16]~I .output_register_mode = "none";
+defparam \SalidaRAM[16]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[17]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[17]));
+// synopsys translate_off
+defparam \SalidaRAM[17]~I .input_async_reset = "none";
+defparam \SalidaRAM[17]~I .input_power_up = "low";
+defparam \SalidaRAM[17]~I .input_register_mode = "none";
+defparam \SalidaRAM[17]~I .input_sync_reset = "none";
+defparam \SalidaRAM[17]~I .oe_async_reset = "none";
+defparam \SalidaRAM[17]~I .oe_power_up = "low";
+defparam \SalidaRAM[17]~I .oe_register_mode = "none";
+defparam \SalidaRAM[17]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[17]~I .operation_mode = "output";
+defparam \SalidaRAM[17]~I .output_async_reset = "none";
+defparam \SalidaRAM[17]~I .output_power_up = "low";
+defparam \SalidaRAM[17]~I .output_register_mode = "none";
+defparam \SalidaRAM[17]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[18]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[18]));
+// synopsys translate_off
+defparam \SalidaRAM[18]~I .input_async_reset = "none";
+defparam \SalidaRAM[18]~I .input_power_up = "low";
+defparam \SalidaRAM[18]~I .input_register_mode = "none";
+defparam \SalidaRAM[18]~I .input_sync_reset = "none";
+defparam \SalidaRAM[18]~I .oe_async_reset = "none";
+defparam \SalidaRAM[18]~I .oe_power_up = "low";
+defparam \SalidaRAM[18]~I .oe_register_mode = "none";
+defparam \SalidaRAM[18]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[18]~I .operation_mode = "output";
+defparam \SalidaRAM[18]~I .output_async_reset = "none";
+defparam \SalidaRAM[18]~I .output_power_up = "low";
+defparam \SalidaRAM[18]~I .output_register_mode = "none";
+defparam \SalidaRAM[18]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[19]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[19]));
+// synopsys translate_off
+defparam \SalidaRAM[19]~I .input_async_reset = "none";
+defparam \SalidaRAM[19]~I .input_power_up = "low";
+defparam \SalidaRAM[19]~I .input_register_mode = "none";
+defparam \SalidaRAM[19]~I .input_sync_reset = "none";
+defparam \SalidaRAM[19]~I .oe_async_reset = "none";
+defparam \SalidaRAM[19]~I .oe_power_up = "low";
+defparam \SalidaRAM[19]~I .oe_register_mode = "none";
+defparam \SalidaRAM[19]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[19]~I .operation_mode = "output";
+defparam \SalidaRAM[19]~I .output_async_reset = "none";
+defparam \SalidaRAM[19]~I .output_power_up = "low";
+defparam \SalidaRAM[19]~I .output_register_mode = "none";
+defparam \SalidaRAM[19]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[20]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[20]));
+// synopsys translate_off
+defparam \SalidaRAM[20]~I .input_async_reset = "none";
+defparam \SalidaRAM[20]~I .input_power_up = "low";
+defparam \SalidaRAM[20]~I .input_register_mode = "none";
+defparam \SalidaRAM[20]~I .input_sync_reset = "none";
+defparam \SalidaRAM[20]~I .oe_async_reset = "none";
+defparam \SalidaRAM[20]~I .oe_power_up = "low";
+defparam \SalidaRAM[20]~I .oe_register_mode = "none";
+defparam \SalidaRAM[20]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[20]~I .operation_mode = "output";
+defparam \SalidaRAM[20]~I .output_async_reset = "none";
+defparam \SalidaRAM[20]~I .output_power_up = "low";
+defparam \SalidaRAM[20]~I .output_register_mode = "none";
+defparam \SalidaRAM[20]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[21]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[21]));
+// synopsys translate_off
+defparam \SalidaRAM[21]~I .input_async_reset = "none";
+defparam \SalidaRAM[21]~I .input_power_up = "low";
+defparam \SalidaRAM[21]~I .input_register_mode = "none";
+defparam \SalidaRAM[21]~I .input_sync_reset = "none";
+defparam \SalidaRAM[21]~I .oe_async_reset = "none";
+defparam \SalidaRAM[21]~I .oe_power_up = "low";
+defparam \SalidaRAM[21]~I .oe_register_mode = "none";
+defparam \SalidaRAM[21]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[21]~I .operation_mode = "output";
+defparam \SalidaRAM[21]~I .output_async_reset = "none";
+defparam \SalidaRAM[21]~I .output_power_up = "low";
+defparam \SalidaRAM[21]~I .output_register_mode = "none";
+defparam \SalidaRAM[21]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[22]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[22]));
+// synopsys translate_off
+defparam \SalidaRAM[22]~I .input_async_reset = "none";
+defparam \SalidaRAM[22]~I .input_power_up = "low";
+defparam \SalidaRAM[22]~I .input_register_mode = "none";
+defparam \SalidaRAM[22]~I .input_sync_reset = "none";
+defparam \SalidaRAM[22]~I .oe_async_reset = "none";
+defparam \SalidaRAM[22]~I .oe_power_up = "low";
+defparam \SalidaRAM[22]~I .oe_register_mode = "none";
+defparam \SalidaRAM[22]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[22]~I .operation_mode = "output";
+defparam \SalidaRAM[22]~I .output_async_reset = "none";
+defparam \SalidaRAM[22]~I .output_power_up = "low";
+defparam \SalidaRAM[22]~I .output_register_mode = "none";
+defparam \SalidaRAM[22]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[23]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[23]));
+// synopsys translate_off
+defparam \SalidaRAM[23]~I .input_async_reset = "none";
+defparam \SalidaRAM[23]~I .input_power_up = "low";
+defparam \SalidaRAM[23]~I .input_register_mode = "none";
+defparam \SalidaRAM[23]~I .input_sync_reset = "none";
+defparam \SalidaRAM[23]~I .oe_async_reset = "none";
+defparam \SalidaRAM[23]~I .oe_power_up = "low";
+defparam \SalidaRAM[23]~I .oe_register_mode = "none";
+defparam \SalidaRAM[23]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[23]~I .operation_mode = "output";
+defparam \SalidaRAM[23]~I .output_async_reset = "none";
+defparam \SalidaRAM[23]~I .output_power_up = "low";
+defparam \SalidaRAM[23]~I .output_register_mode = "none";
+defparam \SalidaRAM[23]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[24]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[24]));
+// synopsys translate_off
+defparam \SalidaRAM[24]~I .input_async_reset = "none";
+defparam \SalidaRAM[24]~I .input_power_up = "low";
+defparam \SalidaRAM[24]~I .input_register_mode = "none";
+defparam \SalidaRAM[24]~I .input_sync_reset = "none";
+defparam \SalidaRAM[24]~I .oe_async_reset = "none";
+defparam \SalidaRAM[24]~I .oe_power_up = "low";
+defparam \SalidaRAM[24]~I .oe_register_mode = "none";
+defparam \SalidaRAM[24]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[24]~I .operation_mode = "output";
+defparam \SalidaRAM[24]~I .output_async_reset = "none";
+defparam \SalidaRAM[24]~I .output_power_up = "low";
+defparam \SalidaRAM[24]~I .output_register_mode = "none";
+defparam \SalidaRAM[24]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[25]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[25]));
+// synopsys translate_off
+defparam \SalidaRAM[25]~I .input_async_reset = "none";
+defparam \SalidaRAM[25]~I .input_power_up = "low";
+defparam \SalidaRAM[25]~I .input_register_mode = "none";
+defparam \SalidaRAM[25]~I .input_sync_reset = "none";
+defparam \SalidaRAM[25]~I .oe_async_reset = "none";
+defparam \SalidaRAM[25]~I .oe_power_up = "low";
+defparam \SalidaRAM[25]~I .oe_register_mode = "none";
+defparam \SalidaRAM[25]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[25]~I .operation_mode = "output";
+defparam \SalidaRAM[25]~I .output_async_reset = "none";
+defparam \SalidaRAM[25]~I .output_power_up = "low";
+defparam \SalidaRAM[25]~I .output_register_mode = "none";
+defparam \SalidaRAM[25]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[26]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[26]));
+// synopsys translate_off
+defparam \SalidaRAM[26]~I .input_async_reset = "none";
+defparam \SalidaRAM[26]~I .input_power_up = "low";
+defparam \SalidaRAM[26]~I .input_register_mode = "none";
+defparam \SalidaRAM[26]~I .input_sync_reset = "none";
+defparam \SalidaRAM[26]~I .oe_async_reset = "none";
+defparam \SalidaRAM[26]~I .oe_power_up = "low";
+defparam \SalidaRAM[26]~I .oe_register_mode = "none";
+defparam \SalidaRAM[26]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[26]~I .operation_mode = "output";
+defparam \SalidaRAM[26]~I .output_async_reset = "none";
+defparam \SalidaRAM[26]~I .output_power_up = "low";
+defparam \SalidaRAM[26]~I .output_register_mode = "none";
+defparam \SalidaRAM[26]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[27]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[27]));
+// synopsys translate_off
+defparam \SalidaRAM[27]~I .input_async_reset = "none";
+defparam \SalidaRAM[27]~I .input_power_up = "low";
+defparam \SalidaRAM[27]~I .input_register_mode = "none";
+defparam \SalidaRAM[27]~I .input_sync_reset = "none";
+defparam \SalidaRAM[27]~I .oe_async_reset = "none";
+defparam \SalidaRAM[27]~I .oe_power_up = "low";
+defparam \SalidaRAM[27]~I .oe_register_mode = "none";
+defparam \SalidaRAM[27]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[27]~I .operation_mode = "output";
+defparam \SalidaRAM[27]~I .output_async_reset = "none";
+defparam \SalidaRAM[27]~I .output_power_up = "low";
+defparam \SalidaRAM[27]~I .output_register_mode = "none";
+defparam \SalidaRAM[27]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[28]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[28]));
+// synopsys translate_off
+defparam \SalidaRAM[28]~I .input_async_reset = "none";
+defparam \SalidaRAM[28]~I .input_power_up = "low";
+defparam \SalidaRAM[28]~I .input_register_mode = "none";
+defparam \SalidaRAM[28]~I .input_sync_reset = "none";
+defparam \SalidaRAM[28]~I .oe_async_reset = "none";
+defparam \SalidaRAM[28]~I .oe_power_up = "low";
+defparam \SalidaRAM[28]~I .oe_register_mode = "none";
+defparam \SalidaRAM[28]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[28]~I .operation_mode = "output";
+defparam \SalidaRAM[28]~I .output_async_reset = "none";
+defparam \SalidaRAM[28]~I .output_power_up = "low";
+defparam \SalidaRAM[28]~I .output_register_mode = "none";
+defparam \SalidaRAM[28]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[29]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[29]));
+// synopsys translate_off
+defparam \SalidaRAM[29]~I .input_async_reset = "none";
+defparam \SalidaRAM[29]~I .input_power_up = "low";
+defparam \SalidaRAM[29]~I .input_register_mode = "none";
+defparam \SalidaRAM[29]~I .input_sync_reset = "none";
+defparam \SalidaRAM[29]~I .oe_async_reset = "none";
+defparam \SalidaRAM[29]~I .oe_power_up = "low";
+defparam \SalidaRAM[29]~I .oe_register_mode = "none";
+defparam \SalidaRAM[29]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[29]~I .operation_mode = "output";
+defparam \SalidaRAM[29]~I .output_async_reset = "none";
+defparam \SalidaRAM[29]~I .output_power_up = "low";
+defparam \SalidaRAM[29]~I .output_register_mode = "none";
+defparam \SalidaRAM[29]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[30]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[30]));
+// synopsys translate_off
+defparam \SalidaRAM[30]~I .input_async_reset = "none";
+defparam \SalidaRAM[30]~I .input_power_up = "low";
+defparam \SalidaRAM[30]~I .input_register_mode = "none";
+defparam \SalidaRAM[30]~I .input_sync_reset = "none";
+defparam \SalidaRAM[30]~I .oe_async_reset = "none";
+defparam \SalidaRAM[30]~I .oe_power_up = "low";
+defparam \SalidaRAM[30]~I .oe_register_mode = "none";
+defparam \SalidaRAM[30]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[30]~I .operation_mode = "output";
+defparam \SalidaRAM[30]~I .output_async_reset = "none";
+defparam \SalidaRAM[30]~I .output_power_up = "low";
+defparam \SalidaRAM[30]~I .output_register_mode = "none";
+defparam \SalidaRAM[30]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRAM[31]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRAM[31]));
+// synopsys translate_off
+defparam \SalidaRAM[31]~I .input_async_reset = "none";
+defparam \SalidaRAM[31]~I .input_power_up = "low";
+defparam \SalidaRAM[31]~I .input_register_mode = "none";
+defparam \SalidaRAM[31]~I .input_sync_reset = "none";
+defparam \SalidaRAM[31]~I .oe_async_reset = "none";
+defparam \SalidaRAM[31]~I .oe_power_up = "low";
+defparam \SalidaRAM[31]~I .oe_register_mode = "none";
+defparam \SalidaRAM[31]~I .oe_sync_reset = "none";
+defparam \SalidaRAM[31]~I .operation_mode = "output";
+defparam \SalidaRAM[31]~I .output_async_reset = "none";
+defparam \SalidaRAM[31]~I .output_power_up = "low";
+defparam \SalidaRAM[31]~I .output_register_mode = "none";
+defparam \SalidaRAM[31]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[0]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[0]));
+// synopsys translate_off
+defparam \SalidaRF1[0]~I .input_async_reset = "none";
+defparam \SalidaRF1[0]~I .input_power_up = "low";
+defparam \SalidaRF1[0]~I .input_register_mode = "none";
+defparam \SalidaRF1[0]~I .input_sync_reset = "none";
+defparam \SalidaRF1[0]~I .oe_async_reset = "none";
+defparam \SalidaRF1[0]~I .oe_power_up = "low";
+defparam \SalidaRF1[0]~I .oe_register_mode = "none";
+defparam \SalidaRF1[0]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[0]~I .operation_mode = "output";
+defparam \SalidaRF1[0]~I .output_async_reset = "none";
+defparam \SalidaRF1[0]~I .output_power_up = "low";
+defparam \SalidaRF1[0]~I .output_register_mode = "none";
+defparam \SalidaRF1[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[1]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[1]));
+// synopsys translate_off
+defparam \SalidaRF1[1]~I .input_async_reset = "none";
+defparam \SalidaRF1[1]~I .input_power_up = "low";
+defparam \SalidaRF1[1]~I .input_register_mode = "none";
+defparam \SalidaRF1[1]~I .input_sync_reset = "none";
+defparam \SalidaRF1[1]~I .oe_async_reset = "none";
+defparam \SalidaRF1[1]~I .oe_power_up = "low";
+defparam \SalidaRF1[1]~I .oe_register_mode = "none";
+defparam \SalidaRF1[1]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[1]~I .operation_mode = "output";
+defparam \SalidaRF1[1]~I .output_async_reset = "none";
+defparam \SalidaRF1[1]~I .output_power_up = "low";
+defparam \SalidaRF1[1]~I .output_register_mode = "none";
+defparam \SalidaRF1[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[2]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[2]));
+// synopsys translate_off
+defparam \SalidaRF1[2]~I .input_async_reset = "none";
+defparam \SalidaRF1[2]~I .input_power_up = "low";
+defparam \SalidaRF1[2]~I .input_register_mode = "none";
+defparam \SalidaRF1[2]~I .input_sync_reset = "none";
+defparam \SalidaRF1[2]~I .oe_async_reset = "none";
+defparam \SalidaRF1[2]~I .oe_power_up = "low";
+defparam \SalidaRF1[2]~I .oe_register_mode = "none";
+defparam \SalidaRF1[2]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[2]~I .operation_mode = "output";
+defparam \SalidaRF1[2]~I .output_async_reset = "none";
+defparam \SalidaRF1[2]~I .output_power_up = "low";
+defparam \SalidaRF1[2]~I .output_register_mode = "none";
+defparam \SalidaRF1[2]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[3]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[3]));
+// synopsys translate_off
+defparam \SalidaRF1[3]~I .input_async_reset = "none";
+defparam \SalidaRF1[3]~I .input_power_up = "low";
+defparam \SalidaRF1[3]~I .input_register_mode = "none";
+defparam \SalidaRF1[3]~I .input_sync_reset = "none";
+defparam \SalidaRF1[3]~I .oe_async_reset = "none";
+defparam \SalidaRF1[3]~I .oe_power_up = "low";
+defparam \SalidaRF1[3]~I .oe_register_mode = "none";
+defparam \SalidaRF1[3]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[3]~I .operation_mode = "output";
+defparam \SalidaRF1[3]~I .output_async_reset = "none";
+defparam \SalidaRF1[3]~I .output_power_up = "low";
+defparam \SalidaRF1[3]~I .output_register_mode = "none";
+defparam \SalidaRF1[3]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[4]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[4]));
+// synopsys translate_off
+defparam \SalidaRF1[4]~I .input_async_reset = "none";
+defparam \SalidaRF1[4]~I .input_power_up = "low";
+defparam \SalidaRF1[4]~I .input_register_mode = "none";
+defparam \SalidaRF1[4]~I .input_sync_reset = "none";
+defparam \SalidaRF1[4]~I .oe_async_reset = "none";
+defparam \SalidaRF1[4]~I .oe_power_up = "low";
+defparam \SalidaRF1[4]~I .oe_register_mode = "none";
+defparam \SalidaRF1[4]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[4]~I .operation_mode = "output";
+defparam \SalidaRF1[4]~I .output_async_reset = "none";
+defparam \SalidaRF1[4]~I .output_power_up = "low";
+defparam \SalidaRF1[4]~I .output_register_mode = "none";
+defparam \SalidaRF1[4]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[5]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[5]));
+// synopsys translate_off
+defparam \SalidaRF1[5]~I .input_async_reset = "none";
+defparam \SalidaRF1[5]~I .input_power_up = "low";
+defparam \SalidaRF1[5]~I .input_register_mode = "none";
+defparam \SalidaRF1[5]~I .input_sync_reset = "none";
+defparam \SalidaRF1[5]~I .oe_async_reset = "none";
+defparam \SalidaRF1[5]~I .oe_power_up = "low";
+defparam \SalidaRF1[5]~I .oe_register_mode = "none";
+defparam \SalidaRF1[5]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[5]~I .operation_mode = "output";
+defparam \SalidaRF1[5]~I .output_async_reset = "none";
+defparam \SalidaRF1[5]~I .output_power_up = "low";
+defparam \SalidaRF1[5]~I .output_register_mode = "none";
+defparam \SalidaRF1[5]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[6]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[6]));
+// synopsys translate_off
+defparam \SalidaRF1[6]~I .input_async_reset = "none";
+defparam \SalidaRF1[6]~I .input_power_up = "low";
+defparam \SalidaRF1[6]~I .input_register_mode = "none";
+defparam \SalidaRF1[6]~I .input_sync_reset = "none";
+defparam \SalidaRF1[6]~I .oe_async_reset = "none";
+defparam \SalidaRF1[6]~I .oe_power_up = "low";
+defparam \SalidaRF1[6]~I .oe_register_mode = "none";
+defparam \SalidaRF1[6]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[6]~I .operation_mode = "output";
+defparam \SalidaRF1[6]~I .output_async_reset = "none";
+defparam \SalidaRF1[6]~I .output_power_up = "low";
+defparam \SalidaRF1[6]~I .output_register_mode = "none";
+defparam \SalidaRF1[6]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[7]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[7]));
+// synopsys translate_off
+defparam \SalidaRF1[7]~I .input_async_reset = "none";
+defparam \SalidaRF1[7]~I .input_power_up = "low";
+defparam \SalidaRF1[7]~I .input_register_mode = "none";
+defparam \SalidaRF1[7]~I .input_sync_reset = "none";
+defparam \SalidaRF1[7]~I .oe_async_reset = "none";
+defparam \SalidaRF1[7]~I .oe_power_up = "low";
+defparam \SalidaRF1[7]~I .oe_register_mode = "none";
+defparam \SalidaRF1[7]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[7]~I .operation_mode = "output";
+defparam \SalidaRF1[7]~I .output_async_reset = "none";
+defparam \SalidaRF1[7]~I .output_power_up = "low";
+defparam \SalidaRF1[7]~I .output_register_mode = "none";
+defparam \SalidaRF1[7]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[8]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[8]));
+// synopsys translate_off
+defparam \SalidaRF1[8]~I .input_async_reset = "none";
+defparam \SalidaRF1[8]~I .input_power_up = "low";
+defparam \SalidaRF1[8]~I .input_register_mode = "none";
+defparam \SalidaRF1[8]~I .input_sync_reset = "none";
+defparam \SalidaRF1[8]~I .oe_async_reset = "none";
+defparam \SalidaRF1[8]~I .oe_power_up = "low";
+defparam \SalidaRF1[8]~I .oe_register_mode = "none";
+defparam \SalidaRF1[8]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[8]~I .operation_mode = "output";
+defparam \SalidaRF1[8]~I .output_async_reset = "none";
+defparam \SalidaRF1[8]~I .output_power_up = "low";
+defparam \SalidaRF1[8]~I .output_register_mode = "none";
+defparam \SalidaRF1[8]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[9]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[9]));
+// synopsys translate_off
+defparam \SalidaRF1[9]~I .input_async_reset = "none";
+defparam \SalidaRF1[9]~I .input_power_up = "low";
+defparam \SalidaRF1[9]~I .input_register_mode = "none";
+defparam \SalidaRF1[9]~I .input_sync_reset = "none";
+defparam \SalidaRF1[9]~I .oe_async_reset = "none";
+defparam \SalidaRF1[9]~I .oe_power_up = "low";
+defparam \SalidaRF1[9]~I .oe_register_mode = "none";
+defparam \SalidaRF1[9]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[9]~I .operation_mode = "output";
+defparam \SalidaRF1[9]~I .output_async_reset = "none";
+defparam \SalidaRF1[9]~I .output_power_up = "low";
+defparam \SalidaRF1[9]~I .output_register_mode = "none";
+defparam \SalidaRF1[9]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[10]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[10]));
+// synopsys translate_off
+defparam \SalidaRF1[10]~I .input_async_reset = "none";
+defparam \SalidaRF1[10]~I .input_power_up = "low";
+defparam \SalidaRF1[10]~I .input_register_mode = "none";
+defparam \SalidaRF1[10]~I .input_sync_reset = "none";
+defparam \SalidaRF1[10]~I .oe_async_reset = "none";
+defparam \SalidaRF1[10]~I .oe_power_up = "low";
+defparam \SalidaRF1[10]~I .oe_register_mode = "none";
+defparam \SalidaRF1[10]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[10]~I .operation_mode = "output";
+defparam \SalidaRF1[10]~I .output_async_reset = "none";
+defparam \SalidaRF1[10]~I .output_power_up = "low";
+defparam \SalidaRF1[10]~I .output_register_mode = "none";
+defparam \SalidaRF1[10]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[11]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[11]));
+// synopsys translate_off
+defparam \SalidaRF1[11]~I .input_async_reset = "none";
+defparam \SalidaRF1[11]~I .input_power_up = "low";
+defparam \SalidaRF1[11]~I .input_register_mode = "none";
+defparam \SalidaRF1[11]~I .input_sync_reset = "none";
+defparam \SalidaRF1[11]~I .oe_async_reset = "none";
+defparam \SalidaRF1[11]~I .oe_power_up = "low";
+defparam \SalidaRF1[11]~I .oe_register_mode = "none";
+defparam \SalidaRF1[11]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[11]~I .operation_mode = "output";
+defparam \SalidaRF1[11]~I .output_async_reset = "none";
+defparam \SalidaRF1[11]~I .output_power_up = "low";
+defparam \SalidaRF1[11]~I .output_register_mode = "none";
+defparam \SalidaRF1[11]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[12]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[12]));
+// synopsys translate_off
+defparam \SalidaRF1[12]~I .input_async_reset = "none";
+defparam \SalidaRF1[12]~I .input_power_up = "low";
+defparam \SalidaRF1[12]~I .input_register_mode = "none";
+defparam \SalidaRF1[12]~I .input_sync_reset = "none";
+defparam \SalidaRF1[12]~I .oe_async_reset = "none";
+defparam \SalidaRF1[12]~I .oe_power_up = "low";
+defparam \SalidaRF1[12]~I .oe_register_mode = "none";
+defparam \SalidaRF1[12]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[12]~I .operation_mode = "output";
+defparam \SalidaRF1[12]~I .output_async_reset = "none";
+defparam \SalidaRF1[12]~I .output_power_up = "low";
+defparam \SalidaRF1[12]~I .output_register_mode = "none";
+defparam \SalidaRF1[12]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[13]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[13]));
+// synopsys translate_off
+defparam \SalidaRF1[13]~I .input_async_reset = "none";
+defparam \SalidaRF1[13]~I .input_power_up = "low";
+defparam \SalidaRF1[13]~I .input_register_mode = "none";
+defparam \SalidaRF1[13]~I .input_sync_reset = "none";
+defparam \SalidaRF1[13]~I .oe_async_reset = "none";
+defparam \SalidaRF1[13]~I .oe_power_up = "low";
+defparam \SalidaRF1[13]~I .oe_register_mode = "none";
+defparam \SalidaRF1[13]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[13]~I .operation_mode = "output";
+defparam \SalidaRF1[13]~I .output_async_reset = "none";
+defparam \SalidaRF1[13]~I .output_power_up = "low";
+defparam \SalidaRF1[13]~I .output_register_mode = "none";
+defparam \SalidaRF1[13]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[14]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[14]));
+// synopsys translate_off
+defparam \SalidaRF1[14]~I .input_async_reset = "none";
+defparam \SalidaRF1[14]~I .input_power_up = "low";
+defparam \SalidaRF1[14]~I .input_register_mode = "none";
+defparam \SalidaRF1[14]~I .input_sync_reset = "none";
+defparam \SalidaRF1[14]~I .oe_async_reset = "none";
+defparam \SalidaRF1[14]~I .oe_power_up = "low";
+defparam \SalidaRF1[14]~I .oe_register_mode = "none";
+defparam \SalidaRF1[14]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[14]~I .operation_mode = "output";
+defparam \SalidaRF1[14]~I .output_async_reset = "none";
+defparam \SalidaRF1[14]~I .output_power_up = "low";
+defparam \SalidaRF1[14]~I .output_register_mode = "none";
+defparam \SalidaRF1[14]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[15]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[15]));
+// synopsys translate_off
+defparam \SalidaRF1[15]~I .input_async_reset = "none";
+defparam \SalidaRF1[15]~I .input_power_up = "low";
+defparam \SalidaRF1[15]~I .input_register_mode = "none";
+defparam \SalidaRF1[15]~I .input_sync_reset = "none";
+defparam \SalidaRF1[15]~I .oe_async_reset = "none";
+defparam \SalidaRF1[15]~I .oe_power_up = "low";
+defparam \SalidaRF1[15]~I .oe_register_mode = "none";
+defparam \SalidaRF1[15]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[15]~I .operation_mode = "output";
+defparam \SalidaRF1[15]~I .output_async_reset = "none";
+defparam \SalidaRF1[15]~I .output_power_up = "low";
+defparam \SalidaRF1[15]~I .output_register_mode = "none";
+defparam \SalidaRF1[15]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[16]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[16]));
+// synopsys translate_off
+defparam \SalidaRF1[16]~I .input_async_reset = "none";
+defparam \SalidaRF1[16]~I .input_power_up = "low";
+defparam \SalidaRF1[16]~I .input_register_mode = "none";
+defparam \SalidaRF1[16]~I .input_sync_reset = "none";
+defparam \SalidaRF1[16]~I .oe_async_reset = "none";
+defparam \SalidaRF1[16]~I .oe_power_up = "low";
+defparam \SalidaRF1[16]~I .oe_register_mode = "none";
+defparam \SalidaRF1[16]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[16]~I .operation_mode = "output";
+defparam \SalidaRF1[16]~I .output_async_reset = "none";
+defparam \SalidaRF1[16]~I .output_power_up = "low";
+defparam \SalidaRF1[16]~I .output_register_mode = "none";
+defparam \SalidaRF1[16]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[17]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[17]));
+// synopsys translate_off
+defparam \SalidaRF1[17]~I .input_async_reset = "none";
+defparam \SalidaRF1[17]~I .input_power_up = "low";
+defparam \SalidaRF1[17]~I .input_register_mode = "none";
+defparam \SalidaRF1[17]~I .input_sync_reset = "none";
+defparam \SalidaRF1[17]~I .oe_async_reset = "none";
+defparam \SalidaRF1[17]~I .oe_power_up = "low";
+defparam \SalidaRF1[17]~I .oe_register_mode = "none";
+defparam \SalidaRF1[17]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[17]~I .operation_mode = "output";
+defparam \SalidaRF1[17]~I .output_async_reset = "none";
+defparam \SalidaRF1[17]~I .output_power_up = "low";
+defparam \SalidaRF1[17]~I .output_register_mode = "none";
+defparam \SalidaRF1[17]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[18]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[18]));
+// synopsys translate_off
+defparam \SalidaRF1[18]~I .input_async_reset = "none";
+defparam \SalidaRF1[18]~I .input_power_up = "low";
+defparam \SalidaRF1[18]~I .input_register_mode = "none";
+defparam \SalidaRF1[18]~I .input_sync_reset = "none";
+defparam \SalidaRF1[18]~I .oe_async_reset = "none";
+defparam \SalidaRF1[18]~I .oe_power_up = "low";
+defparam \SalidaRF1[18]~I .oe_register_mode = "none";
+defparam \SalidaRF1[18]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[18]~I .operation_mode = "output";
+defparam \SalidaRF1[18]~I .output_async_reset = "none";
+defparam \SalidaRF1[18]~I .output_power_up = "low";
+defparam \SalidaRF1[18]~I .output_register_mode = "none";
+defparam \SalidaRF1[18]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[19]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[19]));
+// synopsys translate_off
+defparam \SalidaRF1[19]~I .input_async_reset = "none";
+defparam \SalidaRF1[19]~I .input_power_up = "low";
+defparam \SalidaRF1[19]~I .input_register_mode = "none";
+defparam \SalidaRF1[19]~I .input_sync_reset = "none";
+defparam \SalidaRF1[19]~I .oe_async_reset = "none";
+defparam \SalidaRF1[19]~I .oe_power_up = "low";
+defparam \SalidaRF1[19]~I .oe_register_mode = "none";
+defparam \SalidaRF1[19]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[19]~I .operation_mode = "output";
+defparam \SalidaRF1[19]~I .output_async_reset = "none";
+defparam \SalidaRF1[19]~I .output_power_up = "low";
+defparam \SalidaRF1[19]~I .output_register_mode = "none";
+defparam \SalidaRF1[19]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[20]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[20]));
+// synopsys translate_off
+defparam \SalidaRF1[20]~I .input_async_reset = "none";
+defparam \SalidaRF1[20]~I .input_power_up = "low";
+defparam \SalidaRF1[20]~I .input_register_mode = "none";
+defparam \SalidaRF1[20]~I .input_sync_reset = "none";
+defparam \SalidaRF1[20]~I .oe_async_reset = "none";
+defparam \SalidaRF1[20]~I .oe_power_up = "low";
+defparam \SalidaRF1[20]~I .oe_register_mode = "none";
+defparam \SalidaRF1[20]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[20]~I .operation_mode = "output";
+defparam \SalidaRF1[20]~I .output_async_reset = "none";
+defparam \SalidaRF1[20]~I .output_power_up = "low";
+defparam \SalidaRF1[20]~I .output_register_mode = "none";
+defparam \SalidaRF1[20]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[21]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[21]));
+// synopsys translate_off
+defparam \SalidaRF1[21]~I .input_async_reset = "none";
+defparam \SalidaRF1[21]~I .input_power_up = "low";
+defparam \SalidaRF1[21]~I .input_register_mode = "none";
+defparam \SalidaRF1[21]~I .input_sync_reset = "none";
+defparam \SalidaRF1[21]~I .oe_async_reset = "none";
+defparam \SalidaRF1[21]~I .oe_power_up = "low";
+defparam \SalidaRF1[21]~I .oe_register_mode = "none";
+defparam \SalidaRF1[21]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[21]~I .operation_mode = "output";
+defparam \SalidaRF1[21]~I .output_async_reset = "none";
+defparam \SalidaRF1[21]~I .output_power_up = "low";
+defparam \SalidaRF1[21]~I .output_register_mode = "none";
+defparam \SalidaRF1[21]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[22]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[22]));
+// synopsys translate_off
+defparam \SalidaRF1[22]~I .input_async_reset = "none";
+defparam \SalidaRF1[22]~I .input_power_up = "low";
+defparam \SalidaRF1[22]~I .input_register_mode = "none";
+defparam \SalidaRF1[22]~I .input_sync_reset = "none";
+defparam \SalidaRF1[22]~I .oe_async_reset = "none";
+defparam \SalidaRF1[22]~I .oe_power_up = "low";
+defparam \SalidaRF1[22]~I .oe_register_mode = "none";
+defparam \SalidaRF1[22]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[22]~I .operation_mode = "output";
+defparam \SalidaRF1[22]~I .output_async_reset = "none";
+defparam \SalidaRF1[22]~I .output_power_up = "low";
+defparam \SalidaRF1[22]~I .output_register_mode = "none";
+defparam \SalidaRF1[22]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[23]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[23]));
+// synopsys translate_off
+defparam \SalidaRF1[23]~I .input_async_reset = "none";
+defparam \SalidaRF1[23]~I .input_power_up = "low";
+defparam \SalidaRF1[23]~I .input_register_mode = "none";
+defparam \SalidaRF1[23]~I .input_sync_reset = "none";
+defparam \SalidaRF1[23]~I .oe_async_reset = "none";
+defparam \SalidaRF1[23]~I .oe_power_up = "low";
+defparam \SalidaRF1[23]~I .oe_register_mode = "none";
+defparam \SalidaRF1[23]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[23]~I .operation_mode = "output";
+defparam \SalidaRF1[23]~I .output_async_reset = "none";
+defparam \SalidaRF1[23]~I .output_power_up = "low";
+defparam \SalidaRF1[23]~I .output_register_mode = "none";
+defparam \SalidaRF1[23]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[24]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[24]));
+// synopsys translate_off
+defparam \SalidaRF1[24]~I .input_async_reset = "none";
+defparam \SalidaRF1[24]~I .input_power_up = "low";
+defparam \SalidaRF1[24]~I .input_register_mode = "none";
+defparam \SalidaRF1[24]~I .input_sync_reset = "none";
+defparam \SalidaRF1[24]~I .oe_async_reset = "none";
+defparam \SalidaRF1[24]~I .oe_power_up = "low";
+defparam \SalidaRF1[24]~I .oe_register_mode = "none";
+defparam \SalidaRF1[24]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[24]~I .operation_mode = "output";
+defparam \SalidaRF1[24]~I .output_async_reset = "none";
+defparam \SalidaRF1[24]~I .output_power_up = "low";
+defparam \SalidaRF1[24]~I .output_register_mode = "none";
+defparam \SalidaRF1[24]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[25]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[25]));
+// synopsys translate_off
+defparam \SalidaRF1[25]~I .input_async_reset = "none";
+defparam \SalidaRF1[25]~I .input_power_up = "low";
+defparam \SalidaRF1[25]~I .input_register_mode = "none";
+defparam \SalidaRF1[25]~I .input_sync_reset = "none";
+defparam \SalidaRF1[25]~I .oe_async_reset = "none";
+defparam \SalidaRF1[25]~I .oe_power_up = "low";
+defparam \SalidaRF1[25]~I .oe_register_mode = "none";
+defparam \SalidaRF1[25]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[25]~I .operation_mode = "output";
+defparam \SalidaRF1[25]~I .output_async_reset = "none";
+defparam \SalidaRF1[25]~I .output_power_up = "low";
+defparam \SalidaRF1[25]~I .output_register_mode = "none";
+defparam \SalidaRF1[25]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[26]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[26]));
+// synopsys translate_off
+defparam \SalidaRF1[26]~I .input_async_reset = "none";
+defparam \SalidaRF1[26]~I .input_power_up = "low";
+defparam \SalidaRF1[26]~I .input_register_mode = "none";
+defparam \SalidaRF1[26]~I .input_sync_reset = "none";
+defparam \SalidaRF1[26]~I .oe_async_reset = "none";
+defparam \SalidaRF1[26]~I .oe_power_up = "low";
+defparam \SalidaRF1[26]~I .oe_register_mode = "none";
+defparam \SalidaRF1[26]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[26]~I .operation_mode = "output";
+defparam \SalidaRF1[26]~I .output_async_reset = "none";
+defparam \SalidaRF1[26]~I .output_power_up = "low";
+defparam \SalidaRF1[26]~I .output_register_mode = "none";
+defparam \SalidaRF1[26]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[27]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[27]));
+// synopsys translate_off
+defparam \SalidaRF1[27]~I .input_async_reset = "none";
+defparam \SalidaRF1[27]~I .input_power_up = "low";
+defparam \SalidaRF1[27]~I .input_register_mode = "none";
+defparam \SalidaRF1[27]~I .input_sync_reset = "none";
+defparam \SalidaRF1[27]~I .oe_async_reset = "none";
+defparam \SalidaRF1[27]~I .oe_power_up = "low";
+defparam \SalidaRF1[27]~I .oe_register_mode = "none";
+defparam \SalidaRF1[27]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[27]~I .operation_mode = "output";
+defparam \SalidaRF1[27]~I .output_async_reset = "none";
+defparam \SalidaRF1[27]~I .output_power_up = "low";
+defparam \SalidaRF1[27]~I .output_register_mode = "none";
+defparam \SalidaRF1[27]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[28]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[28]));
+// synopsys translate_off
+defparam \SalidaRF1[28]~I .input_async_reset = "none";
+defparam \SalidaRF1[28]~I .input_power_up = "low";
+defparam \SalidaRF1[28]~I .input_register_mode = "none";
+defparam \SalidaRF1[28]~I .input_sync_reset = "none";
+defparam \SalidaRF1[28]~I .oe_async_reset = "none";
+defparam \SalidaRF1[28]~I .oe_power_up = "low";
+defparam \SalidaRF1[28]~I .oe_register_mode = "none";
+defparam \SalidaRF1[28]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[28]~I .operation_mode = "output";
+defparam \SalidaRF1[28]~I .output_async_reset = "none";
+defparam \SalidaRF1[28]~I .output_power_up = "low";
+defparam \SalidaRF1[28]~I .output_register_mode = "none";
+defparam \SalidaRF1[28]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[29]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[29]));
+// synopsys translate_off
+defparam \SalidaRF1[29]~I .input_async_reset = "none";
+defparam \SalidaRF1[29]~I .input_power_up = "low";
+defparam \SalidaRF1[29]~I .input_register_mode = "none";
+defparam \SalidaRF1[29]~I .input_sync_reset = "none";
+defparam \SalidaRF1[29]~I .oe_async_reset = "none";
+defparam \SalidaRF1[29]~I .oe_power_up = "low";
+defparam \SalidaRF1[29]~I .oe_register_mode = "none";
+defparam \SalidaRF1[29]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[29]~I .operation_mode = "output";
+defparam \SalidaRF1[29]~I .output_async_reset = "none";
+defparam \SalidaRF1[29]~I .output_power_up = "low";
+defparam \SalidaRF1[29]~I .output_register_mode = "none";
+defparam \SalidaRF1[29]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[30]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[30]));
+// synopsys translate_off
+defparam \SalidaRF1[30]~I .input_async_reset = "none";
+defparam \SalidaRF1[30]~I .input_power_up = "low";
+defparam \SalidaRF1[30]~I .input_register_mode = "none";
+defparam \SalidaRF1[30]~I .input_sync_reset = "none";
+defparam \SalidaRF1[30]~I .oe_async_reset = "none";
+defparam \SalidaRF1[30]~I .oe_power_up = "low";
+defparam \SalidaRF1[30]~I .oe_register_mode = "none";
+defparam \SalidaRF1[30]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[30]~I .operation_mode = "output";
+defparam \SalidaRF1[30]~I .output_async_reset = "none";
+defparam \SalidaRF1[30]~I .output_power_up = "low";
+defparam \SalidaRF1[30]~I .output_register_mode = "none";
+defparam \SalidaRF1[30]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF1[31]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF1[31]));
+// synopsys translate_off
+defparam \SalidaRF1[31]~I .input_async_reset = "none";
+defparam \SalidaRF1[31]~I .input_power_up = "low";
+defparam \SalidaRF1[31]~I .input_register_mode = "none";
+defparam \SalidaRF1[31]~I .input_sync_reset = "none";
+defparam \SalidaRF1[31]~I .oe_async_reset = "none";
+defparam \SalidaRF1[31]~I .oe_power_up = "low";
+defparam \SalidaRF1[31]~I .oe_register_mode = "none";
+defparam \SalidaRF1[31]~I .oe_sync_reset = "none";
+defparam \SalidaRF1[31]~I .operation_mode = "output";
+defparam \SalidaRF1[31]~I .output_async_reset = "none";
+defparam \SalidaRF1[31]~I .output_power_up = "low";
+defparam \SalidaRF1[31]~I .output_register_mode = "none";
+defparam \SalidaRF1[31]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[0]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[0]));
+// synopsys translate_off
+defparam \SalidaRF2[0]~I .input_async_reset = "none";
+defparam \SalidaRF2[0]~I .input_power_up = "low";
+defparam \SalidaRF2[0]~I .input_register_mode = "none";
+defparam \SalidaRF2[0]~I .input_sync_reset = "none";
+defparam \SalidaRF2[0]~I .oe_async_reset = "none";
+defparam \SalidaRF2[0]~I .oe_power_up = "low";
+defparam \SalidaRF2[0]~I .oe_register_mode = "none";
+defparam \SalidaRF2[0]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[0]~I .operation_mode = "output";
+defparam \SalidaRF2[0]~I .output_async_reset = "none";
+defparam \SalidaRF2[0]~I .output_power_up = "low";
+defparam \SalidaRF2[0]~I .output_register_mode = "none";
+defparam \SalidaRF2[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[1]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[1]));
+// synopsys translate_off
+defparam \SalidaRF2[1]~I .input_async_reset = "none";
+defparam \SalidaRF2[1]~I .input_power_up = "low";
+defparam \SalidaRF2[1]~I .input_register_mode = "none";
+defparam \SalidaRF2[1]~I .input_sync_reset = "none";
+defparam \SalidaRF2[1]~I .oe_async_reset = "none";
+defparam \SalidaRF2[1]~I .oe_power_up = "low";
+defparam \SalidaRF2[1]~I .oe_register_mode = "none";
+defparam \SalidaRF2[1]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[1]~I .operation_mode = "output";
+defparam \SalidaRF2[1]~I .output_async_reset = "none";
+defparam \SalidaRF2[1]~I .output_power_up = "low";
+defparam \SalidaRF2[1]~I .output_register_mode = "none";
+defparam \SalidaRF2[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[2]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[2]));
+// synopsys translate_off
+defparam \SalidaRF2[2]~I .input_async_reset = "none";
+defparam \SalidaRF2[2]~I .input_power_up = "low";
+defparam \SalidaRF2[2]~I .input_register_mode = "none";
+defparam \SalidaRF2[2]~I .input_sync_reset = "none";
+defparam \SalidaRF2[2]~I .oe_async_reset = "none";
+defparam \SalidaRF2[2]~I .oe_power_up = "low";
+defparam \SalidaRF2[2]~I .oe_register_mode = "none";
+defparam \SalidaRF2[2]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[2]~I .operation_mode = "output";
+defparam \SalidaRF2[2]~I .output_async_reset = "none";
+defparam \SalidaRF2[2]~I .output_power_up = "low";
+defparam \SalidaRF2[2]~I .output_register_mode = "none";
+defparam \SalidaRF2[2]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[3]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[3]));
+// synopsys translate_off
+defparam \SalidaRF2[3]~I .input_async_reset = "none";
+defparam \SalidaRF2[3]~I .input_power_up = "low";
+defparam \SalidaRF2[3]~I .input_register_mode = "none";
+defparam \SalidaRF2[3]~I .input_sync_reset = "none";
+defparam \SalidaRF2[3]~I .oe_async_reset = "none";
+defparam \SalidaRF2[3]~I .oe_power_up = "low";
+defparam \SalidaRF2[3]~I .oe_register_mode = "none";
+defparam \SalidaRF2[3]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[3]~I .operation_mode = "output";
+defparam \SalidaRF2[3]~I .output_async_reset = "none";
+defparam \SalidaRF2[3]~I .output_power_up = "low";
+defparam \SalidaRF2[3]~I .output_register_mode = "none";
+defparam \SalidaRF2[3]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[4]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[4]));
+// synopsys translate_off
+defparam \SalidaRF2[4]~I .input_async_reset = "none";
+defparam \SalidaRF2[4]~I .input_power_up = "low";
+defparam \SalidaRF2[4]~I .input_register_mode = "none";
+defparam \SalidaRF2[4]~I .input_sync_reset = "none";
+defparam \SalidaRF2[4]~I .oe_async_reset = "none";
+defparam \SalidaRF2[4]~I .oe_power_up = "low";
+defparam \SalidaRF2[4]~I .oe_register_mode = "none";
+defparam \SalidaRF2[4]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[4]~I .operation_mode = "output";
+defparam \SalidaRF2[4]~I .output_async_reset = "none";
+defparam \SalidaRF2[4]~I .output_power_up = "low";
+defparam \SalidaRF2[4]~I .output_register_mode = "none";
+defparam \SalidaRF2[4]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[5]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[5]));
+// synopsys translate_off
+defparam \SalidaRF2[5]~I .input_async_reset = "none";
+defparam \SalidaRF2[5]~I .input_power_up = "low";
+defparam \SalidaRF2[5]~I .input_register_mode = "none";
+defparam \SalidaRF2[5]~I .input_sync_reset = "none";
+defparam \SalidaRF2[5]~I .oe_async_reset = "none";
+defparam \SalidaRF2[5]~I .oe_power_up = "low";
+defparam \SalidaRF2[5]~I .oe_register_mode = "none";
+defparam \SalidaRF2[5]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[5]~I .operation_mode = "output";
+defparam \SalidaRF2[5]~I .output_async_reset = "none";
+defparam \SalidaRF2[5]~I .output_power_up = "low";
+defparam \SalidaRF2[5]~I .output_register_mode = "none";
+defparam \SalidaRF2[5]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[6]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[6]));
+// synopsys translate_off
+defparam \SalidaRF2[6]~I .input_async_reset = "none";
+defparam \SalidaRF2[6]~I .input_power_up = "low";
+defparam \SalidaRF2[6]~I .input_register_mode = "none";
+defparam \SalidaRF2[6]~I .input_sync_reset = "none";
+defparam \SalidaRF2[6]~I .oe_async_reset = "none";
+defparam \SalidaRF2[6]~I .oe_power_up = "low";
+defparam \SalidaRF2[6]~I .oe_register_mode = "none";
+defparam \SalidaRF2[6]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[6]~I .operation_mode = "output";
+defparam \SalidaRF2[6]~I .output_async_reset = "none";
+defparam \SalidaRF2[6]~I .output_power_up = "low";
+defparam \SalidaRF2[6]~I .output_register_mode = "none";
+defparam \SalidaRF2[6]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[7]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[7]));
+// synopsys translate_off
+defparam \SalidaRF2[7]~I .input_async_reset = "none";
+defparam \SalidaRF2[7]~I .input_power_up = "low";
+defparam \SalidaRF2[7]~I .input_register_mode = "none";
+defparam \SalidaRF2[7]~I .input_sync_reset = "none";
+defparam \SalidaRF2[7]~I .oe_async_reset = "none";
+defparam \SalidaRF2[7]~I .oe_power_up = "low";
+defparam \SalidaRF2[7]~I .oe_register_mode = "none";
+defparam \SalidaRF2[7]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[7]~I .operation_mode = "output";
+defparam \SalidaRF2[7]~I .output_async_reset = "none";
+defparam \SalidaRF2[7]~I .output_power_up = "low";
+defparam \SalidaRF2[7]~I .output_register_mode = "none";
+defparam \SalidaRF2[7]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[8]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[8]));
+// synopsys translate_off
+defparam \SalidaRF2[8]~I .input_async_reset = "none";
+defparam \SalidaRF2[8]~I .input_power_up = "low";
+defparam \SalidaRF2[8]~I .input_register_mode = "none";
+defparam \SalidaRF2[8]~I .input_sync_reset = "none";
+defparam \SalidaRF2[8]~I .oe_async_reset = "none";
+defparam \SalidaRF2[8]~I .oe_power_up = "low";
+defparam \SalidaRF2[8]~I .oe_register_mode = "none";
+defparam \SalidaRF2[8]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[8]~I .operation_mode = "output";
+defparam \SalidaRF2[8]~I .output_async_reset = "none";
+defparam \SalidaRF2[8]~I .output_power_up = "low";
+defparam \SalidaRF2[8]~I .output_register_mode = "none";
+defparam \SalidaRF2[8]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[9]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[9]));
+// synopsys translate_off
+defparam \SalidaRF2[9]~I .input_async_reset = "none";
+defparam \SalidaRF2[9]~I .input_power_up = "low";
+defparam \SalidaRF2[9]~I .input_register_mode = "none";
+defparam \SalidaRF2[9]~I .input_sync_reset = "none";
+defparam \SalidaRF2[9]~I .oe_async_reset = "none";
+defparam \SalidaRF2[9]~I .oe_power_up = "low";
+defparam \SalidaRF2[9]~I .oe_register_mode = "none";
+defparam \SalidaRF2[9]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[9]~I .operation_mode = "output";
+defparam \SalidaRF2[9]~I .output_async_reset = "none";
+defparam \SalidaRF2[9]~I .output_power_up = "low";
+defparam \SalidaRF2[9]~I .output_register_mode = "none";
+defparam \SalidaRF2[9]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[10]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[10]));
+// synopsys translate_off
+defparam \SalidaRF2[10]~I .input_async_reset = "none";
+defparam \SalidaRF2[10]~I .input_power_up = "low";
+defparam \SalidaRF2[10]~I .input_register_mode = "none";
+defparam \SalidaRF2[10]~I .input_sync_reset = "none";
+defparam \SalidaRF2[10]~I .oe_async_reset = "none";
+defparam \SalidaRF2[10]~I .oe_power_up = "low";
+defparam \SalidaRF2[10]~I .oe_register_mode = "none";
+defparam \SalidaRF2[10]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[10]~I .operation_mode = "output";
+defparam \SalidaRF2[10]~I .output_async_reset = "none";
+defparam \SalidaRF2[10]~I .output_power_up = "low";
+defparam \SalidaRF2[10]~I .output_register_mode = "none";
+defparam \SalidaRF2[10]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[11]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[11]));
+// synopsys translate_off
+defparam \SalidaRF2[11]~I .input_async_reset = "none";
+defparam \SalidaRF2[11]~I .input_power_up = "low";
+defparam \SalidaRF2[11]~I .input_register_mode = "none";
+defparam \SalidaRF2[11]~I .input_sync_reset = "none";
+defparam \SalidaRF2[11]~I .oe_async_reset = "none";
+defparam \SalidaRF2[11]~I .oe_power_up = "low";
+defparam \SalidaRF2[11]~I .oe_register_mode = "none";
+defparam \SalidaRF2[11]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[11]~I .operation_mode = "output";
+defparam \SalidaRF2[11]~I .output_async_reset = "none";
+defparam \SalidaRF2[11]~I .output_power_up = "low";
+defparam \SalidaRF2[11]~I .output_register_mode = "none";
+defparam \SalidaRF2[11]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[12]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[12]));
+// synopsys translate_off
+defparam \SalidaRF2[12]~I .input_async_reset = "none";
+defparam \SalidaRF2[12]~I .input_power_up = "low";
+defparam \SalidaRF2[12]~I .input_register_mode = "none";
+defparam \SalidaRF2[12]~I .input_sync_reset = "none";
+defparam \SalidaRF2[12]~I .oe_async_reset = "none";
+defparam \SalidaRF2[12]~I .oe_power_up = "low";
+defparam \SalidaRF2[12]~I .oe_register_mode = "none";
+defparam \SalidaRF2[12]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[12]~I .operation_mode = "output";
+defparam \SalidaRF2[12]~I .output_async_reset = "none";
+defparam \SalidaRF2[12]~I .output_power_up = "low";
+defparam \SalidaRF2[12]~I .output_register_mode = "none";
+defparam \SalidaRF2[12]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[13]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[13]));
+// synopsys translate_off
+defparam \SalidaRF2[13]~I .input_async_reset = "none";
+defparam \SalidaRF2[13]~I .input_power_up = "low";
+defparam \SalidaRF2[13]~I .input_register_mode = "none";
+defparam \SalidaRF2[13]~I .input_sync_reset = "none";
+defparam \SalidaRF2[13]~I .oe_async_reset = "none";
+defparam \SalidaRF2[13]~I .oe_power_up = "low";
+defparam \SalidaRF2[13]~I .oe_register_mode = "none";
+defparam \SalidaRF2[13]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[13]~I .operation_mode = "output";
+defparam \SalidaRF2[13]~I .output_async_reset = "none";
+defparam \SalidaRF2[13]~I .output_power_up = "low";
+defparam \SalidaRF2[13]~I .output_register_mode = "none";
+defparam \SalidaRF2[13]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[14]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[14]));
+// synopsys translate_off
+defparam \SalidaRF2[14]~I .input_async_reset = "none";
+defparam \SalidaRF2[14]~I .input_power_up = "low";
+defparam \SalidaRF2[14]~I .input_register_mode = "none";
+defparam \SalidaRF2[14]~I .input_sync_reset = "none";
+defparam \SalidaRF2[14]~I .oe_async_reset = "none";
+defparam \SalidaRF2[14]~I .oe_power_up = "low";
+defparam \SalidaRF2[14]~I .oe_register_mode = "none";
+defparam \SalidaRF2[14]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[14]~I .operation_mode = "output";
+defparam \SalidaRF2[14]~I .output_async_reset = "none";
+defparam \SalidaRF2[14]~I .output_power_up = "low";
+defparam \SalidaRF2[14]~I .output_register_mode = "none";
+defparam \SalidaRF2[14]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[15]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[15]));
+// synopsys translate_off
+defparam \SalidaRF2[15]~I .input_async_reset = "none";
+defparam \SalidaRF2[15]~I .input_power_up = "low";
+defparam \SalidaRF2[15]~I .input_register_mode = "none";
+defparam \SalidaRF2[15]~I .input_sync_reset = "none";
+defparam \SalidaRF2[15]~I .oe_async_reset = "none";
+defparam \SalidaRF2[15]~I .oe_power_up = "low";
+defparam \SalidaRF2[15]~I .oe_register_mode = "none";
+defparam \SalidaRF2[15]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[15]~I .operation_mode = "output";
+defparam \SalidaRF2[15]~I .output_async_reset = "none";
+defparam \SalidaRF2[15]~I .output_power_up = "low";
+defparam \SalidaRF2[15]~I .output_register_mode = "none";
+defparam \SalidaRF2[15]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[16]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[16]));
+// synopsys translate_off
+defparam \SalidaRF2[16]~I .input_async_reset = "none";
+defparam \SalidaRF2[16]~I .input_power_up = "low";
+defparam \SalidaRF2[16]~I .input_register_mode = "none";
+defparam \SalidaRF2[16]~I .input_sync_reset = "none";
+defparam \SalidaRF2[16]~I .oe_async_reset = "none";
+defparam \SalidaRF2[16]~I .oe_power_up = "low";
+defparam \SalidaRF2[16]~I .oe_register_mode = "none";
+defparam \SalidaRF2[16]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[16]~I .operation_mode = "output";
+defparam \SalidaRF2[16]~I .output_async_reset = "none";
+defparam \SalidaRF2[16]~I .output_power_up = "low";
+defparam \SalidaRF2[16]~I .output_register_mode = "none";
+defparam \SalidaRF2[16]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[17]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[17]));
+// synopsys translate_off
+defparam \SalidaRF2[17]~I .input_async_reset = "none";
+defparam \SalidaRF2[17]~I .input_power_up = "low";
+defparam \SalidaRF2[17]~I .input_register_mode = "none";
+defparam \SalidaRF2[17]~I .input_sync_reset = "none";
+defparam \SalidaRF2[17]~I .oe_async_reset = "none";
+defparam \SalidaRF2[17]~I .oe_power_up = "low";
+defparam \SalidaRF2[17]~I .oe_register_mode = "none";
+defparam \SalidaRF2[17]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[17]~I .operation_mode = "output";
+defparam \SalidaRF2[17]~I .output_async_reset = "none";
+defparam \SalidaRF2[17]~I .output_power_up = "low";
+defparam \SalidaRF2[17]~I .output_register_mode = "none";
+defparam \SalidaRF2[17]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[18]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[18]));
+// synopsys translate_off
+defparam \SalidaRF2[18]~I .input_async_reset = "none";
+defparam \SalidaRF2[18]~I .input_power_up = "low";
+defparam \SalidaRF2[18]~I .input_register_mode = "none";
+defparam \SalidaRF2[18]~I .input_sync_reset = "none";
+defparam \SalidaRF2[18]~I .oe_async_reset = "none";
+defparam \SalidaRF2[18]~I .oe_power_up = "low";
+defparam \SalidaRF2[18]~I .oe_register_mode = "none";
+defparam \SalidaRF2[18]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[18]~I .operation_mode = "output";
+defparam \SalidaRF2[18]~I .output_async_reset = "none";
+defparam \SalidaRF2[18]~I .output_power_up = "low";
+defparam \SalidaRF2[18]~I .output_register_mode = "none";
+defparam \SalidaRF2[18]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[19]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[19]));
+// synopsys translate_off
+defparam \SalidaRF2[19]~I .input_async_reset = "none";
+defparam \SalidaRF2[19]~I .input_power_up = "low";
+defparam \SalidaRF2[19]~I .input_register_mode = "none";
+defparam \SalidaRF2[19]~I .input_sync_reset = "none";
+defparam \SalidaRF2[19]~I .oe_async_reset = "none";
+defparam \SalidaRF2[19]~I .oe_power_up = "low";
+defparam \SalidaRF2[19]~I .oe_register_mode = "none";
+defparam \SalidaRF2[19]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[19]~I .operation_mode = "output";
+defparam \SalidaRF2[19]~I .output_async_reset = "none";
+defparam \SalidaRF2[19]~I .output_power_up = "low";
+defparam \SalidaRF2[19]~I .output_register_mode = "none";
+defparam \SalidaRF2[19]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[20]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[20]));
+// synopsys translate_off
+defparam \SalidaRF2[20]~I .input_async_reset = "none";
+defparam \SalidaRF2[20]~I .input_power_up = "low";
+defparam \SalidaRF2[20]~I .input_register_mode = "none";
+defparam \SalidaRF2[20]~I .input_sync_reset = "none";
+defparam \SalidaRF2[20]~I .oe_async_reset = "none";
+defparam \SalidaRF2[20]~I .oe_power_up = "low";
+defparam \SalidaRF2[20]~I .oe_register_mode = "none";
+defparam \SalidaRF2[20]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[20]~I .operation_mode = "output";
+defparam \SalidaRF2[20]~I .output_async_reset = "none";
+defparam \SalidaRF2[20]~I .output_power_up = "low";
+defparam \SalidaRF2[20]~I .output_register_mode = "none";
+defparam \SalidaRF2[20]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[21]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[21]));
+// synopsys translate_off
+defparam \SalidaRF2[21]~I .input_async_reset = "none";
+defparam \SalidaRF2[21]~I .input_power_up = "low";
+defparam \SalidaRF2[21]~I .input_register_mode = "none";
+defparam \SalidaRF2[21]~I .input_sync_reset = "none";
+defparam \SalidaRF2[21]~I .oe_async_reset = "none";
+defparam \SalidaRF2[21]~I .oe_power_up = "low";
+defparam \SalidaRF2[21]~I .oe_register_mode = "none";
+defparam \SalidaRF2[21]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[21]~I .operation_mode = "output";
+defparam \SalidaRF2[21]~I .output_async_reset = "none";
+defparam \SalidaRF2[21]~I .output_power_up = "low";
+defparam \SalidaRF2[21]~I .output_register_mode = "none";
+defparam \SalidaRF2[21]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[22]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[22]));
+// synopsys translate_off
+defparam \SalidaRF2[22]~I .input_async_reset = "none";
+defparam \SalidaRF2[22]~I .input_power_up = "low";
+defparam \SalidaRF2[22]~I .input_register_mode = "none";
+defparam \SalidaRF2[22]~I .input_sync_reset = "none";
+defparam \SalidaRF2[22]~I .oe_async_reset = "none";
+defparam \SalidaRF2[22]~I .oe_power_up = "low";
+defparam \SalidaRF2[22]~I .oe_register_mode = "none";
+defparam \SalidaRF2[22]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[22]~I .operation_mode = "output";
+defparam \SalidaRF2[22]~I .output_async_reset = "none";
+defparam \SalidaRF2[22]~I .output_power_up = "low";
+defparam \SalidaRF2[22]~I .output_register_mode = "none";
+defparam \SalidaRF2[22]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[23]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[23]));
+// synopsys translate_off
+defparam \SalidaRF2[23]~I .input_async_reset = "none";
+defparam \SalidaRF2[23]~I .input_power_up = "low";
+defparam \SalidaRF2[23]~I .input_register_mode = "none";
+defparam \SalidaRF2[23]~I .input_sync_reset = "none";
+defparam \SalidaRF2[23]~I .oe_async_reset = "none";
+defparam \SalidaRF2[23]~I .oe_power_up = "low";
+defparam \SalidaRF2[23]~I .oe_register_mode = "none";
+defparam \SalidaRF2[23]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[23]~I .operation_mode = "output";
+defparam \SalidaRF2[23]~I .output_async_reset = "none";
+defparam \SalidaRF2[23]~I .output_power_up = "low";
+defparam \SalidaRF2[23]~I .output_register_mode = "none";
+defparam \SalidaRF2[23]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[24]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[24]));
+// synopsys translate_off
+defparam \SalidaRF2[24]~I .input_async_reset = "none";
+defparam \SalidaRF2[24]~I .input_power_up = "low";
+defparam \SalidaRF2[24]~I .input_register_mode = "none";
+defparam \SalidaRF2[24]~I .input_sync_reset = "none";
+defparam \SalidaRF2[24]~I .oe_async_reset = "none";
+defparam \SalidaRF2[24]~I .oe_power_up = "low";
+defparam \SalidaRF2[24]~I .oe_register_mode = "none";
+defparam \SalidaRF2[24]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[24]~I .operation_mode = "output";
+defparam \SalidaRF2[24]~I .output_async_reset = "none";
+defparam \SalidaRF2[24]~I .output_power_up = "low";
+defparam \SalidaRF2[24]~I .output_register_mode = "none";
+defparam \SalidaRF2[24]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[25]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[25]));
+// synopsys translate_off
+defparam \SalidaRF2[25]~I .input_async_reset = "none";
+defparam \SalidaRF2[25]~I .input_power_up = "low";
+defparam \SalidaRF2[25]~I .input_register_mode = "none";
+defparam \SalidaRF2[25]~I .input_sync_reset = "none";
+defparam \SalidaRF2[25]~I .oe_async_reset = "none";
+defparam \SalidaRF2[25]~I .oe_power_up = "low";
+defparam \SalidaRF2[25]~I .oe_register_mode = "none";
+defparam \SalidaRF2[25]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[25]~I .operation_mode = "output";
+defparam \SalidaRF2[25]~I .output_async_reset = "none";
+defparam \SalidaRF2[25]~I .output_power_up = "low";
+defparam \SalidaRF2[25]~I .output_register_mode = "none";
+defparam \SalidaRF2[25]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[26]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[26]));
+// synopsys translate_off
+defparam \SalidaRF2[26]~I .input_async_reset = "none";
+defparam \SalidaRF2[26]~I .input_power_up = "low";
+defparam \SalidaRF2[26]~I .input_register_mode = "none";
+defparam \SalidaRF2[26]~I .input_sync_reset = "none";
+defparam \SalidaRF2[26]~I .oe_async_reset = "none";
+defparam \SalidaRF2[26]~I .oe_power_up = "low";
+defparam \SalidaRF2[26]~I .oe_register_mode = "none";
+defparam \SalidaRF2[26]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[26]~I .operation_mode = "output";
+defparam \SalidaRF2[26]~I .output_async_reset = "none";
+defparam \SalidaRF2[26]~I .output_power_up = "low";
+defparam \SalidaRF2[26]~I .output_register_mode = "none";
+defparam \SalidaRF2[26]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[27]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[27]));
+// synopsys translate_off
+defparam \SalidaRF2[27]~I .input_async_reset = "none";
+defparam \SalidaRF2[27]~I .input_power_up = "low";
+defparam \SalidaRF2[27]~I .input_register_mode = "none";
+defparam \SalidaRF2[27]~I .input_sync_reset = "none";
+defparam \SalidaRF2[27]~I .oe_async_reset = "none";
+defparam \SalidaRF2[27]~I .oe_power_up = "low";
+defparam \SalidaRF2[27]~I .oe_register_mode = "none";
+defparam \SalidaRF2[27]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[27]~I .operation_mode = "output";
+defparam \SalidaRF2[27]~I .output_async_reset = "none";
+defparam \SalidaRF2[27]~I .output_power_up = "low";
+defparam \SalidaRF2[27]~I .output_register_mode = "none";
+defparam \SalidaRF2[27]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[28]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[28]));
+// synopsys translate_off
+defparam \SalidaRF2[28]~I .input_async_reset = "none";
+defparam \SalidaRF2[28]~I .input_power_up = "low";
+defparam \SalidaRF2[28]~I .input_register_mode = "none";
+defparam \SalidaRF2[28]~I .input_sync_reset = "none";
+defparam \SalidaRF2[28]~I .oe_async_reset = "none";
+defparam \SalidaRF2[28]~I .oe_power_up = "low";
+defparam \SalidaRF2[28]~I .oe_register_mode = "none";
+defparam \SalidaRF2[28]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[28]~I .operation_mode = "output";
+defparam \SalidaRF2[28]~I .output_async_reset = "none";
+defparam \SalidaRF2[28]~I .output_power_up = "low";
+defparam \SalidaRF2[28]~I .output_register_mode = "none";
+defparam \SalidaRF2[28]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[29]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[29]));
+// synopsys translate_off
+defparam \SalidaRF2[29]~I .input_async_reset = "none";
+defparam \SalidaRF2[29]~I .input_power_up = "low";
+defparam \SalidaRF2[29]~I .input_register_mode = "none";
+defparam \SalidaRF2[29]~I .input_sync_reset = "none";
+defparam \SalidaRF2[29]~I .oe_async_reset = "none";
+defparam \SalidaRF2[29]~I .oe_power_up = "low";
+defparam \SalidaRF2[29]~I .oe_register_mode = "none";
+defparam \SalidaRF2[29]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[29]~I .operation_mode = "output";
+defparam \SalidaRF2[29]~I .output_async_reset = "none";
+defparam \SalidaRF2[29]~I .output_power_up = "low";
+defparam \SalidaRF2[29]~I .output_register_mode = "none";
+defparam \SalidaRF2[29]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[30]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[30]));
+// synopsys translate_off
+defparam \SalidaRF2[30]~I .input_async_reset = "none";
+defparam \SalidaRF2[30]~I .input_power_up = "low";
+defparam \SalidaRF2[30]~I .input_register_mode = "none";
+defparam \SalidaRF2[30]~I .input_sync_reset = "none";
+defparam \SalidaRF2[30]~I .oe_async_reset = "none";
+defparam \SalidaRF2[30]~I .oe_power_up = "low";
+defparam \SalidaRF2[30]~I .oe_register_mode = "none";
+defparam \SalidaRF2[30]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[30]~I .operation_mode = "output";
+defparam \SalidaRF2[30]~I .output_async_reset = "none";
+defparam \SalidaRF2[30]~I .output_power_up = "low";
+defparam \SalidaRF2[30]~I .output_register_mode = "none";
+defparam \SalidaRF2[30]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaRF2[31]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaRF2[31]));
+// synopsys translate_off
+defparam \SalidaRF2[31]~I .input_async_reset = "none";
+defparam \SalidaRF2[31]~I .input_power_up = "low";
+defparam \SalidaRF2[31]~I .input_register_mode = "none";
+defparam \SalidaRF2[31]~I .input_sync_reset = "none";
+defparam \SalidaRF2[31]~I .oe_async_reset = "none";
+defparam \SalidaRF2[31]~I .oe_power_up = "low";
+defparam \SalidaRF2[31]~I .oe_register_mode = "none";
+defparam \SalidaRF2[31]~I .oe_sync_reset = "none";
+defparam \SalidaRF2[31]~I .operation_mode = "output";
+defparam \SalidaRF2[31]~I .output_async_reset = "none";
+defparam \SalidaRF2[31]~I .output_power_up = "low";
+defparam \SalidaRF2[31]~I .output_register_mode = "none";
+defparam \SalidaRF2[31]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaPC[0]~I (
+	.datain(PC[0]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaPC[0]));
+// synopsys translate_off
+defparam \SalidaPC[0]~I .input_async_reset = "none";
+defparam \SalidaPC[0]~I .input_power_up = "low";
+defparam \SalidaPC[0]~I .input_register_mode = "none";
+defparam \SalidaPC[0]~I .input_sync_reset = "none";
+defparam \SalidaPC[0]~I .oe_async_reset = "none";
+defparam \SalidaPC[0]~I .oe_power_up = "low";
+defparam \SalidaPC[0]~I .oe_register_mode = "none";
+defparam \SalidaPC[0]~I .oe_sync_reset = "none";
+defparam \SalidaPC[0]~I .operation_mode = "output";
+defparam \SalidaPC[0]~I .output_async_reset = "none";
+defparam \SalidaPC[0]~I .output_power_up = "low";
+defparam \SalidaPC[0]~I .output_register_mode = "none";
+defparam \SalidaPC[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaPC[1]~I (
+	.datain(PC[1]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaPC[1]));
+// synopsys translate_off
+defparam \SalidaPC[1]~I .input_async_reset = "none";
+defparam \SalidaPC[1]~I .input_power_up = "low";
+defparam \SalidaPC[1]~I .input_register_mode = "none";
+defparam \SalidaPC[1]~I .input_sync_reset = "none";
+defparam \SalidaPC[1]~I .oe_async_reset = "none";
+defparam \SalidaPC[1]~I .oe_power_up = "low";
+defparam \SalidaPC[1]~I .oe_register_mode = "none";
+defparam \SalidaPC[1]~I .oe_sync_reset = "none";
+defparam \SalidaPC[1]~I .operation_mode = "output";
+defparam \SalidaPC[1]~I .output_async_reset = "none";
+defparam \SalidaPC[1]~I .output_power_up = "low";
+defparam \SalidaPC[1]~I .output_register_mode = "none";
+defparam \SalidaPC[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaPC[2]~I (
+	.datain(PC[2]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaPC[2]));
+// synopsys translate_off
+defparam \SalidaPC[2]~I .input_async_reset = "none";
+defparam \SalidaPC[2]~I .input_power_up = "low";
+defparam \SalidaPC[2]~I .input_register_mode = "none";
+defparam \SalidaPC[2]~I .input_sync_reset = "none";
+defparam \SalidaPC[2]~I .oe_async_reset = "none";
+defparam \SalidaPC[2]~I .oe_power_up = "low";
+defparam \SalidaPC[2]~I .oe_register_mode = "none";
+defparam \SalidaPC[2]~I .oe_sync_reset = "none";
+defparam \SalidaPC[2]~I .operation_mode = "output";
+defparam \SalidaPC[2]~I .output_async_reset = "none";
+defparam \SalidaPC[2]~I .output_power_up = "low";
+defparam \SalidaPC[2]~I .output_register_mode = "none";
+defparam \SalidaPC[2]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaPC[3]~I (
+	.datain(PC[3]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaPC[3]));
+// synopsys translate_off
+defparam \SalidaPC[3]~I .input_async_reset = "none";
+defparam \SalidaPC[3]~I .input_power_up = "low";
+defparam \SalidaPC[3]~I .input_register_mode = "none";
+defparam \SalidaPC[3]~I .input_sync_reset = "none";
+defparam \SalidaPC[3]~I .oe_async_reset = "none";
+defparam \SalidaPC[3]~I .oe_power_up = "low";
+defparam \SalidaPC[3]~I .oe_register_mode = "none";
+defparam \SalidaPC[3]~I .oe_sync_reset = "none";
+defparam \SalidaPC[3]~I .operation_mode = "output";
+defparam \SalidaPC[3]~I .output_async_reset = "none";
+defparam \SalidaPC[3]~I .output_power_up = "low";
+defparam \SalidaPC[3]~I .output_register_mode = "none";
+defparam \SalidaPC[3]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaPC[4]~I (
+	.datain(PC[4]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaPC[4]));
+// synopsys translate_off
+defparam \SalidaPC[4]~I .input_async_reset = "none";
+defparam \SalidaPC[4]~I .input_power_up = "low";
+defparam \SalidaPC[4]~I .input_register_mode = "none";
+defparam \SalidaPC[4]~I .input_sync_reset = "none";
+defparam \SalidaPC[4]~I .oe_async_reset = "none";
+defparam \SalidaPC[4]~I .oe_power_up = "low";
+defparam \SalidaPC[4]~I .oe_register_mode = "none";
+defparam \SalidaPC[4]~I .oe_sync_reset = "none";
+defparam \SalidaPC[4]~I .operation_mode = "output";
+defparam \SalidaPC[4]~I .output_async_reset = "none";
+defparam \SalidaPC[4]~I .output_power_up = "low";
+defparam \SalidaPC[4]~I .output_register_mode = "none";
+defparam \SalidaPC[4]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaPC[5]~I (
+	.datain(PC[5]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaPC[5]));
+// synopsys translate_off
+defparam \SalidaPC[5]~I .input_async_reset = "none";
+defparam \SalidaPC[5]~I .input_power_up = "low";
+defparam \SalidaPC[5]~I .input_register_mode = "none";
+defparam \SalidaPC[5]~I .input_sync_reset = "none";
+defparam \SalidaPC[5]~I .oe_async_reset = "none";
+defparam \SalidaPC[5]~I .oe_power_up = "low";
+defparam \SalidaPC[5]~I .oe_register_mode = "none";
+defparam \SalidaPC[5]~I .oe_sync_reset = "none";
+defparam \SalidaPC[5]~I .operation_mode = "output";
+defparam \SalidaPC[5]~I .output_async_reset = "none";
+defparam \SalidaPC[5]~I .output_power_up = "low";
+defparam \SalidaPC[5]~I .output_register_mode = "none";
+defparam \SalidaPC[5]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaPC[6]~I (
+	.datain(PC[6]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaPC[6]));
+// synopsys translate_off
+defparam \SalidaPC[6]~I .input_async_reset = "none";
+defparam \SalidaPC[6]~I .input_power_up = "low";
+defparam \SalidaPC[6]~I .input_register_mode = "none";
+defparam \SalidaPC[6]~I .input_sync_reset = "none";
+defparam \SalidaPC[6]~I .oe_async_reset = "none";
+defparam \SalidaPC[6]~I .oe_power_up = "low";
+defparam \SalidaPC[6]~I .oe_register_mode = "none";
+defparam \SalidaPC[6]~I .oe_sync_reset = "none";
+defparam \SalidaPC[6]~I .operation_mode = "output";
+defparam \SalidaPC[6]~I .output_async_reset = "none";
+defparam \SalidaPC[6]~I .output_power_up = "low";
+defparam \SalidaPC[6]~I .output_register_mode = "none";
+defparam \SalidaPC[6]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaPC[7]~I (
+	.datain(PC[7]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaPC[7]));
+// synopsys translate_off
+defparam \SalidaPC[7]~I .input_async_reset = "none";
+defparam \SalidaPC[7]~I .input_power_up = "low";
+defparam \SalidaPC[7]~I .input_register_mode = "none";
+defparam \SalidaPC[7]~I .input_sync_reset = "none";
+defparam \SalidaPC[7]~I .oe_async_reset = "none";
+defparam \SalidaPC[7]~I .oe_power_up = "low";
+defparam \SalidaPC[7]~I .oe_register_mode = "none";
+defparam \SalidaPC[7]~I .oe_sync_reset = "none";
+defparam \SalidaPC[7]~I .operation_mode = "output";
+defparam \SalidaPC[7]~I .output_async_reset = "none";
+defparam \SalidaPC[7]~I .output_power_up = "low";
+defparam \SalidaPC[7]~I .output_register_mode = "none";
+defparam \SalidaPC[7]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+endmodule

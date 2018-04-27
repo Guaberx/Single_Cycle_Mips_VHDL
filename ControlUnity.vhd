@@ -13,24 +13,58 @@ entity controlUnity is
 	(
 		OP	:in std_logic_vector(5 downto 0);
 
-		regDST : out std_logic_vector(1 downto 0);
-	   Jump : out std_logic_vector(1 downto 0);
-	   Branch : out std_logic_vector(1 downto 0);
-		MemRead : out std_logic;
-		MemtoReg : out std_logic_vector(1 downto 0);
-		ALUOp : out std_logic;
-		MemWrite : out std_logic;
-		ALUSrc :out std_logic_vector(1 downto 0);
-		RegWrite : out std_logic
+		OutregDST : out std_logic_vector(0 downto 0);
+	   OutJump : out std_logic_vector(0 downto 0);
+	   OutBranch : out std_logic_vector(0 downto 0);
+		OutMemRead : out std_logic;
+		OutMemtoReg : out std_logic_vector(0 downto 0);
+		OutALUOp : out std_logic_vector(1 downto 0);
+		OutMemWrite : out std_logic;
+		OutALUSrc :out std_logic_vector(0 downto 0);
+		OutRegWrite : out std_logic
 
 	);
 	
 end entity;
 
 architecture ControlUnitArchitecture of controlUnity is
-type MicroMemory is array(0 to 2**ADDR_WIDTH -1) of std_logic_vector(dataWidth downto 0);
-
 begin
-
+	process(OP)
+	begin
+		case OP is
+			when "000000" => --R-Type
+				OutregDST <= "1";
+				OutJump <= "0";
+				OutBranch <= "0";
+				OutMemRead <= '1';
+				OutMemtoReg <= "0";
+				OutALUOp <= "00";
+				OutMemWrite <= '0' ;
+				OutALUSrc <= "0";
+				OutRegWrite <= '1';
+			
+			when "001000" => --addi
+				OutregDST <= "0";
+				OutJump <= "0";
+				OutBranch <= "0";
+				OutMemRead <= '1';
+				OutMemtoReg <= "0";
+				OutALUOp <= "01";
+				OutMemWrite <= '0' ;
+				OutALUSrc <= "1";
+				OutRegWrite <= '1';
+				
+			when others =>
+				OutregDST <= "0";
+				OutJump <= "0";
+				OutBranch <= "0";
+				OutMemRead <= '0';
+				OutMemtoReg <= "0";
+				OutALUOp <= "00";
+				OutMemWrite <= '0' ;
+				OutALUSrc <= "0";
+				OutRegWrite <= '0';
+			end case;
+	end process;
 
 end ControlUnitArchitecture;

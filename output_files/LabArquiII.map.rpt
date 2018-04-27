@@ -1,5 +1,5 @@
 Analysis & Synthesis report for LabArquiII
-Thu Apr 26 15:47:18 2018
+Fri Apr 27 18:30:43 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -13,23 +13,26 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Parameter Settings for User Entity Instance: Top-level Entity: |monociclo
- 10. Parameter Settings for User Entity Instance: myMux:MUX_Branch
- 11. Parameter Settings for User Entity Instance: myMux:MUX_PCSrc
- 12. Parameter Settings for User Entity Instance: instructionMemory:pmInstructionMem
- 13. Parameter Settings for User Entity Instance: myMux:MUX_RD_RT_to_RF_writeregister
- 14. Parameter Settings for User Entity Instance: RF:pmRF
- 15. Parameter Settings for User Entity Instance: myMux:MUX_rd_instruction_15_0_to_ALUInB
- 16. Parameter Settings for User Entity Instance: alu:pmALU
- 17. Parameter Settings for User Entity Instance: dataMemory:pmDataMemory
- 18. Parameter Settings for User Entity Instance: myMux:MUX_readData_ALUresult_to_writeData
- 19. Port Connectivity Checks: "alu:pmALU"
- 20. Port Connectivity Checks: "instructionMemory:pmInstructionMem"
- 21. Port Connectivity Checks: "myMux:MUX_PCSrc"
- 22. Port Connectivity Checks: "myMux:MUX_Branch"
- 23. Elapsed Time Per Partition
- 24. Analysis & Synthesis Messages
+  8. Registers Removed During Synthesis
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |monociclo
+ 12. Parameter Settings for User Entity Instance: controlUnity:pmControlUnity
+ 13. Parameter Settings for User Entity Instance: myMux:MUX_Branch
+ 14. Parameter Settings for User Entity Instance: myMux:MUX_PCSrc
+ 15. Parameter Settings for User Entity Instance: instructionMemory:pmInstructionMem
+ 16. Parameter Settings for User Entity Instance: myMux:MUX_RD_RT_to_RF_writeregister
+ 17. Parameter Settings for User Entity Instance: RF:pmRF
+ 18. Parameter Settings for User Entity Instance: ALUControl:pmALUControl
+ 19. Parameter Settings for User Entity Instance: alu:pmALU
+ 20. Parameter Settings for User Entity Instance: dataMemory:pmDataMemory
+ 21. Parameter Settings for User Entity Instance: myMux:MUX_readData_ALUresult_to_writeData
+ 22. Port Connectivity Checks: "alu:pmALU"
+ 23. Port Connectivity Checks: "myMux:MUX_PCSrc"
+ 24. Port Connectivity Checks: "myMux:MUX_Branch"
+ 25. Port Connectivity Checks: "controlUnity:pmControlUnity"
+ 26. Elapsed Time Per Partition
+ 27. Analysis & Synthesis Messages
 
 
 
@@ -55,16 +58,16 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Apr 26 15:47:18 2018           ;
+; Analysis & Synthesis Status        ; Successful - Fri Apr 27 18:30:43 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; LabArquiII                                      ;
 ; Top-level Entity Name              ; monociclo                                       ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 0                                               ;
-;     Total combinational functions  ; 0                                               ;
-;     Dedicated logic registers      ; 0                                               ;
-; Total registers                    ; 0                                               ;
-; Total pins                         ; 1                                               ;
+; Total logic elements               ; 12                                              ;
+;     Total combinational functions  ; 12                                              ;
+;     Dedicated logic registers      ; 10                                              ;
+; Total registers                    ; 10                                              ;
+; Total pins                         ; 249                                             ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
@@ -182,6 +185,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; myMux.vhd                        ; yes             ; User VHDL File  ; C:/Users/Gandalf the White/Dropbox/Javeriana/VI Semestre/Arqui II/Single_Cycle_Mips_VHDL/myMux.vhd              ;         ;
 ; sign_extend.vhd                  ; yes             ; User VHDL File  ; C:/Users/Gandalf the White/Dropbox/Javeriana/VI Semestre/Arqui II/Single_Cycle_Mips_VHDL/sign_extend.vhd        ;         ;
 ; dataMemory.vhd                   ; yes             ; User VHDL File  ; C:/Users/Gandalf the White/Dropbox/Javeriana/VI Semestre/Arqui II/Single_Cycle_Mips_VHDL/dataMemory.vhd         ;         ;
+; ALUcontrol.vhd                   ; yes             ; User VHDL File  ; C:/Users/Gandalf the White/Dropbox/Javeriana/VI Semestre/Arqui II/Single_Cycle_Mips_VHDL/ALUcontrol.vhd         ;         ;
+; ControlUnity.vhd                 ; yes             ; User VHDL File  ; C:/Users/Gandalf the White/Dropbox/Javeriana/VI Semestre/Arqui II/Single_Cycle_Mips_VHDL/ControlUnity.vhd       ;         ;
 +----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------------------------------------+---------+
 
 
@@ -190,34 +195,63 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
+; Estimated Total logic elements              ; 12    ;
 ;                                             ;       ;
-; Total combinational functions               ; 0     ;
+; Total combinational functions               ; 12    ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 0     ;
-;     -- 3 input functions                    ; 0     ;
-;     -- <=2 input functions                  ; 0     ;
+;     -- 4 input functions                    ; 1     ;
+;     -- 3 input functions                    ; 4     ;
+;     -- <=2 input functions                  ; 7     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 0     ;
-;     -- arithmetic mode                      ; 0     ;
+;     -- normal mode                          ; 6     ;
+;     -- arithmetic mode                      ; 6     ;
 ;                                             ;       ;
-; Total registers                             ; 0     ;
-;     -- Dedicated logic registers            ; 0     ;
+; Total registers                             ; 10    ;
+;     -- Dedicated logic registers            ; 10    ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
-; I/O pins                                    ; 1     ;
+; I/O pins                                    ; 249   ;
 ; Embedded Multiplier 9-bit elements          ; 0     ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 10    ;
+; Total fan-out                               ; 62    ;
+; Average fan-out                             ; 0.23  ;
 +---------------------------------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |monociclo                 ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 1    ; 0            ; |monociclo          ; work         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                ;
++-----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------+--------------+
+; Compilation Hierarchy Node              ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                           ; Library Name ;
++-----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------+--------------+
+; |monociclo                              ; 12 (8)            ; 10 (8)       ; 0           ; 0            ; 0       ; 0         ; 249  ; 0            ; |monociclo                                    ; work         ;
+;    |instructionMemory:pmInstructionMem| ; 4 (4)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |monociclo|instructionMemory:pmInstructionMem ; work         ;
++-----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++--------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                     ;
++--------------------------------------------------+-----------------------------------------------------+
+; Register name                                    ; Reason for Removal                                  ;
++--------------------------------------------------+-----------------------------------------------------+
+; dataMemory:pmDataMemory|addr_reg[0..4]           ; Lost fanout                                         ;
+; dataMemory:pmDataMemory|readData[0..31]          ; Stuck at GND due to stuck port data_in              ;
+; instructionMemory:pmInstructionMem|q[2..4,6..31] ; Merged with instructionMemory:pmInstructionMem|q[1] ;
+; instructionMemory:pmInstructionMem|q[1]          ; Stuck at GND due to stuck port data_in              ;
+; Total Number of Removed Registers = 67           ;                                                     ;
++--------------------------------------------------+-----------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                  ;
++--------------------------------------+---------------------------+---------------------------------------------------------------------------+
+; Register name                        ; Reason for Removal        ; Registers Removed due to This Register                                    ;
++--------------------------------------+---------------------------+---------------------------------------------------------------------------+
+; dataMemory:pmDataMemory|readData[20] ; Stuck at GND              ; dataMemory:pmDataMemory|readData[3], dataMemory:pmDataMemory|readData[2], ;
+;                                      ; due to stuck port data_in ; dataMemory:pmDataMemory|readData[1]                                       ;
++--------------------------------------+---------------------------+---------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -225,7 +259,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
+; Total registers                              ; 10    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
@@ -244,6 +278,18 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; ADDR_WIDTH     ; 8     ; Signed Integer                                   ;
 ; registerWidth  ; 5     ; Signed Integer                                   ;
 +----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: controlUnity:pmControlUnity ;
++----------------+-------+-------------------------------------------------+
+; Parameter Name ; Value ; Type                                            ;
++----------------+-------+-------------------------------------------------+
+; datawidth      ; 32    ; Signed Integer                                  ;
+; addr_width     ; 8     ; Signed Integer                                  ;
+; registerwidth  ; 5     ; Signed Integer                                  ;
++----------------+-------+-------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -302,14 +348,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: myMux:MUX_rd_instruction_15_0_to_ALUInB ;
-+----------------+-------+-------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                        ;
-+----------------+-------+-------------------------------------------------------------+
-; w              ; 32    ; Signed Integer                                              ;
-; n              ; 2     ; Signed Integer                                              ;
-+----------------+-------+-------------------------------------------------------------+
++----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: ALUControl:pmALUControl ;
++----------------+-------+---------------------------------------------+
+; Parameter Name ; Value ; Type                                        ;
++----------------+-------+---------------------------------------------+
+; datawidth      ; 32    ; Signed Integer                              ;
+; addr_width     ; 8     ; Signed Integer                              ;
+; registerwidth  ; 5     ; Signed Integer                              ;
++----------------+-------+---------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -345,22 +392,13 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "alu:pmALU"                                                                          ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; flag ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+---------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "instructionMemory:pmInstructionMem"                                                      ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-; Port      ; Type   ; Severity ; Details                                                                             ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-; q[31..26] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:pmALU"                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; flag[1] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------+
@@ -378,10 +416,18 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------------------+-------+----------+--------------+
 ; Port             ; Type  ; Severity ; Details      ;
 +------------------+-------+----------+--------------+
-; selector         ; Input ; Info     ; Stuck at GND ;
 ; values[0][31..8] ; Input ; Info     ; Stuck at GND ;
 ; values[1][31..8] ; Input ; Info     ; Stuck at GND ;
 +------------------+-------+----------+--------------+
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "controlUnity:pmControlUnity"                                                             ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                                             ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; outalusrc ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-------------------------------+
@@ -399,7 +445,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Apr 26 15:47:15 2018
+    Info: Processing started: Fri Apr 27 18:30:39 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off LabArquiII -c LabArquiII
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file alu.vhdl
@@ -425,41 +471,274 @@ Info (12021): Found 2 design units, including 1 entities, in source file sign_ex
 Info (12021): Found 2 design units, including 1 entities, in source file datamemory.vhd
     Info (12022): Found design unit 1: dataMemory-rtl
     Info (12023): Found entity 1: dataMemory
-Info (12021): Found 0 design units, including 0 entities, in source file alucontrol.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file alucontrol.vhd
+    Info (12022): Found design unit 1: ALUControl-ALUControlArchitecture
+    Info (12023): Found entity 1: ALUControl
 Info (12021): Found 2 design units, including 1 entities, in source file controlunity.vhd
     Info (12022): Found design unit 1: controlUnity-ControlUnitArchitecture
     Info (12023): Found entity 1: controlUnity
+Warning (10645): VHDL type inferencing warning at instructionMemory.vhdl(48): two visible identifiers match "TO_INTEGER" because the actual at position 0 has an ambiguous type - it could be "UNSIGNED" or "SIGNED", assuming "UNSIGNED"
+Warning (10645): VHDL type inferencing warning at instructionMemory.vhdl(49): two visible identifiers match "TO_INTEGER" because the actual at position 0 has an ambiguous type - it could be "UNSIGNED" or "SIGNED", assuming "UNSIGNED"
 Info (12127): Elaborating entity "monociclo" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(37): used implicit default value for signal "ALUControlOutput" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(45): used implicit default value for signal "regDST" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(46): used implicit default value for signal "Jump" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(47): used implicit default value for signal "Branch" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(48): used implicit default value for signal "MemRead" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(49): used implicit default value for signal "MemtoReg" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(51): used implicit default value for signal "MemWrite" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(52): used implicit default value for signal "ALUSrc" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at monociclo.vhdl(53): used implicit default value for signal "RegWrite" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Info (12128): Elaborating entity "controlUnity" for hierarchy "controlUnity:pmControlUnity"
 Info (12128): Elaborating entity "myMux" for hierarchy "myMux:MUX_Branch"
 Info (12128): Elaborating entity "instructionMemory" for hierarchy "instructionMemory:pmInstructionMem"
+Warning (10873): Using initial value X (don't care) for net "rom[255..2]" at instructionMemory.vhdl(45)
 Info (12128): Elaborating entity "myMux" for hierarchy "myMux:MUX_RD_RT_to_RF_writeregister"
 Info (12128): Elaborating entity "RF" for hierarchy "RF:pmRF"
 Warning (10492): VHDL Process Statement warning at RF.vhdl(38): signal "registers" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at RF.vhdl(39): signal "registers" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info (12128): Elaborating entity "sign_extend" for hierarchy "sign_extend:pmSignExtendI"
+Info (12128): Elaborating entity "ALUControl" for hierarchy "ALUControl:pmALUControl"
 Info (12128): Elaborating entity "alu" for hierarchy "alu:pmALU"
 Warning (10541): VHDL Signal Declaration warning at alu.vhdl(13): used implicit default value for signal "flag" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Info (12128): Elaborating entity "dataMemory" for hierarchy "dataMemory:pmDataMemory"
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "SalidaALU[0]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[1]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[2]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[3]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[4]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[5]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[6]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[7]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[8]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[9]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[10]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[11]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[12]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[13]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[14]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[15]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[16]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[17]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[18]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[19]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[20]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[21]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[22]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[23]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[24]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[25]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[26]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[27]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[28]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[29]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[30]" is stuck at GND
+    Warning (13410): Pin "SalidaALU[31]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[1]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[2]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[3]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[4]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[6]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[7]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[8]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[9]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[10]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[11]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[12]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[13]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[14]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[15]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[16]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[17]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[18]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[19]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[20]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[21]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[22]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[23]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[24]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[25]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[26]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[27]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[28]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[29]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[30]" is stuck at GND
+    Warning (13410): Pin "SalidaROM[31]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[0]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[1]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[2]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[3]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[4]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[5]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[6]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[7]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[8]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[9]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[10]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[11]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[12]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[13]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[14]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[15]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[16]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[17]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[18]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[19]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[20]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[21]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[22]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[23]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[24]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[25]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[26]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[27]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[28]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[29]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[30]" is stuck at GND
+    Warning (13410): Pin "SalidaRAM[31]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[0]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[1]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[2]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[3]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[4]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[5]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[6]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[7]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[8]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[9]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[10]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[11]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[12]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[13]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[14]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[15]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[16]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[17]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[18]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[19]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[20]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[21]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[22]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[23]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[24]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[25]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[26]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[27]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[28]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[29]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[30]" is stuck at GND
+    Warning (13410): Pin "SalidaRF1[31]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[0]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[1]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[2]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[3]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[4]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[5]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[6]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[7]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[8]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[9]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[10]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[11]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[12]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[13]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[14]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[15]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[16]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[17]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[18]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[19]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[20]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[21]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[22]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[23]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[24]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[25]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[26]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[27]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[28]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[29]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[30]" is stuck at GND
+    Warning (13410): Pin "SalidaRF2[31]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[1]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[2]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[3]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[4]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[6]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[7]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[8]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[9]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[10]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[11]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[12]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[13]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[14]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediato[15]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[1]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[2]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[3]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[4]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[6]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[7]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[8]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[9]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[10]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[11]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[12]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[13]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[14]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[15]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[16]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[17]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[18]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[19]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[20]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[21]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[22]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[23]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[24]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[25]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[26]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[27]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[28]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[29]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[30]" is stuck at GND
+    Warning (13410): Pin "SalidaInmediatoExtendido[31]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[0]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[1]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[2]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[3]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[4]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[5]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[6]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[7]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[8]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[9]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[10]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[11]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[12]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[13]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[14]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[15]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[16]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[17]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[18]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[19]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[20]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[21]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[22]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[23]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[24]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[25]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[26]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[27]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[28]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[29]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[30]" is stuck at GND
+    Warning (13410): Pin "SalidaMuxRFALU[31]" is stuck at GND
+Info (17049): 5 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "clk"
-Info (21057): Implemented 1 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 261 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 1 input pins
-    Info (21059): Implemented 0 output pins
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 15 warnings
+    Info (21059): Implemented 248 output pins
+    Info (21061): Implemented 12 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 242 warnings
     Info: Peak virtual memory: 568 megabytes
-    Info: Processing ended: Thu Apr 26 15:47:18 2018
-    Info: Elapsed time: 00:00:03
+    Info: Processing ended: Fri Apr 27 18:30:43 2018
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:02
 
 

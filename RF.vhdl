@@ -12,7 +12,7 @@ entity RF is
 
 	port
 	(
-		-- Input portsz
+		-- Input ports
 		rs	: in  std_logic_vector(addrWidth downto 0);
 		rt	: in  std_logic_vector(addrWidth downto 0);
 		rd : in std_logic_vector(addrWidth downto 0);
