@@ -17,19 +17,19 @@ entity RF is
 		rt	: in  std_logic_vector(addrWidth downto 0);
 		rd : in std_logic_vector(addrWidth downto 0);
 		
-		writeData : in signed((dataWidth -1) downto 0);
+		writeData : in std_logic_vector((dataWidth -1) downto 0);
 		rw : in std_logic;
 		
 		-- Output ports
-		readData1	: out signed((dataWidth -1) downto 0);
-		readData2	: out signed((dataWidth -1) downto 0)
+		readData1	: out std_logic_vector((dataWidth -1) downto 0);
+		readData2	: out std_logic_vector((dataWidth -1) downto 0)
 	);
 end RF;
 
 
 architecture RFARCHITECTURE of RF is
 
-	type registerFile is array(0 to (dataWidth -1)) of signed((dataWidth -1) downto 0);
+	type registerFile is array(0 to (dataWidth -1)) of std_logic_vector((dataWidth -1) downto 0);
 	signal registers : registerFile;
 
 begin

@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for LabArquiII
-Tue Apr 03 17:03:52 2018
+Fri May 11 15:13:59 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -16,19 +16,30 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   8. Slow Model Recovery Summary
   9. Slow Model Removal Summary
  10. Slow Model Minimum Pulse Width Summary
- 11. Slow Model Datasheet Report
- 12. Fast Model Setup Summary
- 13. Fast Model Hold Summary
- 14. Fast Model Recovery Summary
- 15. Fast Model Removal Summary
- 16. Fast Model Minimum Pulse Width Summary
- 17. Fast Model Datasheet Report
- 18. Multicorner Timing Analysis Summary
- 19. Clock Transfers
- 20. Report TCCS
- 21. Report RSKM
- 22. Unconstrained Paths
- 23. TimeQuest Timing Analyzer Messages
+ 11. Slow Model Setup: 'clk'
+ 12. Slow Model Hold: 'clk'
+ 13. Slow Model Minimum Pulse Width: 'clk'
+ 14. Clock to Output Times
+ 15. Minimum Clock to Output Times
+ 16. Fast Model Setup Summary
+ 17. Fast Model Hold Summary
+ 18. Fast Model Recovery Summary
+ 19. Fast Model Removal Summary
+ 20. Fast Model Minimum Pulse Width Summary
+ 21. Fast Model Setup: 'clk'
+ 22. Fast Model Hold: 'clk'
+ 23. Fast Model Minimum Pulse Width: 'clk'
+ 24. Clock to Output Times
+ 25. Minimum Clock to Output Times
+ 26. Multicorner Timing Analysis Summary
+ 27. Clock to Output Times
+ 28. Minimum Clock to Output Times
+ 29. Setup Transfers
+ 30. Hold Transfers
+ 31. Report TCCS
+ 32. Report RSKM
+ 33. Unconstrained Paths
+ 34. TimeQuest Timing Analyzer Messages
 
 
 
@@ -70,33 +81,46 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 8      ;
+; Number detected on machine ; 2      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
 
-----------
-; Clocks ;
-----------
-No clocks to report.
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                          ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; clk        ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clk } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
 
 
----------------------------
-; Slow Model Fmax Summary ;
----------------------------
-No paths to report.
++-----------------------------------------------------------------------------------------------------------+
+; Slow Model Fmax Summary                                                                                   ;
++------------+-----------------+------------+---------------------------------------------------------------+
+; Fmax       ; Restricted Fmax ; Clock Name ; Note                                                          ;
++------------+-----------------+------------+---------------------------------------------------------------+
+; 475.29 MHz ; 380.08 MHz      ; clk        ; limit due to minimum period restriction (max I/O toggle rate) ;
++------------+-----------------+------------+---------------------------------------------------------------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
-----------------------------
-; Slow Model Setup Summary ;
-----------------------------
-No paths to report.
++--------------------------------+
+; Slow Model Setup Summary       ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; clk   ; -1.104 ; -7.470        ;
++-------+--------+---------------+
 
 
----------------------------
-; Slow Model Hold Summary ;
----------------------------
-No paths to report.
++-------------------------------+
+; Slow Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 0.445 ; 0.000         ;
++-------+-------+---------------+
 
 
 -------------------------------
@@ -111,28 +135,258 @@ No paths to report.
 No paths to report.
 
 
-------------------------------------------
++----------------------------------------+
 ; Slow Model Minimum Pulse Width Summary ;
-------------------------------------------
-No paths to report.
++-------+--------+-----------------------+
+; Clock ; Slack  ; End Point TNS         ;
++-------+--------+-----------------------+
+; clk   ; -1.631 ; -13.851               ;
++-------+--------+-----------------------+
 
 
--------------------------------
-; Slow Model Datasheet Report ;
--------------------------------
-Nothing to report.
++------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Setup: 'clk'                                                                                                            ;
++--------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node ; To Node                                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; -1.104 ; PC[1]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 2.142      ;
+; -1.059 ; PC[0]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 2.097      ;
+; -1.024 ; PC[1]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 2.062      ;
+; -0.984 ; PC[2]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 2.022      ;
+; -0.979 ; PC[0]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 2.017      ;
+; -0.947 ; PC[3]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.985      ;
+; -0.944 ; PC[1]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.982      ;
+; -0.904 ; PC[2]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.942      ;
+; -0.899 ; PC[0]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.937      ;
+; -0.888 ; PC[2]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.926      ;
+; -0.885 ; PC[2]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.923      ;
+; -0.868 ; PC[1]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.906      ;
+; -0.867 ; PC[3]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.905      ;
+; -0.865 ; PC[1]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.903      ;
+; -0.864 ; PC[1]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.902      ;
+; -0.828 ; PC[4]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.866      ;
+; -0.824 ; PC[2]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.862      ;
+; -0.819 ; PC[0]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.857      ;
+; -0.799 ; PC[7]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.837      ;
+; -0.798 ; PC[7]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.836      ;
+; -0.788 ; PC[5]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.826      ;
+; -0.787 ; PC[3]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.825      ;
+; -0.784 ; PC[1]     ; PC[3]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.822      ;
+; -0.748 ; PC[4]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.786      ;
+; -0.744 ; PC[2]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.782      ;
+; -0.739 ; PC[0]     ; PC[3]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.777      ;
+; -0.708 ; PC[5]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.746      ;
+; -0.707 ; PC[3]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.745      ;
+; -0.704 ; PC[1]     ; PC[2]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.742      ;
+; -0.671 ; PC[5]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.709      ;
+; -0.670 ; PC[5]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.708      ;
+; -0.668 ; PC[4]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.706      ;
+; -0.664 ; PC[6]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.702      ;
+; -0.664 ; PC[2]     ; PC[3]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.702      ;
+; -0.659 ; PC[0]     ; PC[2]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.697      ;
+; -0.530 ; PC[3]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.568      ;
+; -0.527 ; PC[3]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.565      ;
+; -0.514 ; PC[6]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.552      ;
+; -0.513 ; PC[6]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.551      ;
+; -0.473 ; PC[0]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.511      ;
+; -0.409 ; PC[0]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.447      ;
+; -0.377 ; PC[4]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.415      ;
+; -0.374 ; PC[4]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.412      ;
+; -0.275 ; PC[5]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.313      ;
+; -0.274 ; PC[3]     ; PC[3]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.312      ;
+; -0.273 ; PC[1]     ; PC[1]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.311      ;
+; -0.236 ; PC[4]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.274      ;
+; -0.232 ; PC[6]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.270      ;
+; -0.232 ; PC[2]     ; PC[2]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.270      ;
+; -0.227 ; PC[0]     ; PC[1]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.265      ;
+; 0.116  ; PC[7]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.922      ;
+; 0.307  ; PC[0]     ; PC[0]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.731      ;
++--------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
-----------------------------
-; Fast Model Setup Summary ;
-----------------------------
-No paths to report.
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Hold: 'clk'                                                                                                            ;
++-------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node ; To Node                                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.445 ; PC[0]     ; PC[0]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.731      ;
+; 0.636 ; PC[7]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.922      ;
+; 0.979 ; PC[0]     ; PC[1]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.265      ;
+; 0.984 ; PC[2]     ; PC[2]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.270      ;
+; 0.984 ; PC[6]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.270      ;
+; 0.988 ; PC[4]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.274      ;
+; 1.025 ; PC[1]     ; PC[1]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.311      ;
+; 1.026 ; PC[3]     ; PC[3]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.312      ;
+; 1.027 ; PC[5]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.313      ;
+; 1.126 ; PC[4]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.412      ;
+; 1.129 ; PC[4]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.415      ;
+; 1.161 ; PC[0]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.447      ;
+; 1.225 ; PC[0]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.511      ;
+; 1.265 ; PC[6]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.551      ;
+; 1.266 ; PC[6]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.552      ;
+; 1.279 ; PC[3]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.565      ;
+; 1.282 ; PC[3]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.568      ;
+; 1.411 ; PC[0]     ; PC[2]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.697      ;
+; 1.416 ; PC[6]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.702      ;
+; 1.416 ; PC[2]     ; PC[3]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.702      ;
+; 1.420 ; PC[4]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.706      ;
+; 1.422 ; PC[5]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.708      ;
+; 1.423 ; PC[5]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.709      ;
+; 1.456 ; PC[1]     ; PC[2]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.742      ;
+; 1.459 ; PC[3]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.745      ;
+; 1.460 ; PC[5]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.746      ;
+; 1.491 ; PC[0]     ; PC[3]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.777      ;
+; 1.496 ; PC[2]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.782      ;
+; 1.500 ; PC[4]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.786      ;
+; 1.536 ; PC[1]     ; PC[3]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.822      ;
+; 1.539 ; PC[3]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.825      ;
+; 1.540 ; PC[5]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.826      ;
+; 1.550 ; PC[7]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.836      ;
+; 1.551 ; PC[7]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.837      ;
+; 1.571 ; PC[0]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.857      ;
+; 1.576 ; PC[2]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.862      ;
+; 1.580 ; PC[4]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.866      ;
+; 1.616 ; PC[1]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.902      ;
+; 1.617 ; PC[1]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.903      ;
+; 1.619 ; PC[3]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.905      ;
+; 1.620 ; PC[1]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.906      ;
+; 1.637 ; PC[2]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.923      ;
+; 1.640 ; PC[2]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.926      ;
+; 1.651 ; PC[0]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.937      ;
+; 1.656 ; PC[2]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.942      ;
+; 1.696 ; PC[1]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.982      ;
+; 1.699 ; PC[3]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.985      ;
+; 1.731 ; PC[0]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.017      ;
+; 1.736 ; PC[2]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.022      ;
+; 1.776 ; PC[1]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.062      ;
+; 1.811 ; PC[0]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.097      ;
+; 1.856 ; PC[1]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.142      ;
++-------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
----------------------------
-; Fast Model Hold Summary ;
----------------------------
-No paths to report.
++--------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Minimum Pulse Width: 'clk'                                                                                    ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                  ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; -1.631 ; 1.000        ; 2.631          ; Port Rate        ; clk   ; Rise       ; clk                                     ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; PC[0]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; PC[0]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; PC[1]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; PC[1]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; PC[2]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; PC[2]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; PC[3]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; PC[3]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; PC[4]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; PC[4]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; PC[5]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; PC[5]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; PC[6]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; PC[6]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; PC[7]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; PC[7]                                   ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; instructionMemory:pmInstructionMem|q[0] ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; instructionMemory:pmInstructionMem|q[0] ;
+; -0.611 ; 0.500        ; 1.111          ; High Pulse Width ; clk   ; Rise       ; instructionMemory:pmInstructionMem|q[5] ;
+; -0.611 ; 0.500        ; 1.111          ; Low Pulse Width  ; clk   ; Rise       ; instructionMemory:pmInstructionMem|q[5] ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[0]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[0]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[1]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[1]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[2]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[2]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[3]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[3]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[4]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[4]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[5]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[5]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[6]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[6]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[7]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[7]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk|combout                             ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk|combout                             ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|inclk[0]                    ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|inclk[0]                    ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|outclk                      ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|outclk                      ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; pmInstructionMem|q[0]|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; pmInstructionMem|q[0]|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; pmInstructionMem|q[5]|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; pmInstructionMem|q[5]|clk               ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+
+
++------------------------------------------------------------------------------------------+
+; Clock to Output Times                                                                    ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; Data Port                    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; SalidaInmediato[*]           ; clk        ; 7.078 ; 7.078 ; Rise       ; clk             ;
+;  SalidaInmediato[0]          ; clk        ; 7.076 ; 7.076 ; Rise       ; clk             ;
+;  SalidaInmediato[5]          ; clk        ; 7.078 ; 7.078 ; Rise       ; clk             ;
+; SalidaInmediatoExtendido[*]  ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[0] ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[5] ; clk        ; 7.048 ; 7.048 ; Rise       ; clk             ;
+; SalidaPC[*]                  ; clk        ; 7.107 ; 7.107 ; Rise       ; clk             ;
+;  SalidaPC[0]                 ; clk        ; 7.080 ; 7.080 ; Rise       ; clk             ;
+;  SalidaPC[1]                 ; clk        ; 7.083 ; 7.083 ; Rise       ; clk             ;
+;  SalidaPC[2]                 ; clk        ; 6.714 ; 6.714 ; Rise       ; clk             ;
+;  SalidaPC[3]                 ; clk        ; 6.734 ; 6.734 ; Rise       ; clk             ;
+;  SalidaPC[4]                 ; clk        ; 7.107 ; 7.107 ; Rise       ; clk             ;
+;  SalidaPC[5]                 ; clk        ; 6.708 ; 6.708 ; Rise       ; clk             ;
+;  SalidaPC[6]                 ; clk        ; 6.734 ; 6.734 ; Rise       ; clk             ;
+;  SalidaPC[7]                 ; clk        ; 7.074 ; 7.074 ; Rise       ; clk             ;
+; SalidaROM[*]                 ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaROM[0]                ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaROM[5]                ; clk        ; 7.078 ; 7.078 ; Rise       ; clk             ;
++------------------------------+------------+-------+-------+------------+-----------------+
+
+
++------------------------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                                            ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; Data Port                    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; SalidaInmediato[*]           ; clk        ; 7.076 ; 7.076 ; Rise       ; clk             ;
+;  SalidaInmediato[0]          ; clk        ; 7.076 ; 7.076 ; Rise       ; clk             ;
+;  SalidaInmediato[5]          ; clk        ; 7.078 ; 7.078 ; Rise       ; clk             ;
+; SalidaInmediatoExtendido[*]  ; clk        ; 7.048 ; 7.048 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[0] ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[5] ; clk        ; 7.048 ; 7.048 ; Rise       ; clk             ;
+; SalidaPC[*]                  ; clk        ; 6.708 ; 6.708 ; Rise       ; clk             ;
+;  SalidaPC[0]                 ; clk        ; 7.080 ; 7.080 ; Rise       ; clk             ;
+;  SalidaPC[1]                 ; clk        ; 7.083 ; 7.083 ; Rise       ; clk             ;
+;  SalidaPC[2]                 ; clk        ; 6.714 ; 6.714 ; Rise       ; clk             ;
+;  SalidaPC[3]                 ; clk        ; 6.734 ; 6.734 ; Rise       ; clk             ;
+;  SalidaPC[4]                 ; clk        ; 7.107 ; 7.107 ; Rise       ; clk             ;
+;  SalidaPC[5]                 ; clk        ; 6.708 ; 6.708 ; Rise       ; clk             ;
+;  SalidaPC[6]                 ; clk        ; 6.734 ; 6.734 ; Rise       ; clk             ;
+;  SalidaPC[7]                 ; clk        ; 7.074 ; 7.074 ; Rise       ; clk             ;
+; SalidaROM[*]                 ; clk        ; 7.078 ; 7.078 ; Rise       ; clk             ;
+;  SalidaROM[0]                ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaROM[5]                ; clk        ; 7.078 ; 7.078 ; Rise       ; clk             ;
++------------------------------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------+
+; Fast Model Setup Summary      ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 0.190 ; 0.000         ;
++-------+-------+---------------+
+
+
++-------------------------------+
+; Fast Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 0.215 ; 0.000         ;
++-------+-------+---------------+
 
 
 -------------------------------
@@ -147,32 +401,324 @@ No paths to report.
 No paths to report.
 
 
-------------------------------------------
++----------------------------------------+
 ; Fast Model Minimum Pulse Width Summary ;
-------------------------------------------
-No paths to report.
++-------+--------+-----------------------+
+; Clock ; Slack  ; End Point TNS         ;
++-------+--------+-----------------------+
+; clk   ; -1.380 ; -11.380               ;
++-------+--------+-----------------------+
 
 
--------------------------------
-; Fast Model Datasheet Report ;
--------------------------------
-Nothing to report.
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Setup: 'clk'                                                                                                           ;
++-------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node ; To Node                                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.190 ; PC[1]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.842      ;
+; 0.203 ; PC[0]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.829      ;
+; 0.225 ; PC[1]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.807      ;
+; 0.238 ; PC[2]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.794      ;
+; 0.238 ; PC[0]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.794      ;
+; 0.246 ; PC[2]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.786      ;
+; 0.249 ; PC[2]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.783      ;
+; 0.257 ; PC[3]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.775      ;
+; 0.258 ; PC[1]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.774      ;
+; 0.260 ; PC[1]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.772      ;
+; 0.261 ; PC[1]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.771      ;
+; 0.263 ; PC[7]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.769      ;
+; 0.264 ; PC[7]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.768      ;
+; 0.273 ; PC[2]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.759      ;
+; 0.273 ; PC[0]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.759      ;
+; 0.292 ; PC[3]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.740      ;
+; 0.295 ; PC[1]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.737      ;
+; 0.306 ; PC[4]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.726      ;
+; 0.308 ; PC[2]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.724      ;
+; 0.308 ; PC[0]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.724      ;
+; 0.327 ; PC[5]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.705      ;
+; 0.327 ; PC[3]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.705      ;
+; 0.330 ; PC[1]     ; PC[3]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.702      ;
+; 0.330 ; PC[5]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.702      ;
+; 0.331 ; PC[5]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.701      ;
+; 0.341 ; PC[4]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.691      ;
+; 0.343 ; PC[2]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.689      ;
+; 0.343 ; PC[0]     ; PC[3]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.689      ;
+; 0.362 ; PC[5]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.670      ;
+; 0.362 ; PC[3]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.670      ;
+; 0.365 ; PC[1]     ; PC[2]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.667      ;
+; 0.376 ; PC[4]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.656      ;
+; 0.378 ; PC[6]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.654      ;
+; 0.378 ; PC[2]     ; PC[3]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.654      ;
+; 0.378 ; PC[0]     ; PC[2]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.654      ;
+; 0.386 ; PC[6]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.646      ;
+; 0.387 ; PC[6]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.645      ;
+; 0.400 ; PC[3]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.632      ;
+; 0.403 ; PC[3]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.629      ;
+; 0.415 ; PC[0]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.617      ;
+; 0.422 ; PC[0]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.610      ;
+; 0.453 ; PC[4]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.579      ;
+; 0.456 ; PC[4]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.576      ;
+; 0.502 ; PC[5]     ; PC[5]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.530      ;
+; 0.502 ; PC[3]     ; PC[3]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.530      ;
+; 0.505 ; PC[1]     ; PC[1]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.527      ;
+; 0.513 ; PC[0]     ; PC[1]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.519      ;
+; 0.514 ; PC[4]     ; PC[4]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.518      ;
+; 0.516 ; PC[6]     ; PC[6]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.516      ;
+; 0.516 ; PC[2]     ; PC[2]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.516      ;
+; 0.633 ; PC[7]     ; PC[7]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.399      ;
+; 0.665 ; PC[0]     ; PC[0]                                   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
++-------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
-+----------------------------------------------------------------------------+
-; Multicorner Timing Analysis Summary                                        ;
-+------------------+-------+------+----------+---------+---------------------+
-; Clock            ; Setup ; Hold ; Recovery ; Removal ; Minimum Pulse Width ;
-+------------------+-------+------+----------+---------+---------------------+
-; Worst-case Slack ; N/A   ; N/A  ; N/A      ; N/A     ; N/A                 ;
-; Design-wide TNS  ; 0.0   ; 0.0  ; 0.0      ; 0.0     ; 0.0                 ;
-+------------------+-------+------+----------+---------+---------------------+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Hold: 'clk'                                                                                                            ;
++-------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node ; To Node                                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.215 ; PC[0]     ; PC[0]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.247 ; PC[7]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.399      ;
+; 0.364 ; PC[2]     ; PC[2]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.516      ;
+; 0.364 ; PC[6]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.516      ;
+; 0.366 ; PC[4]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.518      ;
+; 0.367 ; PC[0]     ; PC[1]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.519      ;
+; 0.375 ; PC[1]     ; PC[1]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.527      ;
+; 0.378 ; PC[3]     ; PC[3]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.530      ;
+; 0.378 ; PC[5]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.530      ;
+; 0.424 ; PC[4]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.576      ;
+; 0.427 ; PC[4]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.579      ;
+; 0.458 ; PC[0]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.610      ;
+; 0.465 ; PC[0]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.617      ;
+; 0.477 ; PC[3]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.629      ;
+; 0.480 ; PC[3]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.632      ;
+; 0.493 ; PC[6]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.645      ;
+; 0.494 ; PC[6]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.646      ;
+; 0.502 ; PC[6]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.654      ;
+; 0.502 ; PC[0]     ; PC[2]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.654      ;
+; 0.502 ; PC[2]     ; PC[3]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.654      ;
+; 0.504 ; PC[4]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.656      ;
+; 0.515 ; PC[1]     ; PC[2]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.667      ;
+; 0.518 ; PC[5]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.670      ;
+; 0.518 ; PC[3]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.670      ;
+; 0.537 ; PC[0]     ; PC[3]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.689      ;
+; 0.537 ; PC[2]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.689      ;
+; 0.539 ; PC[4]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.691      ;
+; 0.549 ; PC[5]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.701      ;
+; 0.550 ; PC[5]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.702      ;
+; 0.550 ; PC[1]     ; PC[3]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.702      ;
+; 0.553 ; PC[5]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.705      ;
+; 0.553 ; PC[3]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.705      ;
+; 0.572 ; PC[0]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.724      ;
+; 0.572 ; PC[2]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.724      ;
+; 0.574 ; PC[4]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.726      ;
+; 0.585 ; PC[1]     ; PC[4]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.737      ;
+; 0.588 ; PC[3]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.740      ;
+; 0.607 ; PC[0]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.759      ;
+; 0.607 ; PC[2]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.759      ;
+; 0.616 ; PC[7]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.768      ;
+; 0.617 ; PC[7]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.769      ;
+; 0.619 ; PC[1]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.771      ;
+; 0.620 ; PC[1]     ; PC[5]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.772      ;
+; 0.622 ; PC[1]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.774      ;
+; 0.623 ; PC[3]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.775      ;
+; 0.631 ; PC[2]     ; instructionMemory:pmInstructionMem|q[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.783      ;
+; 0.634 ; PC[2]     ; instructionMemory:pmInstructionMem|q[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.786      ;
+; 0.642 ; PC[0]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.794      ;
+; 0.642 ; PC[2]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.794      ;
+; 0.655 ; PC[1]     ; PC[6]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.807      ;
+; 0.677 ; PC[0]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.829      ;
+; 0.690 ; PC[1]     ; PC[7]                                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.842      ;
++-------+-----------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
--------------------
-; Clock Transfers ;
--------------------
-Nothing to report.
++--------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Minimum Pulse Width: 'clk'                                                                                    ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                  ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clk   ; Rise       ; clk                                     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; PC[0]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[0]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; PC[1]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[1]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; PC[2]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[2]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; PC[3]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[3]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; PC[4]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[4]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; PC[5]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[5]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; PC[6]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[6]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; PC[7]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[7]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; instructionMemory:pmInstructionMem|q[0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; instructionMemory:pmInstructionMem|q[0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; instructionMemory:pmInstructionMem|q[5] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; instructionMemory:pmInstructionMem|q[5] ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[0]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[0]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[1]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[1]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[2]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[2]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[3]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[3]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[4]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[4]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[5]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[5]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[6]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[6]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; PC[7]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; PC[7]|clk                               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk|combout                             ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk|combout                             ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|inclk[0]                    ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|inclk[0]                    ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|outclk                      ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|outclk                      ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; pmInstructionMem|q[0]|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; pmInstructionMem|q[0]|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; pmInstructionMem|q[5]|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; pmInstructionMem|q[5]|clk               ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+
+
++------------------------------------------------------------------------------------------+
+; Clock to Output Times                                                                    ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; Data Port                    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; SalidaInmediato[*]           ; clk        ; 3.688 ; 3.688 ; Rise       ; clk             ;
+;  SalidaInmediato[0]          ; clk        ; 3.684 ; 3.684 ; Rise       ; clk             ;
+;  SalidaInmediato[5]          ; clk        ; 3.688 ; 3.688 ; Rise       ; clk             ;
+; SalidaInmediatoExtendido[*]  ; clk        ; 3.704 ; 3.704 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[0] ; clk        ; 3.704 ; 3.704 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[5] ; clk        ; 3.658 ; 3.658 ; Rise       ; clk             ;
+; SalidaPC[*]                  ; clk        ; 3.710 ; 3.710 ; Rise       ; clk             ;
+;  SalidaPC[0]                 ; clk        ; 3.681 ; 3.681 ; Rise       ; clk             ;
+;  SalidaPC[1]                 ; clk        ; 3.684 ; 3.684 ; Rise       ; clk             ;
+;  SalidaPC[2]                 ; clk        ; 3.526 ; 3.526 ; Rise       ; clk             ;
+;  SalidaPC[3]                 ; clk        ; 3.552 ; 3.552 ; Rise       ; clk             ;
+;  SalidaPC[4]                 ; clk        ; 3.710 ; 3.710 ; Rise       ; clk             ;
+;  SalidaPC[5]                 ; clk        ; 3.524 ; 3.524 ; Rise       ; clk             ;
+;  SalidaPC[6]                 ; clk        ; 3.552 ; 3.552 ; Rise       ; clk             ;
+;  SalidaPC[7]                 ; clk        ; 3.679 ; 3.679 ; Rise       ; clk             ;
+; SalidaROM[*]                 ; clk        ; 3.704 ; 3.704 ; Rise       ; clk             ;
+;  SalidaROM[0]                ; clk        ; 3.704 ; 3.704 ; Rise       ; clk             ;
+;  SalidaROM[5]                ; clk        ; 3.688 ; 3.688 ; Rise       ; clk             ;
++------------------------------+------------+-------+-------+------------+-----------------+
+
+
++------------------------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                                            ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; Data Port                    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; SalidaInmediato[*]           ; clk        ; 3.684 ; 3.684 ; Rise       ; clk             ;
+;  SalidaInmediato[0]          ; clk        ; 3.684 ; 3.684 ; Rise       ; clk             ;
+;  SalidaInmediato[5]          ; clk        ; 3.688 ; 3.688 ; Rise       ; clk             ;
+; SalidaInmediatoExtendido[*]  ; clk        ; 3.658 ; 3.658 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[0] ; clk        ; 3.704 ; 3.704 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[5] ; clk        ; 3.658 ; 3.658 ; Rise       ; clk             ;
+; SalidaPC[*]                  ; clk        ; 3.524 ; 3.524 ; Rise       ; clk             ;
+;  SalidaPC[0]                 ; clk        ; 3.681 ; 3.681 ; Rise       ; clk             ;
+;  SalidaPC[1]                 ; clk        ; 3.684 ; 3.684 ; Rise       ; clk             ;
+;  SalidaPC[2]                 ; clk        ; 3.526 ; 3.526 ; Rise       ; clk             ;
+;  SalidaPC[3]                 ; clk        ; 3.552 ; 3.552 ; Rise       ; clk             ;
+;  SalidaPC[4]                 ; clk        ; 3.710 ; 3.710 ; Rise       ; clk             ;
+;  SalidaPC[5]                 ; clk        ; 3.524 ; 3.524 ; Rise       ; clk             ;
+;  SalidaPC[6]                 ; clk        ; 3.552 ; 3.552 ; Rise       ; clk             ;
+;  SalidaPC[7]                 ; clk        ; 3.679 ; 3.679 ; Rise       ; clk             ;
+; SalidaROM[*]                 ; clk        ; 3.688 ; 3.688 ; Rise       ; clk             ;
+;  SalidaROM[0]                ; clk        ; 3.704 ; 3.704 ; Rise       ; clk             ;
+;  SalidaROM[5]                ; clk        ; 3.688 ; 3.688 ; Rise       ; clk             ;
++------------------------------+------------+-------+-------+------------+-----------------+
+
+
++------------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                          ;
++------------------+--------+-------+----------+---------+---------------------+
+; Clock            ; Setup  ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
++------------------+--------+-------+----------+---------+---------------------+
+; Worst-case Slack ; -1.104 ; 0.215 ; N/A      ; N/A     ; -1.631              ;
+;  clk             ; -1.104 ; 0.215 ; N/A      ; N/A     ; -1.631              ;
+; Design-wide TNS  ; -7.47  ; 0.0   ; 0.0      ; 0.0     ; -13.851             ;
+;  clk             ; -7.470 ; 0.000 ; N/A      ; N/A     ; -13.851             ;
++------------------+--------+-------+----------+---------+---------------------+
+
+
++------------------------------------------------------------------------------------------+
+; Clock to Output Times                                                                    ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; Data Port                    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; SalidaInmediato[*]           ; clk        ; 7.078 ; 7.078 ; Rise       ; clk             ;
+;  SalidaInmediato[0]          ; clk        ; 7.076 ; 7.076 ; Rise       ; clk             ;
+;  SalidaInmediato[5]          ; clk        ; 7.078 ; 7.078 ; Rise       ; clk             ;
+; SalidaInmediatoExtendido[*]  ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[0] ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[5] ; clk        ; 7.048 ; 7.048 ; Rise       ; clk             ;
+; SalidaPC[*]                  ; clk        ; 7.107 ; 7.107 ; Rise       ; clk             ;
+;  SalidaPC[0]                 ; clk        ; 7.080 ; 7.080 ; Rise       ; clk             ;
+;  SalidaPC[1]                 ; clk        ; 7.083 ; 7.083 ; Rise       ; clk             ;
+;  SalidaPC[2]                 ; clk        ; 6.714 ; 6.714 ; Rise       ; clk             ;
+;  SalidaPC[3]                 ; clk        ; 6.734 ; 6.734 ; Rise       ; clk             ;
+;  SalidaPC[4]                 ; clk        ; 7.107 ; 7.107 ; Rise       ; clk             ;
+;  SalidaPC[5]                 ; clk        ; 6.708 ; 6.708 ; Rise       ; clk             ;
+;  SalidaPC[6]                 ; clk        ; 6.734 ; 6.734 ; Rise       ; clk             ;
+;  SalidaPC[7]                 ; clk        ; 7.074 ; 7.074 ; Rise       ; clk             ;
+; SalidaROM[*]                 ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaROM[0]                ; clk        ; 7.096 ; 7.096 ; Rise       ; clk             ;
+;  SalidaROM[5]                ; clk        ; 7.078 ; 7.078 ; Rise       ; clk             ;
++------------------------------+------------+-------+-------+------------+-----------------+
+
+
++------------------------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                                            ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; Data Port                    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++------------------------------+------------+-------+-------+------------+-----------------+
+; SalidaInmediato[*]           ; clk        ; 3.684 ; 3.684 ; Rise       ; clk             ;
+;  SalidaInmediato[0]          ; clk        ; 3.684 ; 3.684 ; Rise       ; clk             ;
+;  SalidaInmediato[5]          ; clk        ; 3.688 ; 3.688 ; Rise       ; clk             ;
+; SalidaInmediatoExtendido[*]  ; clk        ; 3.658 ; 3.658 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[0] ; clk        ; 3.704 ; 3.704 ; Rise       ; clk             ;
+;  SalidaInmediatoExtendido[5] ; clk        ; 3.658 ; 3.658 ; Rise       ; clk             ;
+; SalidaPC[*]                  ; clk        ; 3.524 ; 3.524 ; Rise       ; clk             ;
+;  SalidaPC[0]                 ; clk        ; 3.681 ; 3.681 ; Rise       ; clk             ;
+;  SalidaPC[1]                 ; clk        ; 3.684 ; 3.684 ; Rise       ; clk             ;
+;  SalidaPC[2]                 ; clk        ; 3.526 ; 3.526 ; Rise       ; clk             ;
+;  SalidaPC[3]                 ; clk        ; 3.552 ; 3.552 ; Rise       ; clk             ;
+;  SalidaPC[4]                 ; clk        ; 3.710 ; 3.710 ; Rise       ; clk             ;
+;  SalidaPC[5]                 ; clk        ; 3.524 ; 3.524 ; Rise       ; clk             ;
+;  SalidaPC[6]                 ; clk        ; 3.552 ; 3.552 ; Rise       ; clk             ;
+;  SalidaPC[7]                 ; clk        ; 3.679 ; 3.679 ; Rise       ; clk             ;
+; SalidaROM[*]                 ; clk        ; 3.688 ; 3.688 ; Rise       ; clk             ;
+;  SalidaROM[0]                ; clk        ; 3.704 ; 3.704 ; Rise       ; clk             ;
+;  SalidaROM[5]                ; clk        ; 3.688 ; 3.688 ; Rise       ; clk             ;
++------------------------------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 52       ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 52       ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
 
 ---------------
@@ -196,8 +742,8 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 ; Unconstrained Clocks            ; 0     ; 0    ;
 ; Unconstrained Input Ports       ; 0     ; 0    ;
 ; Unconstrained Input Port Paths  ; 0     ; 0    ;
-; Unconstrained Output Ports      ; 0     ; 0    ;
-; Unconstrained Output Port Paths ; 0     ; 0    ;
+; Unconstrained Output Ports      ; 14    ; 14   ;
+; Unconstrained Output Port Paths ; 14    ; 14   ;
 +---------------------------------+-------+------+
 
 
@@ -207,7 +753,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Apr 03 17:03:49 2018
+    Info: Processing started: Fri May 11 15:13:57 2018
 Info: Command: quartus_sta LabArquiII -c LabArquiII
 Info: qsta_default_script.tcl version: #1
 Warning (20028): Parallel compilation is not licensed and has been disabled
@@ -215,34 +761,49 @@ Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'LabArquiII.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
-Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
-Warning (332068): No clocks defined in design.
+Info (332105): Deriving Clocks
+    Info (332105): create_clock -period 1.000 -name clk clk
 Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
-Info (332159): No clocks to report
 Info: Analyzing Slow Model
-Info (332140): No fmax paths to report
-Info (332140): No Setup paths to report
-Info (332140): No Hold paths to report
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -1.104
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -1.104        -7.470 clk 
+Info (332146): Worst-case hold slack is 0.445
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.445         0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332140): No Minimum Pulse Width paths to report
+Info (332146): Worst-case minimum pulse width slack is -1.631
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -1.631       -13.851 clk 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info: Analyzing Fast Model
-Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
-Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
-Warning (332068): No clocks defined in design.
-Info (332140): No Setup paths to report
-Info (332140): No Hold paths to report
+Info (332146): Worst-case setup slack is 0.190
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.190         0.000 clk 
+Info (332146): Worst-case hold slack is 0.215
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.215         0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332140): No Minimum Pulse Width paths to report
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case minimum pulse width slack is -1.380
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -1.380       -11.380 clk 
 Info (332001): The selected device family is not supported by the report_metastability command.
-Info (332101): Design is fully constrained for setup requirements
-Info (332101): Design is fully constrained for hold requirements
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 468 megabytes
-    Info: Processing ended: Tue Apr 03 17:03:52 2018
-    Info: Elapsed time: 00:00:03
+    Info: Peak virtual memory: 395 megabytes
+    Info: Processing ended: Fri May 11 15:13:59 2018
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 

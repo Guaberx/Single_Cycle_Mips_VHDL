@@ -16,15 +16,15 @@ entity monociclo is
 	(
 		-- Input ports
 		clk	: in  std_logic;
-		SalidaALU : out signed((dataWidth-1) downto 0);
+		SalidaALU : out std_logic_vector((dataWidth-1) downto 0);
 		SalidaROM : out std_logic_vector((dataWidth-1) downto 0);
-		SalidaRAM : out signed((dataWidth-1) downto 0);
-		SalidaRF1 : out signed((dataWidth-1) downto 0);
-		SalidaRF2 : out signed((dataWidth-1) downto 0);
+		SalidaRAM : out std_logic_vector((dataWidth-1) downto 0);
+		SalidaRF1 : out std_logic_vector((dataWidth-1) downto 0);
+		SalidaRF2 : out std_logic_vector((dataWidth-1) downto 0);
 		SalidaPC : out natural range 0 to 2**ADDR_WIDTH - 1;
 		SalidaInmediato : out std_logic_vector(15 downto 0);
 		SalidaInmediatoExtendido : out std_logic_vector((dataWidth-1) downto 0);
-		SalidaMuxRFALU : out signed((dataWidth-1) downto 0)
+		SalidaMuxRFALU : out std_logic_vector((dataWidth-1) downto 0)
 		
 	);
 end monociclo;
@@ -37,11 +37,11 @@ architecture arquiMonociclo of monociclo is
 	signal PCAdder: natural range 0 to 2**ADDR_WIDTH - 1;
 	signal branchAdder: natural range 0 to 2**ADDR_WIDTH - 1;
 	
-	signal rData2: signed((dataWidth-1) downto 0);
+	signal rData2: std_logic_vector((dataWidth-1) downto 0);
 	
-	signal ALUInA: signed((dataWidth-1) downto 0);
-	signal ALUInB: signed((dataWidth-1) downto 0);
-	signal ALUresult: signed((dataWidth-1) downto 0);
+	signal ALUInA: std_logic_vector((dataWidth-1) downto 0);
+	signal ALUInB: std_logic_vector((dataWidth-1) downto 0);
+	signal ALUresult: std_logic_vector((dataWidth-1) downto 0);
 	signal ALUflag: std_logic_vector(1 downto 0);--ZERO
 	signal ALUControlOutput: std_logic_vector(1 downto 0);
 	
@@ -61,8 +61,8 @@ architecture arquiMonociclo of monociclo is
 	signal ALUSrc : std_logic_vector(0 downto 0);
 	signal RegWrite : std_logic;
 		
-	signal dataMemOut : signed((dataWidth-1) downto 0);
-	signal resultMux : signed((dataWidth-1) downto 0);
+	signal dataMemOut : std_logic_vector((dataWidth-1) downto 0);
+	signal resultMux : std_logic_vector((dataWidth-1) downto 0);
 	
 	signal pcSrcMuxResult : natural range 0 to 2**ADDR_WIDTH - 1;--Maximo 256 instrucciones
 	signal branchMuxResult	 : std_logic_vector((dataWidth-1) downto 0);--Maximo 256 instrucciones
@@ -216,7 +216,7 @@ begin
 	
 	with ALUSrc select ALUInB <=
 		rData2 when "0",
-		signed(inm_extended) when "1";
+		inm_extended when "1";
 	
 	--Sign Extended
 	pmSignExtendI: work.sign_extend

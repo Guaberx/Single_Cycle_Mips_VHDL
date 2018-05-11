@@ -1,15 +1,15 @@
-Fitter Status : Successful - Tue Apr 03 17:03:43 2018
+Fitter Status : Successful - Fri May 11 15:13:48 2018
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : LabArquiII
 Top-level Entity Name : monociclo
 Family : Cyclone II
 Device : EP2C70F672C7
 Timing Models : Final
-Total logic elements : 0 / 68,416 ( 0 % )
-    Total combinational functions : 0 / 68,416 ( 0 % )
-    Dedicated logic registers : 0 / 68,416 ( 0 % )
-Total registers : 0
-Total pins : 1 / 422 ( < 1 % )
+Total logic elements : 12 / 68,416 ( < 1 % )
+    Total combinational functions : 12 / 68,416 ( < 1 % )
+    Dedicated logic registers : 10 / 68,416 ( < 1 % )
+Total registers : 10
+Total pins : 249 / 422 ( 59 % )
 Total virtual pins : 0
 Total memory bits : 0 / 1,152,000 ( 0 % )
 Embedded Multiplier 9-bit elements : 0 / 300 ( 0 % )

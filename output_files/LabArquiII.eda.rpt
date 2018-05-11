@@ -1,5 +1,5 @@
 EDA Netlist Writer report for LabArquiII
-Mon Apr 30 13:47:06 2018
+Fri May 11 15:14:01 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Mon Apr 30 13:47:06 2018 ;
+; EDA Netlist Writer Status ; Successful - Fri May 11 15:14:01 2018 ;
 ; Revision Name             ; LabArquiII                            ;
 ; Top-level Entity Name     ; monociclo                             ;
 ; Family                    ; Cyclone II                            ;
@@ -65,13 +65,13 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+---------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                                                 ;
-+----------------------------------------------------------------------------------------------------------------------------+
-; Generated Files                                                                                                            ;
-+----------------------------------------------------------------------------------------------------------------------------+
-; C:/Users/Gandalf the White/Dropbox/Javeriana/VI Semestre/Arqui II/Single_Cycle_Mips_VHDL/simulation/modelsim/LabArquiII.vo ;
-+----------------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                  ;
++---------------------------------------------------------------------------------------------+
+; Generated Files                                                                             ;
++---------------------------------------------------------------------------------------------+
+; C:/Users/jfotoya.JAVERIANA/Desktop/Single_Cycle_Mips_VHDL/simulation/modelsim/LabArquiII.vo ;
++---------------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -80,14 +80,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit EDA Netlist Writer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Apr 30 13:47:04 2018
-Info: Command: quartus_eda --functional=on --simulation=on --tool=modelsim_oem --format=verilog LabArquiII -c LabArquiII
-Info (119006): Selected device EP2C70F672C7 for design "LabArquiII"
-Info (204019): Generated file LabArquiII.vo in folder "C:/Users/Gandalf the White/Dropbox/Javeriana/VI Semestre/Arqui II/Single_Cycle_Mips_VHDL/simulation/modelsim/" for EDA simulation tool
+    Info: Processing started: Fri May 11 15:14:00 2018
+Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off LabArquiII -c LabArquiII
+Info (204019): Generated file LabArquiII.vo in folder "C:/Users/jfotoya.JAVERIANA/Desktop/Single_Cycle_Mips_VHDL/simulation/modelsim/" for EDA simulation tool
 Info: Quartus II 64-Bit EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 456 megabytes
-    Info: Processing ended: Mon Apr 30 13:47:07 2018
-    Info: Elapsed time: 00:00:03
+    Info: Peak virtual memory: 390 megabytes
+    Info: Processing ended: Fri May 11 15:14:01 2018
+    Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
 
