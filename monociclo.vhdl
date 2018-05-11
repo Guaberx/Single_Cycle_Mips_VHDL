@@ -216,7 +216,7 @@ begin
 	
 	with ALUSrc select ALUInB <=
 		rData2 when "0",
-		rData2 when "1";
+		signed(inm_extended) when "1";
 	
 	--Sign Extended
 	pmSignExtendI: work.sign_extend

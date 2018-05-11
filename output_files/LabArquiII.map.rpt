@@ -1,5 +1,5 @@
 Analysis & Synthesis report for LabArquiII
-Fri Apr 27 18:30:43 2018
+Mon Apr 30 13:46:28 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -14,25 +14,23 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Registers Removed During Synthesis
-  9. Removed Registers Triggering Further Register Optimizations
- 10. General Register Statistics
- 11. Parameter Settings for User Entity Instance: Top-level Entity: |monociclo
- 12. Parameter Settings for User Entity Instance: controlUnity:pmControlUnity
- 13. Parameter Settings for User Entity Instance: myMux:MUX_Branch
- 14. Parameter Settings for User Entity Instance: myMux:MUX_PCSrc
- 15. Parameter Settings for User Entity Instance: instructionMemory:pmInstructionMem
- 16. Parameter Settings for User Entity Instance: myMux:MUX_RD_RT_to_RF_writeregister
- 17. Parameter Settings for User Entity Instance: RF:pmRF
- 18. Parameter Settings for User Entity Instance: ALUControl:pmALUControl
- 19. Parameter Settings for User Entity Instance: alu:pmALU
- 20. Parameter Settings for User Entity Instance: dataMemory:pmDataMemory
- 21. Parameter Settings for User Entity Instance: myMux:MUX_readData_ALUresult_to_writeData
- 22. Port Connectivity Checks: "alu:pmALU"
- 23. Port Connectivity Checks: "myMux:MUX_PCSrc"
- 24. Port Connectivity Checks: "myMux:MUX_Branch"
- 25. Port Connectivity Checks: "controlUnity:pmControlUnity"
- 26. Elapsed Time Per Partition
- 27. Analysis & Synthesis Messages
+  9. General Register Statistics
+ 10. Parameter Settings for User Entity Instance: Top-level Entity: |monociclo
+ 11. Parameter Settings for User Entity Instance: controlUnity:pmControlUnity
+ 12. Parameter Settings for User Entity Instance: myMux:MUX_Branch
+ 13. Parameter Settings for User Entity Instance: myMux:MUX_PCSrc
+ 14. Parameter Settings for User Entity Instance: instructionMemory:pmInstructionMem
+ 15. Parameter Settings for User Entity Instance: myMux:MUX_RD_RT_to_RF_writeregister
+ 16. Parameter Settings for User Entity Instance: RF:pmRF
+ 17. Parameter Settings for User Entity Instance: ALUControl:pmALUControl
+ 18. Parameter Settings for User Entity Instance: alu:pmALU
+ 19. Parameter Settings for User Entity Instance: dataMemory:pmDataMemory
+ 20. Parameter Settings for User Entity Instance: myMux:MUX_readData_ALUresult_to_writeData
+ 21. Port Connectivity Checks: "alu:pmALU"
+ 22. Port Connectivity Checks: "myMux:MUX_PCSrc"
+ 23. Port Connectivity Checks: "myMux:MUX_Branch"
+ 24. Elapsed Time Per Partition
+ 25. Analysis & Synthesis Messages
 
 
 
@@ -58,7 +56,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Apr 27 18:30:43 2018           ;
+; Analysis & Synthesis Status        ; Successful - Mon Apr 30 13:46:28 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; LabArquiII                                      ;
 ; Top-level Entity Name              ; monociclo                                       ;
@@ -244,16 +242,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------------------------------------+-----------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                  ;
-+--------------------------------------+---------------------------+---------------------------------------------------------------------------+
-; Register name                        ; Reason for Removal        ; Registers Removed due to This Register                                    ;
-+--------------------------------------+---------------------------+---------------------------------------------------------------------------+
-; dataMemory:pmDataMemory|readData[20] ; Stuck at GND              ; dataMemory:pmDataMemory|readData[3], dataMemory:pmDataMemory|readData[2], ;
-;                                      ; due to stuck port data_in ; dataMemory:pmDataMemory|readData[1]                                       ;
-+--------------------------------------+---------------------------+---------------------------------------------------------------------------+
-
-
 +------------------------------------------------------+
 ; General Register Statistics                          ;
 +----------------------------------------------+-------+
@@ -421,21 +409,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------------------+-------+----------+--------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "controlUnity:pmControlUnity"                                                             ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-; Port      ; Type   ; Severity ; Details                                                                             ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-; outalusrc ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-
-
 +-------------------------------+
 ; Elapsed Time Per Partition    ;
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:02     ;
 +----------------+--------------+
 
 
@@ -445,7 +424,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Fri Apr 27 18:30:39 2018
+    Info: Processing started: Mon Apr 30 13:46:18 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off LabArquiII -c LabArquiII
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file alu.vhdl
@@ -737,8 +716,8 @@ Info (21057): Implemented 261 device resources after synthesis - the final resou
     Info (21061): Implemented 12 logic cells
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 242 warnings
     Info: Peak virtual memory: 568 megabytes
-    Info: Processing ended: Fri Apr 27 18:30:43 2018
-    Info: Elapsed time: 00:00:04
+    Info: Processing ended: Mon Apr 30 13:46:28 2018
+    Info: Elapsed time: 00:00:10
     Info: Total CPU time (on all processors): 00:00:02
 
 
