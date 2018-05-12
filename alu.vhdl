@@ -10,7 +10,7 @@ entity alu is
 		inputA			:in std_logic_vector((dataWidth) -1 downto 0);
 		inputB			:in std_logic_vector((dataWidth) -1 downto 0);
 		output			:out std_logic_vector((dataWidth -1) downto 0);
-		flag				:out std_logic_vector(1 downto 0)
+		flag				:out std_logic
 	);
 	
 end entity;
@@ -25,7 +25,7 @@ begin
 			when "01" => output <= std_logic_vector(signed(inputA) - signed(inputB));
 			when "10" => output <= std_logic_vector(RESIZE(signed(inputA) * signed(inputB),dataWidth));
 			when "11" => output <= std_logic_vector(signed(inputA) / signed(inputB));
-			when others =>
+			when others => output <= inputA;
 			end case;
 		end process;
 end ALUARCHITECTURE;

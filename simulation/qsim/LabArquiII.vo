@@ -16,7 +16,7 @@
 // PROGRAM "Quartus II 64-Bit"
 // VERSION "Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition"
 
-// DATE "04/30/2018 13:47:05"
+// DATE "05/11/2018 19:29:24"
 
 // 
 // Device: Altera EP2C70F672C7 Package FBGA672
@@ -38,7 +38,10 @@ module monociclo (
 	SalidaPC,
 	SalidaInmediato,
 	SalidaInmediatoExtendido,
-	SalidaMuxRFALU);
+	SalidaMuxRFALU,
+	SalidaALUOP,
+	SalidaALUControl,
+	SalidaInstruction);
 input 	clk;
 output 	[31:0] SalidaALU;
 output 	[31:0] SalidaROM;
@@ -49,6 +52,9 @@ output 	[7:0] SalidaPC;
 output 	[15:0] SalidaInmediato;
 output 	[31:0] SalidaInmediatoExtendido;
 output 	[31:0] SalidaMuxRFALU;
+output 	[1:0] SalidaALUOP;
+output 	[1:0] SalidaALUControl;
+output 	[31:0] SalidaInstruction;
 
 wire gnd;
 wire vcc;
@@ -61,7 +67,6 @@ assign unknown = 1'bx;
 tri1 devclrn;
 tri1 devpor;
 tri1 devoe;
-wire \clk~combout ;
 wire \PC[1]~7_combout ;
 wire \PC[1]~8 ;
 wire \PC[2]~10 ;
@@ -72,52 +77,114 @@ wire \PC[5]~16 ;
 wire \PC[6]~17_combout ;
 wire \PC[6]~18 ;
 wire \PC[7]~19_combout ;
-wire \pmInstructionMem|Mux2~1_combout ;
+wire \pmInstructionMem|Mux1~3_combout ;
 wire \PC[0]~21_combout ;
-wire \pmInstructionMem|Mux2~2_combout ;
+wire \pmInstructionMem|Mux1~4_combout ;
+wire \ALUInB[0]~0_combout ;
+wire \pmALU|Add0~32_combout ;
+wire \ALUInB[1]~1_combout ;
+wire \pmALU|Add0~33 ;
+wire \pmALU|Add0~34_combout ;
+wire \ALUInB[2]~2_combout ;
+wire \pmALU|Add0~35 ;
+wire \pmALU|Add0~36_combout ;
+wire \ALUInB[3]~3_combout ;
+wire \pmALU|Add0~37 ;
+wire \pmALU|Add0~38_combout ;
+wire \ALUInB[4]~4_combout ;
+wire \pmALU|Add0~39 ;
+wire \pmALU|Add0~40_combout ;
+wire \ALUInB[5]~5_combout ;
+wire \pmALU|Add0~41 ;
+wire \pmALU|Add0~42_combout ;
+wire \ALUInB[6]~6_combout ;
+wire \pmALU|Add0~43 ;
+wire \pmALU|Add0~44_combout ;
+wire \ALUInB[7]~7_combout ;
+wire \pmALU|Add0~45 ;
+wire \pmALU|Add0~46_combout ;
+wire \ALUInB[8]~8_combout ;
+wire \pmALU|Add0~47 ;
+wire \pmALU|Add0~48_combout ;
+wire \ALUInB[9]~9_combout ;
+wire \pmALU|Add0~49 ;
+wire \pmALU|Add0~50_combout ;
+wire \ALUInB[10]~10_combout ;
+wire \pmALU|Add0~51 ;
+wire \pmALU|Add0~52_combout ;
+wire \ALUInB[11]~11_combout ;
+wire \pmALU|Add0~53 ;
+wire \pmALU|Add0~54_combout ;
+wire \ALUInB[12]~12_combout ;
+wire \pmALU|Add0~55 ;
+wire \pmALU|Add0~56_combout ;
+wire \ALUInB[13]~13_combout ;
+wire \pmALU|Add0~57 ;
+wire \pmALU|Add0~58_combout ;
+wire \ALUInB[14]~14_combout ;
+wire \pmALU|Add0~59 ;
+wire \pmALU|Add0~60_combout ;
+wire \ALUInB[15]~15_combout ;
+wire \pmALU|Add0~61 ;
+wire \pmALU|Add0~62_combout ;
+wire \ALUInB[16]~16_combout ;
+wire \pmALU|Add0~63 ;
+wire \pmALU|Add0~64_combout ;
+wire \ALUInB[17]~17_combout ;
+wire \pmALU|Add0~65 ;
+wire \pmALU|Add0~66_combout ;
+wire \ALUInB[18]~18_combout ;
+wire \pmALU|Add0~67 ;
+wire \pmALU|Add0~68_combout ;
+wire \ALUInB[19]~19_combout ;
+wire \pmALU|Add0~69 ;
+wire \pmALU|Add0~70_combout ;
+wire \ALUInB[20]~20_combout ;
+wire \pmALU|Add0~71 ;
+wire \pmALU|Add0~72_combout ;
+wire \ALUInB[21]~21_combout ;
+wire \pmALU|Add0~73 ;
+wire \pmALU|Add0~74_combout ;
+wire \ALUInB[22]~22_combout ;
+wire \pmALU|Add0~75 ;
+wire \pmALU|Add0~76_combout ;
+wire \ALUInB[23]~23_combout ;
+wire \pmALU|Add0~77 ;
+wire \pmALU|Add0~78_combout ;
+wire \ALUInB[24]~24_combout ;
+wire \pmALU|Add0~79 ;
+wire \pmALU|Add0~80_combout ;
+wire \ALUInB[25]~25_combout ;
+wire \pmALU|Add0~81 ;
+wire \pmALU|Add0~82_combout ;
+wire \ALUInB[26]~26_combout ;
+wire \pmALU|Add0~83 ;
+wire \pmALU|Add0~84_combout ;
+wire \ALUInB[27]~27_combout ;
+wire \pmALU|Add0~85 ;
+wire \pmALU|Add0~86_combout ;
+wire \ALUInB[28]~28_combout ;
+wire \pmALU|Add0~87 ;
+wire \pmALU|Add0~88_combout ;
+wire \ALUInB[29]~29_combout ;
+wire \pmALU|Add0~89 ;
+wire \pmALU|Add0~90_combout ;
+wire \ALUInB[30]~30_combout ;
+wire \pmALU|Add0~91 ;
+wire \pmALU|Add0~92_combout ;
+wire \ALUInB[31]~31_combout ;
+wire \pmALU|Add0~93 ;
+wire \pmALU|Add0~94_combout ;
+wire \clk~combout ;
 wire \PC[2]~9_combout ;
 wire \PC[3]~11_combout ;
 wire \PC[4]~13_combout ;
-wire \pmInstructionMem|Mux2~0_combout ;
-wire \pmInstructionMem|Mux1~0_combout ;
-wire [31:0] \pmInstructionMem|q ;
+wire \pmInstructionMem|Mux1~2_combout ;
+wire \pmInstructionMem|Mux3~0_combout ;
+wire \pmInstructionMem|Mux1~5_combout ;
 wire [7:0] PC;
+wire [31:0] \pmInstructionMem|q ;
 
-
-cycloneii_io \clk~I (
-	.datain(gnd),
-	.oe(gnd),
-	.outclk(gnd),
-	.outclkena(vcc),
-	.inclk(gnd),
-	.inclkena(vcc),
-	.areset(gnd),
-	.sreset(gnd),
-	.differentialin(gnd),
-	.linkin(gnd),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.devoe(devoe),
-	.combout(\clk~combout ),
-	.regout(),
-	.differentialout(),
-	.linkout(),
-	.padio(clk));
-// synopsys translate_off
-defparam \clk~I .input_async_reset = "none";
-defparam \clk~I .input_power_up = "low";
-defparam \clk~I .input_register_mode = "none";
-defparam \clk~I .input_sync_reset = "none";
-defparam \clk~I .oe_async_reset = "none";
-defparam \clk~I .oe_power_up = "low";
-defparam \clk~I .oe_register_mode = "none";
-defparam \clk~I .oe_sync_reset = "none";
-defparam \clk~I .operation_mode = "input";
-defparam \clk~I .output_async_reset = "none";
-defparam \clk~I .output_power_up = "low";
-defparam \clk~I .output_register_mode = "none";
-defparam \clk~I .output_sync_reset = "none";
-// synopsys translate_on
 
 cycloneii_lcell_comb \PC[1]~7 (
 // Equation(s):
@@ -285,20 +352,20 @@ cycloneii_lcell_ff \PC[7] (
 	.devpor(devpor),
 	.regout(PC[7]));
 
-cycloneii_lcell_comb \pmInstructionMem|Mux2~1 (
+cycloneii_lcell_comb \pmInstructionMem|Mux1~3 (
 // Equation(s):
-// \pmInstructionMem|Mux2~1_combout  = (!PC[5] & (!PC[6] & !PC[7]))
+// \pmInstructionMem|Mux1~3_combout  = (!PC[5] & (!PC[6] & !PC[7]))
 
 	.dataa(vcc),
 	.datab(PC[5]),
 	.datac(PC[6]),
 	.datad(PC[7]),
 	.cin(gnd),
-	.combout(\pmInstructionMem|Mux2~1_combout ),
+	.combout(\pmInstructionMem|Mux1~3_combout ),
 	.cout());
 // synopsys translate_off
-defparam \pmInstructionMem|Mux2~1 .lut_mask = 16'h0003;
-defparam \pmInstructionMem|Mux2~1 .sum_lutc_input = "datac";
+defparam \pmInstructionMem|Mux1~3 .lut_mask = 16'h0003;
+defparam \pmInstructionMem|Mux1~3 .sum_lutc_input = "datac";
 // synopsys translate_on
 
 cycloneii_lcell_comb \PC[0]~21 (
@@ -329,25 +396,25 @@ cycloneii_lcell_ff \PC[0] (
 	.devpor(devpor),
 	.regout(PC[0]));
 
-cycloneii_lcell_comb \pmInstructionMem|Mux2~2 (
+cycloneii_lcell_comb \pmInstructionMem|Mux1~4 (
 // Equation(s):
-// \pmInstructionMem|Mux2~2_combout  = (\pmInstructionMem|Mux2~0_combout  & (\pmInstructionMem|Mux2~1_combout  & !PC[0]))
+// \pmInstructionMem|Mux1~4_combout  = (\pmInstructionMem|Mux1~2_combout  & (\pmInstructionMem|Mux1~3_combout  & !PC[0]))
 
-	.dataa(\pmInstructionMem|Mux2~0_combout ),
-	.datab(\pmInstructionMem|Mux2~1_combout ),
+	.dataa(\pmInstructionMem|Mux1~2_combout ),
+	.datab(\pmInstructionMem|Mux1~3_combout ),
 	.datac(vcc),
 	.datad(PC[0]),
 	.cin(gnd),
-	.combout(\pmInstructionMem|Mux2~2_combout ),
+	.combout(\pmInstructionMem|Mux1~4_combout ),
 	.cout());
 // synopsys translate_off
-defparam \pmInstructionMem|Mux2~2 .lut_mask = 16'h0088;
-defparam \pmInstructionMem|Mux2~2 .sum_lutc_input = "datac";
+defparam \pmInstructionMem|Mux1~4 .lut_mask = 16'h0088;
+defparam \pmInstructionMem|Mux1~4 .sum_lutc_input = "datac";
 // synopsys translate_on
 
 cycloneii_lcell_ff \pmInstructionMem|q[0] (
 	.clk(\clk~combout ),
-	.datain(\pmInstructionMem|Mux2~2_combout ),
+	.datain(\pmInstructionMem|Mux1~4_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
 	.sclr(gnd),
@@ -356,6 +423,1111 @@ cycloneii_lcell_ff \pmInstructionMem|q[0] (
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\pmInstructionMem|q [0]));
+
+cycloneii_lcell_comb \ALUInB[0]~0 (
+// Equation(s):
+// \ALUInB[0]~0_combout  = (\pmALU|Add0~32_combout ) # (\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~32_combout ),
+	.datab(\pmInstructionMem|q [0]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\ALUInB[0]~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[0]~0 .lut_mask = 16'hEEEE;
+defparam \ALUInB[0]~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~32 (
+// Equation(s):
+// \pmALU|Add0~32_combout  = (\ALUInB[0]~0_combout  & (\pmALU|Add0~32_combout  $ (VCC))) # (!\ALUInB[0]~0_combout  & (\pmALU|Add0~32_combout  & VCC))
+// \pmALU|Add0~33  = CARRY((\ALUInB[0]~0_combout  & \pmALU|Add0~32_combout ))
+
+	.dataa(\ALUInB[0]~0_combout ),
+	.datab(\pmALU|Add0~32_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\pmALU|Add0~32_combout ),
+	.cout(\pmALU|Add0~33 ));
+// synopsys translate_off
+defparam \pmALU|Add0~32 .lut_mask = 16'h6688;
+defparam \pmALU|Add0~32 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[1]~1 (
+// Equation(s):
+// \ALUInB[1]~1_combout  = (\pmALU|Add0~34_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~34_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[1]~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[1]~1 .lut_mask = 16'h00AA;
+defparam \ALUInB[1]~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~34 (
+// Equation(s):
+// \pmALU|Add0~34_combout  = (\ALUInB[1]~1_combout  & ((\pmALU|Add0~34_combout  & (\pmALU|Add0~33  & VCC)) # (!\pmALU|Add0~34_combout  & (!\pmALU|Add0~33 )))) # (!\ALUInB[1]~1_combout  & ((\pmALU|Add0~34_combout  & (!\pmALU|Add0~33 )) # 
+// (!\pmALU|Add0~34_combout  & ((\pmALU|Add0~33 ) # (GND)))))
+// \pmALU|Add0~35  = CARRY((\ALUInB[1]~1_combout  & (!\pmALU|Add0~34_combout  & !\pmALU|Add0~33 )) # (!\ALUInB[1]~1_combout  & ((!\pmALU|Add0~33 ) # (!\pmALU|Add0~34_combout ))))
+
+	.dataa(\ALUInB[1]~1_combout ),
+	.datab(\pmALU|Add0~34_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~33 ),
+	.combout(\pmALU|Add0~34_combout ),
+	.cout(\pmALU|Add0~35 ));
+// synopsys translate_off
+defparam \pmALU|Add0~34 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~34 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[2]~2 (
+// Equation(s):
+// \ALUInB[2]~2_combout  = (\pmALU|Add0~36_combout ) # (\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~36_combout ),
+	.datab(\pmInstructionMem|q [0]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\ALUInB[2]~2_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[2]~2 .lut_mask = 16'hEEEE;
+defparam \ALUInB[2]~2 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~36 (
+// Equation(s):
+// \pmALU|Add0~36_combout  = ((\ALUInB[2]~2_combout  $ (\pmALU|Add0~36_combout  $ (!\pmALU|Add0~35 )))) # (GND)
+// \pmALU|Add0~37  = CARRY((\ALUInB[2]~2_combout  & ((\pmALU|Add0~36_combout ) # (!\pmALU|Add0~35 ))) # (!\ALUInB[2]~2_combout  & (\pmALU|Add0~36_combout  & !\pmALU|Add0~35 )))
+
+	.dataa(\ALUInB[2]~2_combout ),
+	.datab(\pmALU|Add0~36_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~35 ),
+	.combout(\pmALU|Add0~36_combout ),
+	.cout(\pmALU|Add0~37 ));
+// synopsys translate_off
+defparam \pmALU|Add0~36 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~36 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[3]~3 (
+// Equation(s):
+// \ALUInB[3]~3_combout  = (\pmALU|Add0~38_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~38_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[3]~3_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[3]~3 .lut_mask = 16'h00AA;
+defparam \ALUInB[3]~3 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~38 (
+// Equation(s):
+// \pmALU|Add0~38_combout  = (\ALUInB[3]~3_combout  & ((\pmALU|Add0~38_combout  & (\pmALU|Add0~37  & VCC)) # (!\pmALU|Add0~38_combout  & (!\pmALU|Add0~37 )))) # (!\ALUInB[3]~3_combout  & ((\pmALU|Add0~38_combout  & (!\pmALU|Add0~37 )) # 
+// (!\pmALU|Add0~38_combout  & ((\pmALU|Add0~37 ) # (GND)))))
+// \pmALU|Add0~39  = CARRY((\ALUInB[3]~3_combout  & (!\pmALU|Add0~38_combout  & !\pmALU|Add0~37 )) # (!\ALUInB[3]~3_combout  & ((!\pmALU|Add0~37 ) # (!\pmALU|Add0~38_combout ))))
+
+	.dataa(\ALUInB[3]~3_combout ),
+	.datab(\pmALU|Add0~38_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~37 ),
+	.combout(\pmALU|Add0~38_combout ),
+	.cout(\pmALU|Add0~39 ));
+// synopsys translate_off
+defparam \pmALU|Add0~38 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~38 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[4]~4 (
+// Equation(s):
+// \ALUInB[4]~4_combout  = (\pmALU|Add0~40_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~40_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[4]~4_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[4]~4 .lut_mask = 16'h00AA;
+defparam \ALUInB[4]~4 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~40 (
+// Equation(s):
+// \pmALU|Add0~40_combout  = ((\ALUInB[4]~4_combout  $ (\pmALU|Add0~40_combout  $ (!\pmALU|Add0~39 )))) # (GND)
+// \pmALU|Add0~41  = CARRY((\ALUInB[4]~4_combout  & ((\pmALU|Add0~40_combout ) # (!\pmALU|Add0~39 ))) # (!\ALUInB[4]~4_combout  & (\pmALU|Add0~40_combout  & !\pmALU|Add0~39 )))
+
+	.dataa(\ALUInB[4]~4_combout ),
+	.datab(\pmALU|Add0~40_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~39 ),
+	.combout(\pmALU|Add0~40_combout ),
+	.cout(\pmALU|Add0~41 ));
+// synopsys translate_off
+defparam \pmALU|Add0~40 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~40 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[5]~5 (
+// Equation(s):
+// \ALUInB[5]~5_combout  = (\pmInstructionMem|q [0] & (\pmInstructionMem|q [5])) # (!\pmInstructionMem|q [0] & ((\pmALU|Add0~42_combout )))
+
+	.dataa(\pmInstructionMem|q [5]),
+	.datab(\pmALU|Add0~42_combout ),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[5]~5_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[5]~5 .lut_mask = 16'hAACC;
+defparam \ALUInB[5]~5 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~42 (
+// Equation(s):
+// \pmALU|Add0~42_combout  = (\pmALU|Add0~42_combout  & ((\ALUInB[5]~5_combout  & (\pmALU|Add0~41  & VCC)) # (!\ALUInB[5]~5_combout  & (!\pmALU|Add0~41 )))) # (!\pmALU|Add0~42_combout  & ((\ALUInB[5]~5_combout  & (!\pmALU|Add0~41 )) # (!\ALUInB[5]~5_combout  
+// & ((\pmALU|Add0~41 ) # (GND)))))
+// \pmALU|Add0~43  = CARRY((\pmALU|Add0~42_combout  & (!\ALUInB[5]~5_combout  & !\pmALU|Add0~41 )) # (!\pmALU|Add0~42_combout  & ((!\pmALU|Add0~41 ) # (!\ALUInB[5]~5_combout ))))
+
+	.dataa(\pmALU|Add0~42_combout ),
+	.datab(\ALUInB[5]~5_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~41 ),
+	.combout(\pmALU|Add0~42_combout ),
+	.cout(\pmALU|Add0~43 ));
+// synopsys translate_off
+defparam \pmALU|Add0~42 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~42 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[6]~6 (
+// Equation(s):
+// \ALUInB[6]~6_combout  = (\pmALU|Add0~44_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~44_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[6]~6_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[6]~6 .lut_mask = 16'h00AA;
+defparam \ALUInB[6]~6 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~44 (
+// Equation(s):
+// \pmALU|Add0~44_combout  = ((\ALUInB[6]~6_combout  $ (\pmALU|Add0~44_combout  $ (!\pmALU|Add0~43 )))) # (GND)
+// \pmALU|Add0~45  = CARRY((\ALUInB[6]~6_combout  & ((\pmALU|Add0~44_combout ) # (!\pmALU|Add0~43 ))) # (!\ALUInB[6]~6_combout  & (\pmALU|Add0~44_combout  & !\pmALU|Add0~43 )))
+
+	.dataa(\ALUInB[6]~6_combout ),
+	.datab(\pmALU|Add0~44_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~43 ),
+	.combout(\pmALU|Add0~44_combout ),
+	.cout(\pmALU|Add0~45 ));
+// synopsys translate_off
+defparam \pmALU|Add0~44 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~44 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[7]~7 (
+// Equation(s):
+// \ALUInB[7]~7_combout  = (\pmALU|Add0~46_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~46_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[7]~7_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[7]~7 .lut_mask = 16'h00AA;
+defparam \ALUInB[7]~7 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~46 (
+// Equation(s):
+// \pmALU|Add0~46_combout  = (\ALUInB[7]~7_combout  & ((\pmALU|Add0~46_combout  & (\pmALU|Add0~45  & VCC)) # (!\pmALU|Add0~46_combout  & (!\pmALU|Add0~45 )))) # (!\ALUInB[7]~7_combout  & ((\pmALU|Add0~46_combout  & (!\pmALU|Add0~45 )) # 
+// (!\pmALU|Add0~46_combout  & ((\pmALU|Add0~45 ) # (GND)))))
+// \pmALU|Add0~47  = CARRY((\ALUInB[7]~7_combout  & (!\pmALU|Add0~46_combout  & !\pmALU|Add0~45 )) # (!\ALUInB[7]~7_combout  & ((!\pmALU|Add0~45 ) # (!\pmALU|Add0~46_combout ))))
+
+	.dataa(\ALUInB[7]~7_combout ),
+	.datab(\pmALU|Add0~46_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~45 ),
+	.combout(\pmALU|Add0~46_combout ),
+	.cout(\pmALU|Add0~47 ));
+// synopsys translate_off
+defparam \pmALU|Add0~46 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~46 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[8]~8 (
+// Equation(s):
+// \ALUInB[8]~8_combout  = (\pmALU|Add0~48_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~48_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[8]~8_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[8]~8 .lut_mask = 16'h00AA;
+defparam \ALUInB[8]~8 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~48 (
+// Equation(s):
+// \pmALU|Add0~48_combout  = ((\ALUInB[8]~8_combout  $ (\pmALU|Add0~48_combout  $ (!\pmALU|Add0~47 )))) # (GND)
+// \pmALU|Add0~49  = CARRY((\ALUInB[8]~8_combout  & ((\pmALU|Add0~48_combout ) # (!\pmALU|Add0~47 ))) # (!\ALUInB[8]~8_combout  & (\pmALU|Add0~48_combout  & !\pmALU|Add0~47 )))
+
+	.dataa(\ALUInB[8]~8_combout ),
+	.datab(\pmALU|Add0~48_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~47 ),
+	.combout(\pmALU|Add0~48_combout ),
+	.cout(\pmALU|Add0~49 ));
+// synopsys translate_off
+defparam \pmALU|Add0~48 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~48 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[9]~9 (
+// Equation(s):
+// \ALUInB[9]~9_combout  = (\pmALU|Add0~50_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~50_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[9]~9_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[9]~9 .lut_mask = 16'h00AA;
+defparam \ALUInB[9]~9 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~50 (
+// Equation(s):
+// \pmALU|Add0~50_combout  = (\ALUInB[9]~9_combout  & ((\pmALU|Add0~50_combout  & (\pmALU|Add0~49  & VCC)) # (!\pmALU|Add0~50_combout  & (!\pmALU|Add0~49 )))) # (!\ALUInB[9]~9_combout  & ((\pmALU|Add0~50_combout  & (!\pmALU|Add0~49 )) # 
+// (!\pmALU|Add0~50_combout  & ((\pmALU|Add0~49 ) # (GND)))))
+// \pmALU|Add0~51  = CARRY((\ALUInB[9]~9_combout  & (!\pmALU|Add0~50_combout  & !\pmALU|Add0~49 )) # (!\ALUInB[9]~9_combout  & ((!\pmALU|Add0~49 ) # (!\pmALU|Add0~50_combout ))))
+
+	.dataa(\ALUInB[9]~9_combout ),
+	.datab(\pmALU|Add0~50_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~49 ),
+	.combout(\pmALU|Add0~50_combout ),
+	.cout(\pmALU|Add0~51 ));
+// synopsys translate_off
+defparam \pmALU|Add0~50 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~50 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[10]~10 (
+// Equation(s):
+// \ALUInB[10]~10_combout  = (\pmALU|Add0~52_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~52_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[10]~10_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[10]~10 .lut_mask = 16'h00AA;
+defparam \ALUInB[10]~10 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~52 (
+// Equation(s):
+// \pmALU|Add0~52_combout  = ((\ALUInB[10]~10_combout  $ (\pmALU|Add0~52_combout  $ (!\pmALU|Add0~51 )))) # (GND)
+// \pmALU|Add0~53  = CARRY((\ALUInB[10]~10_combout  & ((\pmALU|Add0~52_combout ) # (!\pmALU|Add0~51 ))) # (!\ALUInB[10]~10_combout  & (\pmALU|Add0~52_combout  & !\pmALU|Add0~51 )))
+
+	.dataa(\ALUInB[10]~10_combout ),
+	.datab(\pmALU|Add0~52_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~51 ),
+	.combout(\pmALU|Add0~52_combout ),
+	.cout(\pmALU|Add0~53 ));
+// synopsys translate_off
+defparam \pmALU|Add0~52 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~52 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[11]~11 (
+// Equation(s):
+// \ALUInB[11]~11_combout  = (\pmInstructionMem|q [0] & (\pmInstructionMem|q [5])) # (!\pmInstructionMem|q [0] & ((\pmALU|Add0~54_combout )))
+
+	.dataa(\pmInstructionMem|q [5]),
+	.datab(\pmALU|Add0~54_combout ),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[11]~11_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[11]~11 .lut_mask = 16'hAACC;
+defparam \ALUInB[11]~11 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~54 (
+// Equation(s):
+// \pmALU|Add0~54_combout  = (\pmALU|Add0~54_combout  & ((\ALUInB[11]~11_combout  & (\pmALU|Add0~53  & VCC)) # (!\ALUInB[11]~11_combout  & (!\pmALU|Add0~53 )))) # (!\pmALU|Add0~54_combout  & ((\ALUInB[11]~11_combout  & (!\pmALU|Add0~53 )) # 
+// (!\ALUInB[11]~11_combout  & ((\pmALU|Add0~53 ) # (GND)))))
+// \pmALU|Add0~55  = CARRY((\pmALU|Add0~54_combout  & (!\ALUInB[11]~11_combout  & !\pmALU|Add0~53 )) # (!\pmALU|Add0~54_combout  & ((!\pmALU|Add0~53 ) # (!\ALUInB[11]~11_combout ))))
+
+	.dataa(\pmALU|Add0~54_combout ),
+	.datab(\ALUInB[11]~11_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~53 ),
+	.combout(\pmALU|Add0~54_combout ),
+	.cout(\pmALU|Add0~55 ));
+// synopsys translate_off
+defparam \pmALU|Add0~54 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~54 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[12]~12 (
+// Equation(s):
+// \ALUInB[12]~12_combout  = (\pmALU|Add0~56_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~56_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[12]~12_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[12]~12 .lut_mask = 16'h00AA;
+defparam \ALUInB[12]~12 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~56 (
+// Equation(s):
+// \pmALU|Add0~56_combout  = ((\ALUInB[12]~12_combout  $ (\pmALU|Add0~56_combout  $ (!\pmALU|Add0~55 )))) # (GND)
+// \pmALU|Add0~57  = CARRY((\ALUInB[12]~12_combout  & ((\pmALU|Add0~56_combout ) # (!\pmALU|Add0~55 ))) # (!\ALUInB[12]~12_combout  & (\pmALU|Add0~56_combout  & !\pmALU|Add0~55 )))
+
+	.dataa(\ALUInB[12]~12_combout ),
+	.datab(\pmALU|Add0~56_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~55 ),
+	.combout(\pmALU|Add0~56_combout ),
+	.cout(\pmALU|Add0~57 ));
+// synopsys translate_off
+defparam \pmALU|Add0~56 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~56 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[13]~13 (
+// Equation(s):
+// \ALUInB[13]~13_combout  = (\pmALU|Add0~58_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~58_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[13]~13_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[13]~13 .lut_mask = 16'h00AA;
+defparam \ALUInB[13]~13 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~58 (
+// Equation(s):
+// \pmALU|Add0~58_combout  = (\ALUInB[13]~13_combout  & ((\pmALU|Add0~58_combout  & (\pmALU|Add0~57  & VCC)) # (!\pmALU|Add0~58_combout  & (!\pmALU|Add0~57 )))) # (!\ALUInB[13]~13_combout  & ((\pmALU|Add0~58_combout  & (!\pmALU|Add0~57 )) # 
+// (!\pmALU|Add0~58_combout  & ((\pmALU|Add0~57 ) # (GND)))))
+// \pmALU|Add0~59  = CARRY((\ALUInB[13]~13_combout  & (!\pmALU|Add0~58_combout  & !\pmALU|Add0~57 )) # (!\ALUInB[13]~13_combout  & ((!\pmALU|Add0~57 ) # (!\pmALU|Add0~58_combout ))))
+
+	.dataa(\ALUInB[13]~13_combout ),
+	.datab(\pmALU|Add0~58_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~57 ),
+	.combout(\pmALU|Add0~58_combout ),
+	.cout(\pmALU|Add0~59 ));
+// synopsys translate_off
+defparam \pmALU|Add0~58 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~58 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[14]~14 (
+// Equation(s):
+// \ALUInB[14]~14_combout  = (\pmInstructionMem|q [0] & (\pmInstructionMem|q [5])) # (!\pmInstructionMem|q [0] & ((\pmALU|Add0~60_combout )))
+
+	.dataa(\pmInstructionMem|q [5]),
+	.datab(\pmALU|Add0~60_combout ),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[14]~14_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[14]~14 .lut_mask = 16'hAACC;
+defparam \ALUInB[14]~14 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~60 (
+// Equation(s):
+// \pmALU|Add0~60_combout  = ((\pmALU|Add0~60_combout  $ (\ALUInB[14]~14_combout  $ (!\pmALU|Add0~59 )))) # (GND)
+// \pmALU|Add0~61  = CARRY((\pmALU|Add0~60_combout  & ((\ALUInB[14]~14_combout ) # (!\pmALU|Add0~59 ))) # (!\pmALU|Add0~60_combout  & (\ALUInB[14]~14_combout  & !\pmALU|Add0~59 )))
+
+	.dataa(\pmALU|Add0~60_combout ),
+	.datab(\ALUInB[14]~14_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~59 ),
+	.combout(\pmALU|Add0~60_combout ),
+	.cout(\pmALU|Add0~61 ));
+// synopsys translate_off
+defparam \pmALU|Add0~60 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~60 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[15]~15 (
+// Equation(s):
+// \ALUInB[15]~15_combout  = (\pmALU|Add0~62_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~62_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[15]~15_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[15]~15 .lut_mask = 16'h00AA;
+defparam \ALUInB[15]~15 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~62 (
+// Equation(s):
+// \pmALU|Add0~62_combout  = (\ALUInB[15]~15_combout  & ((\pmALU|Add0~62_combout  & (\pmALU|Add0~61  & VCC)) # (!\pmALU|Add0~62_combout  & (!\pmALU|Add0~61 )))) # (!\ALUInB[15]~15_combout  & ((\pmALU|Add0~62_combout  & (!\pmALU|Add0~61 )) # 
+// (!\pmALU|Add0~62_combout  & ((\pmALU|Add0~61 ) # (GND)))))
+// \pmALU|Add0~63  = CARRY((\ALUInB[15]~15_combout  & (!\pmALU|Add0~62_combout  & !\pmALU|Add0~61 )) # (!\ALUInB[15]~15_combout  & ((!\pmALU|Add0~61 ) # (!\pmALU|Add0~62_combout ))))
+
+	.dataa(\ALUInB[15]~15_combout ),
+	.datab(\pmALU|Add0~62_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~61 ),
+	.combout(\pmALU|Add0~62_combout ),
+	.cout(\pmALU|Add0~63 ));
+// synopsys translate_off
+defparam \pmALU|Add0~62 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~62 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[16]~16 (
+// Equation(s):
+// \ALUInB[16]~16_combout  = (\pmALU|Add0~64_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~64_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[16]~16_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[16]~16 .lut_mask = 16'h00AA;
+defparam \ALUInB[16]~16 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~64 (
+// Equation(s):
+// \pmALU|Add0~64_combout  = ((\ALUInB[16]~16_combout  $ (\pmALU|Add0~64_combout  $ (!\pmALU|Add0~63 )))) # (GND)
+// \pmALU|Add0~65  = CARRY((\ALUInB[16]~16_combout  & ((\pmALU|Add0~64_combout ) # (!\pmALU|Add0~63 ))) # (!\ALUInB[16]~16_combout  & (\pmALU|Add0~64_combout  & !\pmALU|Add0~63 )))
+
+	.dataa(\ALUInB[16]~16_combout ),
+	.datab(\pmALU|Add0~64_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~63 ),
+	.combout(\pmALU|Add0~64_combout ),
+	.cout(\pmALU|Add0~65 ));
+// synopsys translate_off
+defparam \pmALU|Add0~64 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~64 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[17]~17 (
+// Equation(s):
+// \ALUInB[17]~17_combout  = (\pmALU|Add0~66_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~66_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[17]~17_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[17]~17 .lut_mask = 16'h00AA;
+defparam \ALUInB[17]~17 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~66 (
+// Equation(s):
+// \pmALU|Add0~66_combout  = (\ALUInB[17]~17_combout  & ((\pmALU|Add0~66_combout  & (\pmALU|Add0~65  & VCC)) # (!\pmALU|Add0~66_combout  & (!\pmALU|Add0~65 )))) # (!\ALUInB[17]~17_combout  & ((\pmALU|Add0~66_combout  & (!\pmALU|Add0~65 )) # 
+// (!\pmALU|Add0~66_combout  & ((\pmALU|Add0~65 ) # (GND)))))
+// \pmALU|Add0~67  = CARRY((\ALUInB[17]~17_combout  & (!\pmALU|Add0~66_combout  & !\pmALU|Add0~65 )) # (!\ALUInB[17]~17_combout  & ((!\pmALU|Add0~65 ) # (!\pmALU|Add0~66_combout ))))
+
+	.dataa(\ALUInB[17]~17_combout ),
+	.datab(\pmALU|Add0~66_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~65 ),
+	.combout(\pmALU|Add0~66_combout ),
+	.cout(\pmALU|Add0~67 ));
+// synopsys translate_off
+defparam \pmALU|Add0~66 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~66 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[18]~18 (
+// Equation(s):
+// \ALUInB[18]~18_combout  = (\pmALU|Add0~68_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~68_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[18]~18_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[18]~18 .lut_mask = 16'h00AA;
+defparam \ALUInB[18]~18 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~68 (
+// Equation(s):
+// \pmALU|Add0~68_combout  = ((\ALUInB[18]~18_combout  $ (\pmALU|Add0~68_combout  $ (!\pmALU|Add0~67 )))) # (GND)
+// \pmALU|Add0~69  = CARRY((\ALUInB[18]~18_combout  & ((\pmALU|Add0~68_combout ) # (!\pmALU|Add0~67 ))) # (!\ALUInB[18]~18_combout  & (\pmALU|Add0~68_combout  & !\pmALU|Add0~67 )))
+
+	.dataa(\ALUInB[18]~18_combout ),
+	.datab(\pmALU|Add0~68_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~67 ),
+	.combout(\pmALU|Add0~68_combout ),
+	.cout(\pmALU|Add0~69 ));
+// synopsys translate_off
+defparam \pmALU|Add0~68 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~68 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[19]~19 (
+// Equation(s):
+// \ALUInB[19]~19_combout  = (\pmALU|Add0~70_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~70_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[19]~19_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[19]~19 .lut_mask = 16'h00AA;
+defparam \ALUInB[19]~19 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~70 (
+// Equation(s):
+// \pmALU|Add0~70_combout  = (\ALUInB[19]~19_combout  & ((\pmALU|Add0~70_combout  & (\pmALU|Add0~69  & VCC)) # (!\pmALU|Add0~70_combout  & (!\pmALU|Add0~69 )))) # (!\ALUInB[19]~19_combout  & ((\pmALU|Add0~70_combout  & (!\pmALU|Add0~69 )) # 
+// (!\pmALU|Add0~70_combout  & ((\pmALU|Add0~69 ) # (GND)))))
+// \pmALU|Add0~71  = CARRY((\ALUInB[19]~19_combout  & (!\pmALU|Add0~70_combout  & !\pmALU|Add0~69 )) # (!\ALUInB[19]~19_combout  & ((!\pmALU|Add0~69 ) # (!\pmALU|Add0~70_combout ))))
+
+	.dataa(\ALUInB[19]~19_combout ),
+	.datab(\pmALU|Add0~70_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~69 ),
+	.combout(\pmALU|Add0~70_combout ),
+	.cout(\pmALU|Add0~71 ));
+// synopsys translate_off
+defparam \pmALU|Add0~70 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~70 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[20]~20 (
+// Equation(s):
+// \ALUInB[20]~20_combout  = (\pmALU|Add0~72_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~72_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[20]~20_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[20]~20 .lut_mask = 16'h00AA;
+defparam \ALUInB[20]~20 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~72 (
+// Equation(s):
+// \pmALU|Add0~72_combout  = ((\ALUInB[20]~20_combout  $ (\pmALU|Add0~72_combout  $ (!\pmALU|Add0~71 )))) # (GND)
+// \pmALU|Add0~73  = CARRY((\ALUInB[20]~20_combout  & ((\pmALU|Add0~72_combout ) # (!\pmALU|Add0~71 ))) # (!\ALUInB[20]~20_combout  & (\pmALU|Add0~72_combout  & !\pmALU|Add0~71 )))
+
+	.dataa(\ALUInB[20]~20_combout ),
+	.datab(\pmALU|Add0~72_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~71 ),
+	.combout(\pmALU|Add0~72_combout ),
+	.cout(\pmALU|Add0~73 ));
+// synopsys translate_off
+defparam \pmALU|Add0~72 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~72 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[21]~21 (
+// Equation(s):
+// \ALUInB[21]~21_combout  = (\pmALU|Add0~74_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~74_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[21]~21_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[21]~21 .lut_mask = 16'h00AA;
+defparam \ALUInB[21]~21 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~74 (
+// Equation(s):
+// \pmALU|Add0~74_combout  = (\ALUInB[21]~21_combout  & ((\pmALU|Add0~74_combout  & (\pmALU|Add0~73  & VCC)) # (!\pmALU|Add0~74_combout  & (!\pmALU|Add0~73 )))) # (!\ALUInB[21]~21_combout  & ((\pmALU|Add0~74_combout  & (!\pmALU|Add0~73 )) # 
+// (!\pmALU|Add0~74_combout  & ((\pmALU|Add0~73 ) # (GND)))))
+// \pmALU|Add0~75  = CARRY((\ALUInB[21]~21_combout  & (!\pmALU|Add0~74_combout  & !\pmALU|Add0~73 )) # (!\ALUInB[21]~21_combout  & ((!\pmALU|Add0~73 ) # (!\pmALU|Add0~74_combout ))))
+
+	.dataa(\ALUInB[21]~21_combout ),
+	.datab(\pmALU|Add0~74_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~73 ),
+	.combout(\pmALU|Add0~74_combout ),
+	.cout(\pmALU|Add0~75 ));
+// synopsys translate_off
+defparam \pmALU|Add0~74 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~74 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[22]~22 (
+// Equation(s):
+// \ALUInB[22]~22_combout  = (\pmALU|Add0~76_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~76_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[22]~22_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[22]~22 .lut_mask = 16'h00AA;
+defparam \ALUInB[22]~22 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~76 (
+// Equation(s):
+// \pmALU|Add0~76_combout  = ((\ALUInB[22]~22_combout  $ (\pmALU|Add0~76_combout  $ (!\pmALU|Add0~75 )))) # (GND)
+// \pmALU|Add0~77  = CARRY((\ALUInB[22]~22_combout  & ((\pmALU|Add0~76_combout ) # (!\pmALU|Add0~75 ))) # (!\ALUInB[22]~22_combout  & (\pmALU|Add0~76_combout  & !\pmALU|Add0~75 )))
+
+	.dataa(\ALUInB[22]~22_combout ),
+	.datab(\pmALU|Add0~76_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~75 ),
+	.combout(\pmALU|Add0~76_combout ),
+	.cout(\pmALU|Add0~77 ));
+// synopsys translate_off
+defparam \pmALU|Add0~76 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~76 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[23]~23 (
+// Equation(s):
+// \ALUInB[23]~23_combout  = (\pmALU|Add0~78_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~78_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[23]~23_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[23]~23 .lut_mask = 16'h00AA;
+defparam \ALUInB[23]~23 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~78 (
+// Equation(s):
+// \pmALU|Add0~78_combout  = (\ALUInB[23]~23_combout  & ((\pmALU|Add0~78_combout  & (\pmALU|Add0~77  & VCC)) # (!\pmALU|Add0~78_combout  & (!\pmALU|Add0~77 )))) # (!\ALUInB[23]~23_combout  & ((\pmALU|Add0~78_combout  & (!\pmALU|Add0~77 )) # 
+// (!\pmALU|Add0~78_combout  & ((\pmALU|Add0~77 ) # (GND)))))
+// \pmALU|Add0~79  = CARRY((\ALUInB[23]~23_combout  & (!\pmALU|Add0~78_combout  & !\pmALU|Add0~77 )) # (!\ALUInB[23]~23_combout  & ((!\pmALU|Add0~77 ) # (!\pmALU|Add0~78_combout ))))
+
+	.dataa(\ALUInB[23]~23_combout ),
+	.datab(\pmALU|Add0~78_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~77 ),
+	.combout(\pmALU|Add0~78_combout ),
+	.cout(\pmALU|Add0~79 ));
+// synopsys translate_off
+defparam \pmALU|Add0~78 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~78 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[24]~24 (
+// Equation(s):
+// \ALUInB[24]~24_combout  = (\pmALU|Add0~80_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~80_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[24]~24_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[24]~24 .lut_mask = 16'h00AA;
+defparam \ALUInB[24]~24 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~80 (
+// Equation(s):
+// \pmALU|Add0~80_combout  = ((\ALUInB[24]~24_combout  $ (\pmALU|Add0~80_combout  $ (!\pmALU|Add0~79 )))) # (GND)
+// \pmALU|Add0~81  = CARRY((\ALUInB[24]~24_combout  & ((\pmALU|Add0~80_combout ) # (!\pmALU|Add0~79 ))) # (!\ALUInB[24]~24_combout  & (\pmALU|Add0~80_combout  & !\pmALU|Add0~79 )))
+
+	.dataa(\ALUInB[24]~24_combout ),
+	.datab(\pmALU|Add0~80_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~79 ),
+	.combout(\pmALU|Add0~80_combout ),
+	.cout(\pmALU|Add0~81 ));
+// synopsys translate_off
+defparam \pmALU|Add0~80 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~80 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[25]~25 (
+// Equation(s):
+// \ALUInB[25]~25_combout  = (\pmALU|Add0~82_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~82_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[25]~25_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[25]~25 .lut_mask = 16'h00AA;
+defparam \ALUInB[25]~25 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~82 (
+// Equation(s):
+// \pmALU|Add0~82_combout  = (\ALUInB[25]~25_combout  & ((\pmALU|Add0~82_combout  & (\pmALU|Add0~81  & VCC)) # (!\pmALU|Add0~82_combout  & (!\pmALU|Add0~81 )))) # (!\ALUInB[25]~25_combout  & ((\pmALU|Add0~82_combout  & (!\pmALU|Add0~81 )) # 
+// (!\pmALU|Add0~82_combout  & ((\pmALU|Add0~81 ) # (GND)))))
+// \pmALU|Add0~83  = CARRY((\ALUInB[25]~25_combout  & (!\pmALU|Add0~82_combout  & !\pmALU|Add0~81 )) # (!\ALUInB[25]~25_combout  & ((!\pmALU|Add0~81 ) # (!\pmALU|Add0~82_combout ))))
+
+	.dataa(\ALUInB[25]~25_combout ),
+	.datab(\pmALU|Add0~82_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~81 ),
+	.combout(\pmALU|Add0~82_combout ),
+	.cout(\pmALU|Add0~83 ));
+// synopsys translate_off
+defparam \pmALU|Add0~82 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~82 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[26]~26 (
+// Equation(s):
+// \ALUInB[26]~26_combout  = (\pmALU|Add0~84_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~84_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[26]~26_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[26]~26 .lut_mask = 16'h00AA;
+defparam \ALUInB[26]~26 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~84 (
+// Equation(s):
+// \pmALU|Add0~84_combout  = ((\ALUInB[26]~26_combout  $ (\pmALU|Add0~84_combout  $ (!\pmALU|Add0~83 )))) # (GND)
+// \pmALU|Add0~85  = CARRY((\ALUInB[26]~26_combout  & ((\pmALU|Add0~84_combout ) # (!\pmALU|Add0~83 ))) # (!\ALUInB[26]~26_combout  & (\pmALU|Add0~84_combout  & !\pmALU|Add0~83 )))
+
+	.dataa(\ALUInB[26]~26_combout ),
+	.datab(\pmALU|Add0~84_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~83 ),
+	.combout(\pmALU|Add0~84_combout ),
+	.cout(\pmALU|Add0~85 ));
+// synopsys translate_off
+defparam \pmALU|Add0~84 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~84 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[27]~27 (
+// Equation(s):
+// \ALUInB[27]~27_combout  = (\pmALU|Add0~86_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~86_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[27]~27_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[27]~27 .lut_mask = 16'h00AA;
+defparam \ALUInB[27]~27 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~86 (
+// Equation(s):
+// \pmALU|Add0~86_combout  = (\ALUInB[27]~27_combout  & ((\pmALU|Add0~86_combout  & (\pmALU|Add0~85  & VCC)) # (!\pmALU|Add0~86_combout  & (!\pmALU|Add0~85 )))) # (!\ALUInB[27]~27_combout  & ((\pmALU|Add0~86_combout  & (!\pmALU|Add0~85 )) # 
+// (!\pmALU|Add0~86_combout  & ((\pmALU|Add0~85 ) # (GND)))))
+// \pmALU|Add0~87  = CARRY((\ALUInB[27]~27_combout  & (!\pmALU|Add0~86_combout  & !\pmALU|Add0~85 )) # (!\ALUInB[27]~27_combout  & ((!\pmALU|Add0~85 ) # (!\pmALU|Add0~86_combout ))))
+
+	.dataa(\ALUInB[27]~27_combout ),
+	.datab(\pmALU|Add0~86_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~85 ),
+	.combout(\pmALU|Add0~86_combout ),
+	.cout(\pmALU|Add0~87 ));
+// synopsys translate_off
+defparam \pmALU|Add0~86 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~86 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[28]~28 (
+// Equation(s):
+// \ALUInB[28]~28_combout  = (\pmALU|Add0~88_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~88_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[28]~28_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[28]~28 .lut_mask = 16'h00AA;
+defparam \ALUInB[28]~28 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~88 (
+// Equation(s):
+// \pmALU|Add0~88_combout  = ((\ALUInB[28]~28_combout  $ (\pmALU|Add0~88_combout  $ (!\pmALU|Add0~87 )))) # (GND)
+// \pmALU|Add0~89  = CARRY((\ALUInB[28]~28_combout  & ((\pmALU|Add0~88_combout ) # (!\pmALU|Add0~87 ))) # (!\ALUInB[28]~28_combout  & (\pmALU|Add0~88_combout  & !\pmALU|Add0~87 )))
+
+	.dataa(\ALUInB[28]~28_combout ),
+	.datab(\pmALU|Add0~88_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~87 ),
+	.combout(\pmALU|Add0~88_combout ),
+	.cout(\pmALU|Add0~89 ));
+// synopsys translate_off
+defparam \pmALU|Add0~88 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~88 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[29]~29 (
+// Equation(s):
+// \ALUInB[29]~29_combout  = (\pmALU|Add0~90_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~90_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[29]~29_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[29]~29 .lut_mask = 16'h00AA;
+defparam \ALUInB[29]~29 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~90 (
+// Equation(s):
+// \pmALU|Add0~90_combout  = (\ALUInB[29]~29_combout  & ((\pmALU|Add0~90_combout  & (\pmALU|Add0~89  & VCC)) # (!\pmALU|Add0~90_combout  & (!\pmALU|Add0~89 )))) # (!\ALUInB[29]~29_combout  & ((\pmALU|Add0~90_combout  & (!\pmALU|Add0~89 )) # 
+// (!\pmALU|Add0~90_combout  & ((\pmALU|Add0~89 ) # (GND)))))
+// \pmALU|Add0~91  = CARRY((\ALUInB[29]~29_combout  & (!\pmALU|Add0~90_combout  & !\pmALU|Add0~89 )) # (!\ALUInB[29]~29_combout  & ((!\pmALU|Add0~89 ) # (!\pmALU|Add0~90_combout ))))
+
+	.dataa(\ALUInB[29]~29_combout ),
+	.datab(\pmALU|Add0~90_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~89 ),
+	.combout(\pmALU|Add0~90_combout ),
+	.cout(\pmALU|Add0~91 ));
+// synopsys translate_off
+defparam \pmALU|Add0~90 .lut_mask = 16'h9617;
+defparam \pmALU|Add0~90 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[30]~30 (
+// Equation(s):
+// \ALUInB[30]~30_combout  = (\pmALU|Add0~92_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~92_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[30]~30_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[30]~30 .lut_mask = 16'h00AA;
+defparam \ALUInB[30]~30 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~92 (
+// Equation(s):
+// \pmALU|Add0~92_combout  = ((\ALUInB[30]~30_combout  $ (\pmALU|Add0~92_combout  $ (!\pmALU|Add0~91 )))) # (GND)
+// \pmALU|Add0~93  = CARRY((\ALUInB[30]~30_combout  & ((\pmALU|Add0~92_combout ) # (!\pmALU|Add0~91 ))) # (!\ALUInB[30]~30_combout  & (\pmALU|Add0~92_combout  & !\pmALU|Add0~91 )))
+
+	.dataa(\ALUInB[30]~30_combout ),
+	.datab(\pmALU|Add0~92_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~91 ),
+	.combout(\pmALU|Add0~92_combout ),
+	.cout(\pmALU|Add0~93 ));
+// synopsys translate_off
+defparam \pmALU|Add0~92 .lut_mask = 16'h698E;
+defparam \pmALU|Add0~92 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_lcell_comb \ALUInB[31]~31 (
+// Equation(s):
+// \ALUInB[31]~31_combout  = (\pmALU|Add0~94_combout  & !\pmInstructionMem|q [0])
+
+	.dataa(\pmALU|Add0~94_combout ),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\pmInstructionMem|q [0]),
+	.cin(gnd),
+	.combout(\ALUInB[31]~31_combout ),
+	.cout());
+// synopsys translate_off
+defparam \ALUInB[31]~31 .lut_mask = 16'h00AA;
+defparam \ALUInB[31]~31 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_comb \pmALU|Add0~94 (
+// Equation(s):
+// \pmALU|Add0~94_combout  = \ALUInB[31]~31_combout  $ (\pmALU|Add0~94_combout  $ (\pmALU|Add0~93 ))
+
+	.dataa(\ALUInB[31]~31_combout ),
+	.datab(\pmALU|Add0~94_combout ),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\pmALU|Add0~93 ),
+	.combout(\pmALU|Add0~94_combout ),
+	.cout());
+// synopsys translate_off
+defparam \pmALU|Add0~94 .lut_mask = 16'h9696;
+defparam \pmALU|Add0~94 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+cycloneii_io \clk~I (
+	.datain(gnd),
+	.oe(gnd),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(\clk~combout ),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(clk));
+// synopsys translate_off
+defparam \clk~I .input_async_reset = "none";
+defparam \clk~I .input_power_up = "low";
+defparam \clk~I .input_register_mode = "none";
+defparam \clk~I .input_sync_reset = "none";
+defparam \clk~I .oe_async_reset = "none";
+defparam \clk~I .oe_power_up = "low";
+defparam \clk~I .oe_register_mode = "none";
+defparam \clk~I .oe_sync_reset = "none";
+defparam \clk~I .operation_mode = "input";
+defparam \clk~I .output_async_reset = "none";
+defparam \clk~I .output_power_up = "low";
+defparam \clk~I .output_register_mode = "none";
+defparam \clk~I .output_sync_reset = "none";
+// synopsys translate_on
 
 cycloneii_lcell_ff \PC[2] (
 	.clk(\clk~combout ),
@@ -393,41 +1565,41 @@ cycloneii_lcell_ff \PC[4] (
 	.devpor(devpor),
 	.regout(PC[4]));
 
-cycloneii_lcell_comb \pmInstructionMem|Mux2~0 (
+cycloneii_lcell_comb \pmInstructionMem|Mux1~2 (
 // Equation(s):
-// \pmInstructionMem|Mux2~0_combout  = (!PC[1] & (!PC[2] & (!PC[3] & !PC[4])))
+// \pmInstructionMem|Mux1~2_combout  = (!PC[1] & (!PC[2] & (!PC[3] & !PC[4])))
 
 	.dataa(PC[1]),
 	.datab(PC[2]),
 	.datac(PC[3]),
 	.datad(PC[4]),
 	.cin(gnd),
-	.combout(\pmInstructionMem|Mux2~0_combout ),
+	.combout(\pmInstructionMem|Mux1~2_combout ),
 	.cout());
 // synopsys translate_off
-defparam \pmInstructionMem|Mux2~0 .lut_mask = 16'h0001;
-defparam \pmInstructionMem|Mux2~0 .sum_lutc_input = "datac";
+defparam \pmInstructionMem|Mux1~2 .lut_mask = 16'h0001;
+defparam \pmInstructionMem|Mux1~2 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-cycloneii_lcell_comb \pmInstructionMem|Mux1~0 (
+cycloneii_lcell_comb \pmInstructionMem|Mux3~0 (
 // Equation(s):
-// \pmInstructionMem|Mux1~0_combout  = (PC[0] & (\pmInstructionMem|Mux2~0_combout  & \pmInstructionMem|Mux2~1_combout ))
+// \pmInstructionMem|Mux3~0_combout  = (PC[0] & (\pmInstructionMem|Mux1~2_combout  & \pmInstructionMem|Mux1~3_combout ))
 
 	.dataa(PC[0]),
-	.datab(\pmInstructionMem|Mux2~0_combout ),
-	.datac(\pmInstructionMem|Mux2~1_combout ),
+	.datab(\pmInstructionMem|Mux1~2_combout ),
+	.datac(\pmInstructionMem|Mux1~3_combout ),
 	.datad(vcc),
 	.cin(gnd),
-	.combout(\pmInstructionMem|Mux1~0_combout ),
+	.combout(\pmInstructionMem|Mux3~0_combout ),
 	.cout());
 // synopsys translate_off
-defparam \pmInstructionMem|Mux1~0 .lut_mask = 16'h8080;
-defparam \pmInstructionMem|Mux1~0 .sum_lutc_input = "datac";
+defparam \pmInstructionMem|Mux3~0 .lut_mask = 16'h8080;
+defparam \pmInstructionMem|Mux3~0 .sum_lutc_input = "datac";
 // synopsys translate_on
 
 cycloneii_lcell_ff \pmInstructionMem|q[5] (
 	.clk(\clk~combout ),
-	.datain(\pmInstructionMem|Mux1~0_combout ),
+	.datain(\pmInstructionMem|Mux3~0_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
 	.sclr(gnd),
@@ -437,8 +1609,36 @@ cycloneii_lcell_ff \pmInstructionMem|q[5] (
 	.devpor(devpor),
 	.regout(\pmInstructionMem|q [5]));
 
+cycloneii_lcell_comb \pmInstructionMem|Mux1~5 (
+// Equation(s):
+// \pmInstructionMem|Mux1~5_combout  = (!PC[5] & (!PC[6] & (!PC[7] & \pmInstructionMem|Mux1~2_combout )))
+
+	.dataa(PC[5]),
+	.datab(PC[6]),
+	.datac(PC[7]),
+	.datad(\pmInstructionMem|Mux1~2_combout ),
+	.cin(gnd),
+	.combout(\pmInstructionMem|Mux1~5_combout ),
+	.cout());
+// synopsys translate_off
+defparam \pmInstructionMem|Mux1~5 .lut_mask = 16'h0100;
+defparam \pmInstructionMem|Mux1~5 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneii_lcell_ff \pmInstructionMem|q[16] (
+	.clk(\clk~combout ),
+	.datain(\pmInstructionMem|Mux1~5_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\pmInstructionMem|q [16]));
+
 cycloneii_io \SalidaALU[0]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~32_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -473,7 +1673,7 @@ defparam \SalidaALU[0]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[1]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~34_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -508,7 +1708,7 @@ defparam \SalidaALU[1]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[2]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~36_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -543,7 +1743,7 @@ defparam \SalidaALU[2]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[3]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~38_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -578,7 +1778,7 @@ defparam \SalidaALU[3]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[4]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~40_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -613,7 +1813,7 @@ defparam \SalidaALU[4]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[5]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~42_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -648,7 +1848,7 @@ defparam \SalidaALU[5]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[6]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~44_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -683,7 +1883,7 @@ defparam \SalidaALU[6]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[7]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~46_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -718,7 +1918,7 @@ defparam \SalidaALU[7]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[8]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~48_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -753,7 +1953,7 @@ defparam \SalidaALU[8]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[9]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~50_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -788,7 +1988,7 @@ defparam \SalidaALU[9]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[10]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~52_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -823,7 +2023,7 @@ defparam \SalidaALU[10]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[11]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~54_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -858,7 +2058,7 @@ defparam \SalidaALU[11]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[12]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~56_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -893,7 +2093,7 @@ defparam \SalidaALU[12]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[13]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~58_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -928,7 +2128,7 @@ defparam \SalidaALU[13]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[14]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~60_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -963,7 +2163,7 @@ defparam \SalidaALU[14]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[15]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~62_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -998,7 +2198,7 @@ defparam \SalidaALU[15]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[16]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~64_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1033,7 +2233,7 @@ defparam \SalidaALU[16]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[17]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~66_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1068,7 +2268,7 @@ defparam \SalidaALU[17]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[18]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~68_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1103,7 +2303,7 @@ defparam \SalidaALU[18]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[19]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~70_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1138,7 +2338,7 @@ defparam \SalidaALU[19]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[20]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~72_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1173,7 +2373,7 @@ defparam \SalidaALU[20]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[21]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~74_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1208,7 +2408,7 @@ defparam \SalidaALU[21]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[22]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~76_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1243,7 +2443,7 @@ defparam \SalidaALU[22]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[23]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~78_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1278,7 +2478,7 @@ defparam \SalidaALU[23]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[24]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~80_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1313,7 +2513,7 @@ defparam \SalidaALU[24]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[25]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~82_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1348,7 +2548,7 @@ defparam \SalidaALU[25]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[26]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~84_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1383,7 +2583,7 @@ defparam \SalidaALU[26]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[27]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~86_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1418,7 +2618,7 @@ defparam \SalidaALU[27]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[28]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~88_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1453,7 +2653,7 @@ defparam \SalidaALU[28]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[29]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~90_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1488,7 +2688,7 @@ defparam \SalidaALU[29]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[30]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~92_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1523,7 +2723,7 @@ defparam \SalidaALU[30]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaALU[31]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~94_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1628,7 +2828,7 @@ defparam \SalidaROM[1]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaROM[2]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [0]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -1943,7 +3143,7 @@ defparam \SalidaROM[10]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaROM[11]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [5]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -2048,7 +3248,7 @@ defparam \SalidaROM[13]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaROM[14]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [5]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -2118,7 +3318,7 @@ defparam \SalidaROM[15]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaROM[16]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [16]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -2223,7 +3423,7 @@ defparam \SalidaROM[18]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaROM[19]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [16]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -2293,7 +3493,7 @@ defparam \SalidaROM[20]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaROM[21]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [16]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -2398,7 +3598,7 @@ defparam \SalidaROM[23]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaROM[24]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [16]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -2573,7 +3773,7 @@ defparam \SalidaROM[28]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaROM[29]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [0]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -3798,7 +4998,7 @@ defparam \SalidaRAM[31]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[0]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~32_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -3833,7 +5033,7 @@ defparam \SalidaRF1[0]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[1]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~34_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -3868,7 +5068,7 @@ defparam \SalidaRF1[1]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[2]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~36_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -3903,7 +5103,7 @@ defparam \SalidaRF1[2]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[3]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~38_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -3938,7 +5138,7 @@ defparam \SalidaRF1[3]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[4]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~40_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -3973,7 +5173,7 @@ defparam \SalidaRF1[4]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[5]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~42_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4008,7 +5208,7 @@ defparam \SalidaRF1[5]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[6]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~44_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4043,7 +5243,7 @@ defparam \SalidaRF1[6]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[7]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~46_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4078,7 +5278,7 @@ defparam \SalidaRF1[7]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[8]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~48_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4113,7 +5313,7 @@ defparam \SalidaRF1[8]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[9]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~50_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4148,7 +5348,7 @@ defparam \SalidaRF1[9]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[10]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~52_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4183,7 +5383,7 @@ defparam \SalidaRF1[10]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[11]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~54_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4218,7 +5418,7 @@ defparam \SalidaRF1[11]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[12]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~56_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4253,7 +5453,7 @@ defparam \SalidaRF1[12]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[13]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~58_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4288,7 +5488,7 @@ defparam \SalidaRF1[13]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[14]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~60_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4323,7 +5523,7 @@ defparam \SalidaRF1[14]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[15]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~62_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4358,7 +5558,7 @@ defparam \SalidaRF1[15]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[16]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~64_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4393,7 +5593,7 @@ defparam \SalidaRF1[16]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[17]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~66_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4428,7 +5628,7 @@ defparam \SalidaRF1[17]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[18]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~68_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4463,7 +5663,7 @@ defparam \SalidaRF1[18]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[19]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~70_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4498,7 +5698,7 @@ defparam \SalidaRF1[19]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[20]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~72_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4533,7 +5733,7 @@ defparam \SalidaRF1[20]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[21]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~74_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4568,7 +5768,7 @@ defparam \SalidaRF1[21]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[22]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~76_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4603,7 +5803,7 @@ defparam \SalidaRF1[22]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[23]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~78_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4638,7 +5838,7 @@ defparam \SalidaRF1[23]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[24]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~80_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4673,7 +5873,7 @@ defparam \SalidaRF1[24]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[25]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~82_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4708,7 +5908,7 @@ defparam \SalidaRF1[25]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[26]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~84_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4743,7 +5943,7 @@ defparam \SalidaRF1[26]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[27]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~86_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4778,7 +5978,7 @@ defparam \SalidaRF1[27]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[28]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~88_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4813,7 +6013,7 @@ defparam \SalidaRF1[28]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[29]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~90_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4848,7 +6048,7 @@ defparam \SalidaRF1[29]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[30]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~92_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4883,7 +6083,7 @@ defparam \SalidaRF1[30]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF1[31]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~94_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4918,7 +6118,7 @@ defparam \SalidaRF1[31]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[0]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~32_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4953,7 +6153,7 @@ defparam \SalidaRF2[0]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[1]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~34_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -4988,7 +6188,7 @@ defparam \SalidaRF2[1]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[2]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~36_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5023,7 +6223,7 @@ defparam \SalidaRF2[2]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[3]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~38_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5058,7 +6258,7 @@ defparam \SalidaRF2[3]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[4]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~40_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5093,7 +6293,7 @@ defparam \SalidaRF2[4]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[5]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~42_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5128,7 +6328,7 @@ defparam \SalidaRF2[5]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[6]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~44_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5163,7 +6363,7 @@ defparam \SalidaRF2[6]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[7]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~46_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5198,7 +6398,7 @@ defparam \SalidaRF2[7]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[8]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~48_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5233,7 +6433,7 @@ defparam \SalidaRF2[8]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[9]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~50_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5268,7 +6468,7 @@ defparam \SalidaRF2[9]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[10]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~52_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5303,7 +6503,7 @@ defparam \SalidaRF2[10]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[11]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~54_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5338,7 +6538,7 @@ defparam \SalidaRF2[11]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[12]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~56_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5373,7 +6573,7 @@ defparam \SalidaRF2[12]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[13]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~58_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5408,7 +6608,7 @@ defparam \SalidaRF2[13]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[14]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~60_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5443,7 +6643,7 @@ defparam \SalidaRF2[14]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[15]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~62_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5478,7 +6678,7 @@ defparam \SalidaRF2[15]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[16]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~64_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5513,7 +6713,7 @@ defparam \SalidaRF2[16]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[17]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~66_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5548,7 +6748,7 @@ defparam \SalidaRF2[17]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[18]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~68_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5583,7 +6783,7 @@ defparam \SalidaRF2[18]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[19]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~70_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5618,7 +6818,7 @@ defparam \SalidaRF2[19]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[20]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~72_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5653,7 +6853,7 @@ defparam \SalidaRF2[20]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[21]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~74_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5688,7 +6888,7 @@ defparam \SalidaRF2[21]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[22]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~76_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5723,7 +6923,7 @@ defparam \SalidaRF2[22]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[23]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~78_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5758,7 +6958,7 @@ defparam \SalidaRF2[23]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[24]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~80_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5793,7 +6993,7 @@ defparam \SalidaRF2[24]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[25]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~82_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5828,7 +7028,7 @@ defparam \SalidaRF2[25]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[26]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~84_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5863,7 +7063,7 @@ defparam \SalidaRF2[26]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[27]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~86_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5898,7 +7098,7 @@ defparam \SalidaRF2[27]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[28]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~88_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5933,7 +7133,7 @@ defparam \SalidaRF2[28]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[29]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~90_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -5968,7 +7168,7 @@ defparam \SalidaRF2[29]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[30]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~92_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -6003,7 +7203,7 @@ defparam \SalidaRF2[30]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaRF2[31]~I (
-	.datain(gnd),
+	.datain(\pmALU|Add0~94_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -6388,7 +7588,7 @@ defparam \SalidaInmediato[1]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaInmediato[2]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [0]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -6703,7 +7903,7 @@ defparam \SalidaInmediato[10]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaInmediato[11]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [5]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -6808,7 +8008,7 @@ defparam \SalidaInmediato[13]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaInmediato[14]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [5]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -6948,7 +8148,7 @@ defparam \SalidaInmediatoExtendido[1]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaInmediatoExtendido[2]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [0]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -7263,7 +8463,7 @@ defparam \SalidaInmediatoExtendido[10]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaInmediatoExtendido[11]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [5]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -7368,7 +8568,7 @@ defparam \SalidaInmediatoExtendido[13]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaInmediatoExtendido[14]~I (
-	.datain(gnd),
+	.datain(\pmInstructionMem|q [5]),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -7998,7 +9198,7 @@ defparam \SalidaInmediatoExtendido[31]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[0]~I (
-	.datain(gnd),
+	.datain(\ALUInB[0]~0_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8033,7 +9233,7 @@ defparam \SalidaMuxRFALU[0]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[1]~I (
-	.datain(gnd),
+	.datain(\ALUInB[1]~1_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8068,7 +9268,7 @@ defparam \SalidaMuxRFALU[1]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[2]~I (
-	.datain(gnd),
+	.datain(\ALUInB[2]~2_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8103,7 +9303,7 @@ defparam \SalidaMuxRFALU[2]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[3]~I (
-	.datain(gnd),
+	.datain(\ALUInB[3]~3_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8138,7 +9338,7 @@ defparam \SalidaMuxRFALU[3]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[4]~I (
-	.datain(gnd),
+	.datain(\ALUInB[4]~4_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8173,7 +9373,7 @@ defparam \SalidaMuxRFALU[4]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[5]~I (
-	.datain(gnd),
+	.datain(\ALUInB[5]~5_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8208,7 +9408,7 @@ defparam \SalidaMuxRFALU[5]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[6]~I (
-	.datain(gnd),
+	.datain(\ALUInB[6]~6_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8243,7 +9443,7 @@ defparam \SalidaMuxRFALU[6]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[7]~I (
-	.datain(gnd),
+	.datain(\ALUInB[7]~7_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8278,7 +9478,7 @@ defparam \SalidaMuxRFALU[7]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[8]~I (
-	.datain(gnd),
+	.datain(\ALUInB[8]~8_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8313,7 +9513,7 @@ defparam \SalidaMuxRFALU[8]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[9]~I (
-	.datain(gnd),
+	.datain(\ALUInB[9]~9_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8348,7 +9548,7 @@ defparam \SalidaMuxRFALU[9]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[10]~I (
-	.datain(gnd),
+	.datain(\ALUInB[10]~10_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8383,7 +9583,7 @@ defparam \SalidaMuxRFALU[10]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[11]~I (
-	.datain(gnd),
+	.datain(\ALUInB[11]~11_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8418,7 +9618,7 @@ defparam \SalidaMuxRFALU[11]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[12]~I (
-	.datain(gnd),
+	.datain(\ALUInB[12]~12_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8453,7 +9653,7 @@ defparam \SalidaMuxRFALU[12]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[13]~I (
-	.datain(gnd),
+	.datain(\ALUInB[13]~13_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8488,7 +9688,7 @@ defparam \SalidaMuxRFALU[13]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[14]~I (
-	.datain(gnd),
+	.datain(\ALUInB[14]~14_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8523,7 +9723,7 @@ defparam \SalidaMuxRFALU[14]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[15]~I (
-	.datain(gnd),
+	.datain(\ALUInB[15]~15_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8558,7 +9758,7 @@ defparam \SalidaMuxRFALU[15]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[16]~I (
-	.datain(gnd),
+	.datain(\ALUInB[16]~16_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8593,7 +9793,7 @@ defparam \SalidaMuxRFALU[16]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[17]~I (
-	.datain(gnd),
+	.datain(\ALUInB[17]~17_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8628,7 +9828,7 @@ defparam \SalidaMuxRFALU[17]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[18]~I (
-	.datain(gnd),
+	.datain(\ALUInB[18]~18_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8663,7 +9863,7 @@ defparam \SalidaMuxRFALU[18]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[19]~I (
-	.datain(gnd),
+	.datain(\ALUInB[19]~19_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8698,7 +9898,7 @@ defparam \SalidaMuxRFALU[19]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[20]~I (
-	.datain(gnd),
+	.datain(\ALUInB[20]~20_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8733,7 +9933,7 @@ defparam \SalidaMuxRFALU[20]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[21]~I (
-	.datain(gnd),
+	.datain(\ALUInB[21]~21_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8768,7 +9968,7 @@ defparam \SalidaMuxRFALU[21]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[22]~I (
-	.datain(gnd),
+	.datain(\ALUInB[22]~22_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8803,7 +10003,7 @@ defparam \SalidaMuxRFALU[22]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[23]~I (
-	.datain(gnd),
+	.datain(\ALUInB[23]~23_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8838,7 +10038,7 @@ defparam \SalidaMuxRFALU[23]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[24]~I (
-	.datain(gnd),
+	.datain(\ALUInB[24]~24_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8873,7 +10073,7 @@ defparam \SalidaMuxRFALU[24]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[25]~I (
-	.datain(gnd),
+	.datain(\ALUInB[25]~25_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8908,7 +10108,7 @@ defparam \SalidaMuxRFALU[25]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[26]~I (
-	.datain(gnd),
+	.datain(\ALUInB[26]~26_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8943,7 +10143,7 @@ defparam \SalidaMuxRFALU[26]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[27]~I (
-	.datain(gnd),
+	.datain(\ALUInB[27]~27_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -8978,7 +10178,7 @@ defparam \SalidaMuxRFALU[27]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[28]~I (
-	.datain(gnd),
+	.datain(\ALUInB[28]~28_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -9013,7 +10213,7 @@ defparam \SalidaMuxRFALU[28]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[29]~I (
-	.datain(gnd),
+	.datain(\ALUInB[29]~29_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -9048,7 +10248,7 @@ defparam \SalidaMuxRFALU[29]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[30]~I (
-	.datain(gnd),
+	.datain(\ALUInB[30]~30_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -9083,7 +10283,7 @@ defparam \SalidaMuxRFALU[30]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 cycloneii_io \SalidaMuxRFALU[31]~I (
-	.datain(gnd),
+	.datain(\ALUInB[31]~31_combout ),
 	.oe(vcc),
 	.outclk(gnd),
 	.outclkena(vcc),
@@ -9115,6 +10315,1266 @@ defparam \SalidaMuxRFALU[31]~I .output_async_reset = "none";
 defparam \SalidaMuxRFALU[31]~I .output_power_up = "low";
 defparam \SalidaMuxRFALU[31]~I .output_register_mode = "none";
 defparam \SalidaMuxRFALU[31]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALUOP[0]~I (
+	.datain(\pmInstructionMem|q [0]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALUOP[0]));
+// synopsys translate_off
+defparam \SalidaALUOP[0]~I .input_async_reset = "none";
+defparam \SalidaALUOP[0]~I .input_power_up = "low";
+defparam \SalidaALUOP[0]~I .input_register_mode = "none";
+defparam \SalidaALUOP[0]~I .input_sync_reset = "none";
+defparam \SalidaALUOP[0]~I .oe_async_reset = "none";
+defparam \SalidaALUOP[0]~I .oe_power_up = "low";
+defparam \SalidaALUOP[0]~I .oe_register_mode = "none";
+defparam \SalidaALUOP[0]~I .oe_sync_reset = "none";
+defparam \SalidaALUOP[0]~I .operation_mode = "output";
+defparam \SalidaALUOP[0]~I .output_async_reset = "none";
+defparam \SalidaALUOP[0]~I .output_power_up = "low";
+defparam \SalidaALUOP[0]~I .output_register_mode = "none";
+defparam \SalidaALUOP[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALUOP[1]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALUOP[1]));
+// synopsys translate_off
+defparam \SalidaALUOP[1]~I .input_async_reset = "none";
+defparam \SalidaALUOP[1]~I .input_power_up = "low";
+defparam \SalidaALUOP[1]~I .input_register_mode = "none";
+defparam \SalidaALUOP[1]~I .input_sync_reset = "none";
+defparam \SalidaALUOP[1]~I .oe_async_reset = "none";
+defparam \SalidaALUOP[1]~I .oe_power_up = "low";
+defparam \SalidaALUOP[1]~I .oe_register_mode = "none";
+defparam \SalidaALUOP[1]~I .oe_sync_reset = "none";
+defparam \SalidaALUOP[1]~I .operation_mode = "output";
+defparam \SalidaALUOP[1]~I .output_async_reset = "none";
+defparam \SalidaALUOP[1]~I .output_power_up = "low";
+defparam \SalidaALUOP[1]~I .output_register_mode = "none";
+defparam \SalidaALUOP[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALUControl[0]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALUControl[0]));
+// synopsys translate_off
+defparam \SalidaALUControl[0]~I .input_async_reset = "none";
+defparam \SalidaALUControl[0]~I .input_power_up = "low";
+defparam \SalidaALUControl[0]~I .input_register_mode = "none";
+defparam \SalidaALUControl[0]~I .input_sync_reset = "none";
+defparam \SalidaALUControl[0]~I .oe_async_reset = "none";
+defparam \SalidaALUControl[0]~I .oe_power_up = "low";
+defparam \SalidaALUControl[0]~I .oe_register_mode = "none";
+defparam \SalidaALUControl[0]~I .oe_sync_reset = "none";
+defparam \SalidaALUControl[0]~I .operation_mode = "output";
+defparam \SalidaALUControl[0]~I .output_async_reset = "none";
+defparam \SalidaALUControl[0]~I .output_power_up = "low";
+defparam \SalidaALUControl[0]~I .output_register_mode = "none";
+defparam \SalidaALUControl[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaALUControl[1]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaALUControl[1]));
+// synopsys translate_off
+defparam \SalidaALUControl[1]~I .input_async_reset = "none";
+defparam \SalidaALUControl[1]~I .input_power_up = "low";
+defparam \SalidaALUControl[1]~I .input_register_mode = "none";
+defparam \SalidaALUControl[1]~I .input_sync_reset = "none";
+defparam \SalidaALUControl[1]~I .oe_async_reset = "none";
+defparam \SalidaALUControl[1]~I .oe_power_up = "low";
+defparam \SalidaALUControl[1]~I .oe_register_mode = "none";
+defparam \SalidaALUControl[1]~I .oe_sync_reset = "none";
+defparam \SalidaALUControl[1]~I .operation_mode = "output";
+defparam \SalidaALUControl[1]~I .output_async_reset = "none";
+defparam \SalidaALUControl[1]~I .output_power_up = "low";
+defparam \SalidaALUControl[1]~I .output_register_mode = "none";
+defparam \SalidaALUControl[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[0]~I (
+	.datain(\pmInstructionMem|q [0]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[0]));
+// synopsys translate_off
+defparam \SalidaInstruction[0]~I .input_async_reset = "none";
+defparam \SalidaInstruction[0]~I .input_power_up = "low";
+defparam \SalidaInstruction[0]~I .input_register_mode = "none";
+defparam \SalidaInstruction[0]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[0]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[0]~I .oe_power_up = "low";
+defparam \SalidaInstruction[0]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[0]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[0]~I .operation_mode = "output";
+defparam \SalidaInstruction[0]~I .output_async_reset = "none";
+defparam \SalidaInstruction[0]~I .output_power_up = "low";
+defparam \SalidaInstruction[0]~I .output_register_mode = "none";
+defparam \SalidaInstruction[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[1]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[1]));
+// synopsys translate_off
+defparam \SalidaInstruction[1]~I .input_async_reset = "none";
+defparam \SalidaInstruction[1]~I .input_power_up = "low";
+defparam \SalidaInstruction[1]~I .input_register_mode = "none";
+defparam \SalidaInstruction[1]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[1]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[1]~I .oe_power_up = "low";
+defparam \SalidaInstruction[1]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[1]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[1]~I .operation_mode = "output";
+defparam \SalidaInstruction[1]~I .output_async_reset = "none";
+defparam \SalidaInstruction[1]~I .output_power_up = "low";
+defparam \SalidaInstruction[1]~I .output_register_mode = "none";
+defparam \SalidaInstruction[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[2]~I (
+	.datain(\pmInstructionMem|q [0]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[2]));
+// synopsys translate_off
+defparam \SalidaInstruction[2]~I .input_async_reset = "none";
+defparam \SalidaInstruction[2]~I .input_power_up = "low";
+defparam \SalidaInstruction[2]~I .input_register_mode = "none";
+defparam \SalidaInstruction[2]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[2]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[2]~I .oe_power_up = "low";
+defparam \SalidaInstruction[2]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[2]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[2]~I .operation_mode = "output";
+defparam \SalidaInstruction[2]~I .output_async_reset = "none";
+defparam \SalidaInstruction[2]~I .output_power_up = "low";
+defparam \SalidaInstruction[2]~I .output_register_mode = "none";
+defparam \SalidaInstruction[2]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[3]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[3]));
+// synopsys translate_off
+defparam \SalidaInstruction[3]~I .input_async_reset = "none";
+defparam \SalidaInstruction[3]~I .input_power_up = "low";
+defparam \SalidaInstruction[3]~I .input_register_mode = "none";
+defparam \SalidaInstruction[3]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[3]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[3]~I .oe_power_up = "low";
+defparam \SalidaInstruction[3]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[3]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[3]~I .operation_mode = "output";
+defparam \SalidaInstruction[3]~I .output_async_reset = "none";
+defparam \SalidaInstruction[3]~I .output_power_up = "low";
+defparam \SalidaInstruction[3]~I .output_register_mode = "none";
+defparam \SalidaInstruction[3]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[4]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[4]));
+// synopsys translate_off
+defparam \SalidaInstruction[4]~I .input_async_reset = "none";
+defparam \SalidaInstruction[4]~I .input_power_up = "low";
+defparam \SalidaInstruction[4]~I .input_register_mode = "none";
+defparam \SalidaInstruction[4]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[4]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[4]~I .oe_power_up = "low";
+defparam \SalidaInstruction[4]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[4]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[4]~I .operation_mode = "output";
+defparam \SalidaInstruction[4]~I .output_async_reset = "none";
+defparam \SalidaInstruction[4]~I .output_power_up = "low";
+defparam \SalidaInstruction[4]~I .output_register_mode = "none";
+defparam \SalidaInstruction[4]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[5]~I (
+	.datain(\pmInstructionMem|q [5]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[5]));
+// synopsys translate_off
+defparam \SalidaInstruction[5]~I .input_async_reset = "none";
+defparam \SalidaInstruction[5]~I .input_power_up = "low";
+defparam \SalidaInstruction[5]~I .input_register_mode = "none";
+defparam \SalidaInstruction[5]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[5]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[5]~I .oe_power_up = "low";
+defparam \SalidaInstruction[5]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[5]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[5]~I .operation_mode = "output";
+defparam \SalidaInstruction[5]~I .output_async_reset = "none";
+defparam \SalidaInstruction[5]~I .output_power_up = "low";
+defparam \SalidaInstruction[5]~I .output_register_mode = "none";
+defparam \SalidaInstruction[5]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[6]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[6]));
+// synopsys translate_off
+defparam \SalidaInstruction[6]~I .input_async_reset = "none";
+defparam \SalidaInstruction[6]~I .input_power_up = "low";
+defparam \SalidaInstruction[6]~I .input_register_mode = "none";
+defparam \SalidaInstruction[6]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[6]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[6]~I .oe_power_up = "low";
+defparam \SalidaInstruction[6]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[6]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[6]~I .operation_mode = "output";
+defparam \SalidaInstruction[6]~I .output_async_reset = "none";
+defparam \SalidaInstruction[6]~I .output_power_up = "low";
+defparam \SalidaInstruction[6]~I .output_register_mode = "none";
+defparam \SalidaInstruction[6]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[7]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[7]));
+// synopsys translate_off
+defparam \SalidaInstruction[7]~I .input_async_reset = "none";
+defparam \SalidaInstruction[7]~I .input_power_up = "low";
+defparam \SalidaInstruction[7]~I .input_register_mode = "none";
+defparam \SalidaInstruction[7]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[7]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[7]~I .oe_power_up = "low";
+defparam \SalidaInstruction[7]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[7]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[7]~I .operation_mode = "output";
+defparam \SalidaInstruction[7]~I .output_async_reset = "none";
+defparam \SalidaInstruction[7]~I .output_power_up = "low";
+defparam \SalidaInstruction[7]~I .output_register_mode = "none";
+defparam \SalidaInstruction[7]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[8]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[8]));
+// synopsys translate_off
+defparam \SalidaInstruction[8]~I .input_async_reset = "none";
+defparam \SalidaInstruction[8]~I .input_power_up = "low";
+defparam \SalidaInstruction[8]~I .input_register_mode = "none";
+defparam \SalidaInstruction[8]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[8]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[8]~I .oe_power_up = "low";
+defparam \SalidaInstruction[8]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[8]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[8]~I .operation_mode = "output";
+defparam \SalidaInstruction[8]~I .output_async_reset = "none";
+defparam \SalidaInstruction[8]~I .output_power_up = "low";
+defparam \SalidaInstruction[8]~I .output_register_mode = "none";
+defparam \SalidaInstruction[8]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[9]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[9]));
+// synopsys translate_off
+defparam \SalidaInstruction[9]~I .input_async_reset = "none";
+defparam \SalidaInstruction[9]~I .input_power_up = "low";
+defparam \SalidaInstruction[9]~I .input_register_mode = "none";
+defparam \SalidaInstruction[9]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[9]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[9]~I .oe_power_up = "low";
+defparam \SalidaInstruction[9]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[9]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[9]~I .operation_mode = "output";
+defparam \SalidaInstruction[9]~I .output_async_reset = "none";
+defparam \SalidaInstruction[9]~I .output_power_up = "low";
+defparam \SalidaInstruction[9]~I .output_register_mode = "none";
+defparam \SalidaInstruction[9]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[10]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[10]));
+// synopsys translate_off
+defparam \SalidaInstruction[10]~I .input_async_reset = "none";
+defparam \SalidaInstruction[10]~I .input_power_up = "low";
+defparam \SalidaInstruction[10]~I .input_register_mode = "none";
+defparam \SalidaInstruction[10]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[10]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[10]~I .oe_power_up = "low";
+defparam \SalidaInstruction[10]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[10]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[10]~I .operation_mode = "output";
+defparam \SalidaInstruction[10]~I .output_async_reset = "none";
+defparam \SalidaInstruction[10]~I .output_power_up = "low";
+defparam \SalidaInstruction[10]~I .output_register_mode = "none";
+defparam \SalidaInstruction[10]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[11]~I (
+	.datain(\pmInstructionMem|q [5]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[11]));
+// synopsys translate_off
+defparam \SalidaInstruction[11]~I .input_async_reset = "none";
+defparam \SalidaInstruction[11]~I .input_power_up = "low";
+defparam \SalidaInstruction[11]~I .input_register_mode = "none";
+defparam \SalidaInstruction[11]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[11]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[11]~I .oe_power_up = "low";
+defparam \SalidaInstruction[11]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[11]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[11]~I .operation_mode = "output";
+defparam \SalidaInstruction[11]~I .output_async_reset = "none";
+defparam \SalidaInstruction[11]~I .output_power_up = "low";
+defparam \SalidaInstruction[11]~I .output_register_mode = "none";
+defparam \SalidaInstruction[11]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[12]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[12]));
+// synopsys translate_off
+defparam \SalidaInstruction[12]~I .input_async_reset = "none";
+defparam \SalidaInstruction[12]~I .input_power_up = "low";
+defparam \SalidaInstruction[12]~I .input_register_mode = "none";
+defparam \SalidaInstruction[12]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[12]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[12]~I .oe_power_up = "low";
+defparam \SalidaInstruction[12]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[12]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[12]~I .operation_mode = "output";
+defparam \SalidaInstruction[12]~I .output_async_reset = "none";
+defparam \SalidaInstruction[12]~I .output_power_up = "low";
+defparam \SalidaInstruction[12]~I .output_register_mode = "none";
+defparam \SalidaInstruction[12]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[13]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[13]));
+// synopsys translate_off
+defparam \SalidaInstruction[13]~I .input_async_reset = "none";
+defparam \SalidaInstruction[13]~I .input_power_up = "low";
+defparam \SalidaInstruction[13]~I .input_register_mode = "none";
+defparam \SalidaInstruction[13]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[13]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[13]~I .oe_power_up = "low";
+defparam \SalidaInstruction[13]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[13]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[13]~I .operation_mode = "output";
+defparam \SalidaInstruction[13]~I .output_async_reset = "none";
+defparam \SalidaInstruction[13]~I .output_power_up = "low";
+defparam \SalidaInstruction[13]~I .output_register_mode = "none";
+defparam \SalidaInstruction[13]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[14]~I (
+	.datain(\pmInstructionMem|q [5]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[14]));
+// synopsys translate_off
+defparam \SalidaInstruction[14]~I .input_async_reset = "none";
+defparam \SalidaInstruction[14]~I .input_power_up = "low";
+defparam \SalidaInstruction[14]~I .input_register_mode = "none";
+defparam \SalidaInstruction[14]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[14]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[14]~I .oe_power_up = "low";
+defparam \SalidaInstruction[14]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[14]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[14]~I .operation_mode = "output";
+defparam \SalidaInstruction[14]~I .output_async_reset = "none";
+defparam \SalidaInstruction[14]~I .output_power_up = "low";
+defparam \SalidaInstruction[14]~I .output_register_mode = "none";
+defparam \SalidaInstruction[14]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[15]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[15]));
+// synopsys translate_off
+defparam \SalidaInstruction[15]~I .input_async_reset = "none";
+defparam \SalidaInstruction[15]~I .input_power_up = "low";
+defparam \SalidaInstruction[15]~I .input_register_mode = "none";
+defparam \SalidaInstruction[15]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[15]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[15]~I .oe_power_up = "low";
+defparam \SalidaInstruction[15]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[15]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[15]~I .operation_mode = "output";
+defparam \SalidaInstruction[15]~I .output_async_reset = "none";
+defparam \SalidaInstruction[15]~I .output_power_up = "low";
+defparam \SalidaInstruction[15]~I .output_register_mode = "none";
+defparam \SalidaInstruction[15]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[16]~I (
+	.datain(\pmInstructionMem|q [16]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[16]));
+// synopsys translate_off
+defparam \SalidaInstruction[16]~I .input_async_reset = "none";
+defparam \SalidaInstruction[16]~I .input_power_up = "low";
+defparam \SalidaInstruction[16]~I .input_register_mode = "none";
+defparam \SalidaInstruction[16]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[16]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[16]~I .oe_power_up = "low";
+defparam \SalidaInstruction[16]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[16]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[16]~I .operation_mode = "output";
+defparam \SalidaInstruction[16]~I .output_async_reset = "none";
+defparam \SalidaInstruction[16]~I .output_power_up = "low";
+defparam \SalidaInstruction[16]~I .output_register_mode = "none";
+defparam \SalidaInstruction[16]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[17]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[17]));
+// synopsys translate_off
+defparam \SalidaInstruction[17]~I .input_async_reset = "none";
+defparam \SalidaInstruction[17]~I .input_power_up = "low";
+defparam \SalidaInstruction[17]~I .input_register_mode = "none";
+defparam \SalidaInstruction[17]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[17]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[17]~I .oe_power_up = "low";
+defparam \SalidaInstruction[17]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[17]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[17]~I .operation_mode = "output";
+defparam \SalidaInstruction[17]~I .output_async_reset = "none";
+defparam \SalidaInstruction[17]~I .output_power_up = "low";
+defparam \SalidaInstruction[17]~I .output_register_mode = "none";
+defparam \SalidaInstruction[17]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[18]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[18]));
+// synopsys translate_off
+defparam \SalidaInstruction[18]~I .input_async_reset = "none";
+defparam \SalidaInstruction[18]~I .input_power_up = "low";
+defparam \SalidaInstruction[18]~I .input_register_mode = "none";
+defparam \SalidaInstruction[18]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[18]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[18]~I .oe_power_up = "low";
+defparam \SalidaInstruction[18]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[18]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[18]~I .operation_mode = "output";
+defparam \SalidaInstruction[18]~I .output_async_reset = "none";
+defparam \SalidaInstruction[18]~I .output_power_up = "low";
+defparam \SalidaInstruction[18]~I .output_register_mode = "none";
+defparam \SalidaInstruction[18]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[19]~I (
+	.datain(\pmInstructionMem|q [16]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[19]));
+// synopsys translate_off
+defparam \SalidaInstruction[19]~I .input_async_reset = "none";
+defparam \SalidaInstruction[19]~I .input_power_up = "low";
+defparam \SalidaInstruction[19]~I .input_register_mode = "none";
+defparam \SalidaInstruction[19]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[19]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[19]~I .oe_power_up = "low";
+defparam \SalidaInstruction[19]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[19]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[19]~I .operation_mode = "output";
+defparam \SalidaInstruction[19]~I .output_async_reset = "none";
+defparam \SalidaInstruction[19]~I .output_power_up = "low";
+defparam \SalidaInstruction[19]~I .output_register_mode = "none";
+defparam \SalidaInstruction[19]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[20]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[20]));
+// synopsys translate_off
+defparam \SalidaInstruction[20]~I .input_async_reset = "none";
+defparam \SalidaInstruction[20]~I .input_power_up = "low";
+defparam \SalidaInstruction[20]~I .input_register_mode = "none";
+defparam \SalidaInstruction[20]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[20]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[20]~I .oe_power_up = "low";
+defparam \SalidaInstruction[20]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[20]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[20]~I .operation_mode = "output";
+defparam \SalidaInstruction[20]~I .output_async_reset = "none";
+defparam \SalidaInstruction[20]~I .output_power_up = "low";
+defparam \SalidaInstruction[20]~I .output_register_mode = "none";
+defparam \SalidaInstruction[20]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[21]~I (
+	.datain(\pmInstructionMem|q [16]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[21]));
+// synopsys translate_off
+defparam \SalidaInstruction[21]~I .input_async_reset = "none";
+defparam \SalidaInstruction[21]~I .input_power_up = "low";
+defparam \SalidaInstruction[21]~I .input_register_mode = "none";
+defparam \SalidaInstruction[21]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[21]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[21]~I .oe_power_up = "low";
+defparam \SalidaInstruction[21]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[21]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[21]~I .operation_mode = "output";
+defparam \SalidaInstruction[21]~I .output_async_reset = "none";
+defparam \SalidaInstruction[21]~I .output_power_up = "low";
+defparam \SalidaInstruction[21]~I .output_register_mode = "none";
+defparam \SalidaInstruction[21]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[22]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[22]));
+// synopsys translate_off
+defparam \SalidaInstruction[22]~I .input_async_reset = "none";
+defparam \SalidaInstruction[22]~I .input_power_up = "low";
+defparam \SalidaInstruction[22]~I .input_register_mode = "none";
+defparam \SalidaInstruction[22]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[22]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[22]~I .oe_power_up = "low";
+defparam \SalidaInstruction[22]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[22]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[22]~I .operation_mode = "output";
+defparam \SalidaInstruction[22]~I .output_async_reset = "none";
+defparam \SalidaInstruction[22]~I .output_power_up = "low";
+defparam \SalidaInstruction[22]~I .output_register_mode = "none";
+defparam \SalidaInstruction[22]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[23]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[23]));
+// synopsys translate_off
+defparam \SalidaInstruction[23]~I .input_async_reset = "none";
+defparam \SalidaInstruction[23]~I .input_power_up = "low";
+defparam \SalidaInstruction[23]~I .input_register_mode = "none";
+defparam \SalidaInstruction[23]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[23]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[23]~I .oe_power_up = "low";
+defparam \SalidaInstruction[23]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[23]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[23]~I .operation_mode = "output";
+defparam \SalidaInstruction[23]~I .output_async_reset = "none";
+defparam \SalidaInstruction[23]~I .output_power_up = "low";
+defparam \SalidaInstruction[23]~I .output_register_mode = "none";
+defparam \SalidaInstruction[23]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[24]~I (
+	.datain(\pmInstructionMem|q [16]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[24]));
+// synopsys translate_off
+defparam \SalidaInstruction[24]~I .input_async_reset = "none";
+defparam \SalidaInstruction[24]~I .input_power_up = "low";
+defparam \SalidaInstruction[24]~I .input_register_mode = "none";
+defparam \SalidaInstruction[24]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[24]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[24]~I .oe_power_up = "low";
+defparam \SalidaInstruction[24]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[24]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[24]~I .operation_mode = "output";
+defparam \SalidaInstruction[24]~I .output_async_reset = "none";
+defparam \SalidaInstruction[24]~I .output_power_up = "low";
+defparam \SalidaInstruction[24]~I .output_register_mode = "none";
+defparam \SalidaInstruction[24]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[25]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[25]));
+// synopsys translate_off
+defparam \SalidaInstruction[25]~I .input_async_reset = "none";
+defparam \SalidaInstruction[25]~I .input_power_up = "low";
+defparam \SalidaInstruction[25]~I .input_register_mode = "none";
+defparam \SalidaInstruction[25]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[25]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[25]~I .oe_power_up = "low";
+defparam \SalidaInstruction[25]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[25]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[25]~I .operation_mode = "output";
+defparam \SalidaInstruction[25]~I .output_async_reset = "none";
+defparam \SalidaInstruction[25]~I .output_power_up = "low";
+defparam \SalidaInstruction[25]~I .output_register_mode = "none";
+defparam \SalidaInstruction[25]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[26]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[26]));
+// synopsys translate_off
+defparam \SalidaInstruction[26]~I .input_async_reset = "none";
+defparam \SalidaInstruction[26]~I .input_power_up = "low";
+defparam \SalidaInstruction[26]~I .input_register_mode = "none";
+defparam \SalidaInstruction[26]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[26]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[26]~I .oe_power_up = "low";
+defparam \SalidaInstruction[26]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[26]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[26]~I .operation_mode = "output";
+defparam \SalidaInstruction[26]~I .output_async_reset = "none";
+defparam \SalidaInstruction[26]~I .output_power_up = "low";
+defparam \SalidaInstruction[26]~I .output_register_mode = "none";
+defparam \SalidaInstruction[26]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[27]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[27]));
+// synopsys translate_off
+defparam \SalidaInstruction[27]~I .input_async_reset = "none";
+defparam \SalidaInstruction[27]~I .input_power_up = "low";
+defparam \SalidaInstruction[27]~I .input_register_mode = "none";
+defparam \SalidaInstruction[27]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[27]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[27]~I .oe_power_up = "low";
+defparam \SalidaInstruction[27]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[27]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[27]~I .operation_mode = "output";
+defparam \SalidaInstruction[27]~I .output_async_reset = "none";
+defparam \SalidaInstruction[27]~I .output_power_up = "low";
+defparam \SalidaInstruction[27]~I .output_register_mode = "none";
+defparam \SalidaInstruction[27]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[28]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[28]));
+// synopsys translate_off
+defparam \SalidaInstruction[28]~I .input_async_reset = "none";
+defparam \SalidaInstruction[28]~I .input_power_up = "low";
+defparam \SalidaInstruction[28]~I .input_register_mode = "none";
+defparam \SalidaInstruction[28]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[28]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[28]~I .oe_power_up = "low";
+defparam \SalidaInstruction[28]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[28]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[28]~I .operation_mode = "output";
+defparam \SalidaInstruction[28]~I .output_async_reset = "none";
+defparam \SalidaInstruction[28]~I .output_power_up = "low";
+defparam \SalidaInstruction[28]~I .output_register_mode = "none";
+defparam \SalidaInstruction[28]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[29]~I (
+	.datain(\pmInstructionMem|q [0]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[29]));
+// synopsys translate_off
+defparam \SalidaInstruction[29]~I .input_async_reset = "none";
+defparam \SalidaInstruction[29]~I .input_power_up = "low";
+defparam \SalidaInstruction[29]~I .input_register_mode = "none";
+defparam \SalidaInstruction[29]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[29]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[29]~I .oe_power_up = "low";
+defparam \SalidaInstruction[29]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[29]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[29]~I .operation_mode = "output";
+defparam \SalidaInstruction[29]~I .output_async_reset = "none";
+defparam \SalidaInstruction[29]~I .output_power_up = "low";
+defparam \SalidaInstruction[29]~I .output_register_mode = "none";
+defparam \SalidaInstruction[29]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[30]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[30]));
+// synopsys translate_off
+defparam \SalidaInstruction[30]~I .input_async_reset = "none";
+defparam \SalidaInstruction[30]~I .input_power_up = "low";
+defparam \SalidaInstruction[30]~I .input_register_mode = "none";
+defparam \SalidaInstruction[30]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[30]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[30]~I .oe_power_up = "low";
+defparam \SalidaInstruction[30]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[30]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[30]~I .operation_mode = "output";
+defparam \SalidaInstruction[30]~I .output_async_reset = "none";
+defparam \SalidaInstruction[30]~I .output_power_up = "low";
+defparam \SalidaInstruction[30]~I .output_register_mode = "none";
+defparam \SalidaInstruction[30]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+cycloneii_io \SalidaInstruction[31]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(SalidaInstruction[31]));
+// synopsys translate_off
+defparam \SalidaInstruction[31]~I .input_async_reset = "none";
+defparam \SalidaInstruction[31]~I .input_power_up = "low";
+defparam \SalidaInstruction[31]~I .input_register_mode = "none";
+defparam \SalidaInstruction[31]~I .input_sync_reset = "none";
+defparam \SalidaInstruction[31]~I .oe_async_reset = "none";
+defparam \SalidaInstruction[31]~I .oe_power_up = "low";
+defparam \SalidaInstruction[31]~I .oe_register_mode = "none";
+defparam \SalidaInstruction[31]~I .oe_sync_reset = "none";
+defparam \SalidaInstruction[31]~I .operation_mode = "output";
+defparam \SalidaInstruction[31]~I .output_async_reset = "none";
+defparam \SalidaInstruction[31]~I .output_power_up = "low";
+defparam \SalidaInstruction[31]~I .output_register_mode = "none";
+defparam \SalidaInstruction[31]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 endmodule

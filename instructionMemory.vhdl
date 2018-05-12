@@ -45,8 +45,8 @@ architecture rtl of instructionMemory is
 	signal rom : memory_t;-- := init_rom;
 
 begin
-	rom(to_integer(x"00000000")) <= x"00000001"; -- addi $0 $0 1
-	rom(to_integer(x"00000001")) <= x"00000020"; -- add $0 $0 $0
+	--rom(to_integer(x"00000000")) <= x"21290005"; -- addi $t1 $t1 5
+	--rom(to_integer(x"00000001")) <= x"01294820"; -- add $t1 $t1 $t1
 	process(clkI)
 	begin
 	if(rising_edge(clkI)) then
